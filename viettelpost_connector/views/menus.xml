@@ -76,6 +76,12 @@
               sequence="1"
               action="api_connect_history_action_view"
     />
+    <menuitem id="menu_api_endpoint_config"
+              parent="menu_viettelpost_api_main"
+              name="Endpoint Config"
+              sequence="2"
+              action="api_endpoint_config_action_view"
+    />
     <menuitem id="menu_api_connect_config"
               parent="menu_viettelpost_api_main"
               name="Connection Config"

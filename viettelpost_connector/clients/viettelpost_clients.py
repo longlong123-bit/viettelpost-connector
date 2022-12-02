@@ -2,6 +2,8 @@ import logging
 from odoo.tools.translate import _
 from odoo.exceptions import UserError
 from .viettelpost_connection import ViettelPostConnection
+from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import FuncName
+from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Method
 _logger = logging.getLogger(__name__)
 
 
@@ -10,78 +12,73 @@ class ViettelPostClient:
         self.conn = ViettelPostConnection(host, token, external_model)
 
     def get_provinces(self):
-        res = self.conn.execute_restful('GetProvinces', 'GET')
+        res = self.conn.execute_restful(FuncName.GetProvinces, Method.Get)
         res = self.check_response(res)
         return res
 
     def get_districts(self):
-        res = self.conn.execute_restful('GetDistricts', 'GET')
+        res = self.conn.execute_restful(FuncName.GetDistricts, Method.Get)
         res = self.check_response(res)
         return res
 
     def get_wards(self):
-        res = self.conn.execute_restful('GetWards', 'GET')
+        res = self.conn.execute_restful(FuncName.GetWards, Method.Get)
         res = self.check_response(res)
         return res
 
     def sign_in(self, payload):
-        res = self.conn.execute_restful('SignIn', 'POST', **payload)
+        res = self.conn.execute_restful(FuncName.SignIn, Method.Post, **payload)
         res = self.check_response(res)
         return res
 
     def sign_in_owner(self, payload):
-        res = self.conn.execute_restful('SignInOwner', 'POST', **payload)
+        res = self.conn.execute_restful(FuncName.SignInOwner, Method.Post, **payload)
         res = self.check_response(res)
         return res
 
     def get_offices(self):
-        res = self.conn.execute_restful('GetOffices', 'GET')
+        res = self.conn.execute_restful(FuncName.GetOffices, Method.Get)
         res = self.check_response(res)
         return res
 
     def get_services(self, payload):
-        res = self.conn.execute_restful('GetServices', 'POST', **payload)
+        res = self.conn.execute_restful(FuncName.GetServices, Method.Post, **payload)
         res = self.check_response(res)
         return res
 
     def get_extend_services(self, param):
-        res = self.conn.execute_restful('GetExtendServices', 'GET', param)
+        res = self.conn.execute_restful(FuncName.GetExtendServices, Method.Get, param)
         res = self.check_response(res)
         return res
 
     def get_stores(self):
-        res = self.conn.execute_restful('GetStores', 'GET')
+        res = self.conn.execute_restful(FuncName.GetStores, Method.Get)
         res = self.check_response(res)
         return res
 
     def set_store(self, payload):
-        res = self.conn.execute_restful('SetStore', 'POST', **payload)
+        res = self.conn.execute_restful(FuncName.SetStore, Method.Post, **payload)
         res = self.check_response(res)
         return res
 
     def compute_fee_ship_all(self, payload):
-        res = self.conn.execute_restful('ComputeFeeAll', 'POST', **payload)
+        res = self.conn.execute_restful(FuncName.ComputeFeeAll, Method.Post, **payload)
         res = self.check_response(res)
         return res
 
     def create_waybill(self, payload):
-        res = self.conn.execute_restful('CreateWaybill', 'POST', **payload)
+        res = self.conn.execute_restful(FuncName.CreateWaybill, Method.Post, **payload)
         res = self.check_response(res)
         return res
 
     def update_waybill(self, payload):
-        res = self.conn.execute_restful('UpdateWaybill', 'POST', **payload)
+        res = self.conn.execute_restful(FuncName.UpdateWaybill, Method.Post, **payload)
         res = self.check_response(res)
         return res
 
     def print_waybill(self, payload):
-        res = self.conn.execute_restful('PrintWaybill', 'POST', **payload)
+        res = self.conn.execute_restful(FuncName.PrintWaybill, Method.Post, **payload)
         res = self.check_response_print_waybill(res)
-        return res
-
-    def check_ship_cost(self, payload):
-        res = self.conn.execute_restful('CheckShipCost', 'POST', **payload)
-        res = self.check_response(res)
         return res
 
     def check_response(self, res):

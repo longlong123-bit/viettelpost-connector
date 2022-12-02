@@ -27,6 +27,7 @@
         'data/viettelpost_waybill_type_data.xml',
         'data/viettelpost_status_data.xml',
         'data/delivery_carrier_data.xml',
+        'data/api_endpoints_config_data.xml',
         'wizard/create_store_wizard_views.xml',
         'wizard/print_waybill_wizard.xml',
         'views/api_connect_config_views.xml',
@@ -46,6 +47,7 @@
         'views/vtp_status_views.xml',
         'views/res_partner_views.xml',
         'views/stock_picking_views.xml',
+        'views/api_endpoint_config_views.xml',
         'views/menus.xml'
     ],
     'assets': {
