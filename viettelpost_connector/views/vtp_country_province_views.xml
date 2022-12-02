@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="vtp_country_province_form_view" model="ir.ui.view">
+        <field name="name">vtp.country.province.form.view</field>
+        <field name="model">vtp.country.province</field>
+        <field name="arch" type="xml">
+            <form string="Province">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="country_id"/>
+                            <field name="province_name"/>
+                        </group>
+                        <group>
+                            <field name="province_code"/>
+                            <field name="delivery_carrier_id"/>
+                            <field name="province_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="District" name="district">
+                            <field name="district_ids">
+                                <tree editable="bottom">
+                                    <field name="province_id"/>
+                                    <field name="district_name"/>
+                                    <field name="district_code"/>
+                                    <field name="district_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                     <field name="message_follower_ids" widget="mail_followers"/>
+                     <field name="message_ids" colspan="4" widget="mail_thread" nolabel="1"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="vtp_country_province_tree_view" model="ir.ui.view">
+        <field name="name">vtp.country.province.tree.view</field>
+        <field name="model">vtp.country.province</field>
+        <field name="arch" type="xml">
+            <tree string="Province" export_xlsx="0">
+                <field name="country_id"/>
+                <field name="province_name"/>
+                <field name="province_code"/>
+                <field name="province_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="vtp_country_province_search_view" model="ir.ui.view">
+        <field name="name">vtp.country.province.search.search</field>
+        <field name="model">vtp.country.province</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="province_name"/>
+                <field name="province_code"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="vtp_country_province_action_view">
+        <field name="name">Province</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">vtp.country.province</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('vtp_country_province_tree_view')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('vtp_country_province_form_view')})]"/>
+        <field name="search_view_id" ref="vtp_country_province_search_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Province.
+            </p>
+        </field>
+    </record>
+</odoo>

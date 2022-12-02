@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="vtp_waybill_type_form_view" model="ir.ui.view">
+        <field name="name">viettelpost.waybill.type.form.view</field>
+        <field name="model">viettelpost.waybill.type</field>
+        <field name="arch" type="xml">
+            <form string="Waybill type" create="0" edit="0" import="0">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="vtp_waybill_type_tree_view" model="ir.ui.view">
+        <field name="name">viettelpost.waybill.type.tree.view</field>
+        <field name="model">viettelpost.waybill.type</field>
+        <field name="arch" type="xml">
+            <tree string="Waybill Type" export_xlsx="0" create="0">
+                <field name="name"/>
+                <field name="code"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="vtp_waybill_type_search_view" model="ir.ui.view">
+        <field name="name">viettelpost.waybill.type.search</field>
+        <field name="model">viettelpost.waybill.type</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="vtp_waybill_type_action_view">
+        <field name="name">Waybill Type</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">viettelpost.waybill.type</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('vtp_waybill_type_tree_view')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('vtp_waybill_type_form_view')})]"/>
+        <field name="search_view_id" ref="vtp_waybill_type_search_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new waybill type.
+            </p>
+        </field>
+    </record>
+</odoo>

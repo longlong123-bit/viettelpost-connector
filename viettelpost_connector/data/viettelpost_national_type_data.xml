@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record model="viettelpost.national.type" id="viettelpost_national_type_1">
+            <field name="name">Trong nước</field>
+            <field name="code">1</field>
+        </record>
+        <record model="viettelpost.national.type" id="viettelpost_national_type_2">
+            <field name="name">Ngoài nước</field>
+            <field name="code">0</field>
+        </record>
+    </data>
+</odoo>

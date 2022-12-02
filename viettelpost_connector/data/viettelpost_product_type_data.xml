@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record model="viettelpost.product.type" id="viettelpost_product_type_1">
+            <field name="name">Thư</field>
+            <field name="code">TH</field>
+        </record>
+        <record model="viettelpost.product.type" id="viettelpost_product_type_2">
+            <field name="name">Hàng hóa</field>
+            <field name="code">HH</field>
+        </record>
+    </data>
+</odoo>
