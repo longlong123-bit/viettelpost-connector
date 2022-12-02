@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record model="viettelpost.waybill.type" id="viettelpost_waybill_type_1">
+            <field name="name">Không thu hộ</field>
+            <field name="code">1</field>
+        </record>
+        <record model="viettelpost.waybill.type" id="viettelpost_waybill_type_2">
+            <field name="name">Thu hộ tiền hàng và tiền cước</field>
+            <field name="code">2</field>
+        </record>
+        <record model="viettelpost.waybill.type" id="viettelpost_waybill_type_3">
+            <field name="name">Thu hộ tiền hàng</field>
+            <field name="code">3</field>
+        </record>
+        <record model="viettelpost.waybill.type" id="viettelpost_waybill_type_4">
+            <field name="name">Thu hộ tiền cước</field>
+            <field name="code">4</field>
+        </record>
+    </data>
+</odoo>

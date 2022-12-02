@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="print_waybill_wizard_form_view" model="ir.ui.view">
+        <field name="name">print.waybill.wizard.form</field>
+        <field name="model">print.waybill.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="picking_id"/>
+                    <field name="waybill_code"/>
+                </group>
+                <footer>
+                    <button type="object" name="action_print_waybill" context="{'type_print': 'a5'}" string="Print A5" class="oe_highlight"/>
+                    <button type="object" name="action_print_waybill" context="{'type_print': 'a6'}" string="Print A6" class="oe_highlight"/>
+                    <button type="object" name="action_print_waybill" context="{'type_print': 'a7'}" string="Print A7" class="oe_highlight"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="print_waybill_wizard_wizard_action" model="ir.actions.act_window">
+        <field name="name">Print waybill</field>
+        <field name="res_model">print.waybill.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

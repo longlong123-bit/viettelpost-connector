@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <meta
+      name="viewport"
+      content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"
+    />
+    <title></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Abhaya+Libre&family=Comforter+Brush&family=El+Messiri:wght@400;700&family=Great+Vibes&family=Nanum+Myeongjo&family=Roboto:ital,wght@0,300;0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link href="css/styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div style="padding-bottom: 40px">
+      <h2 class="page-title">Odoo ViettelPost Connector</h2>
+      <p class="page-desc">
+        The Odoo ViettelPost Connector module is an integrated product between the Odoo application and the ViettelPost carrier. The application provides features, through the API manipulated directly into the dashboard of ViettelPost.
+      </p>
+      <div class="container">
+        <div class="tab-container">
+          <input
+            type="radio"
+            name="tab"
+            class="tab-control"
+            id="tab1"
+            checked
+          /><label for="tab1">Features</label>
+          <input type="radio" name="tab" id="tab2" class="tab-control" /><label
+            for="tab2"
+            >Guidelines</label
+          >
+          <input type="radio" name="tab" id="tab3" class="tab-control" /><label
+            for="tab3"
+            >Contacts</label
+          >
+        </div>
+        <div class="content-container">
+          <div class="content1" id="features">
+            <ul>
+              <li>Login and get token</li>
+              <li>Test connection</li>
+              <li>Provinces data synchronous</li>
+              <li>Districts data synchronous</li>
+              <li>Wards data synchronous</li>
+              <li>Post offices data synchronous</li>
+              <li>Services data synchronous</li>
+              <li>Extend services data synchronous</li>
+              <li>Warehouses data synchronous</li>
+              <li>Configuration warehouse ViettelPost from Odoo</li>
+              <li>Automatically generated a list of product types</li>
+              <li>Automatically generated a list of national types</li>
+              <li>Automatically generated a list of waybill types</li>
+              <li>Automatically generated a list of status</li>
+              <li>Create the waybill</li>
+              <li>Update status waybill</li>
+              <li>Automatically generated a list of national types</li>
+              <li>Print and save the waybill</li>
+              <li>Tracking log connect API</li>
+            </ul>
+          </div>
+          <div class="content2" id="content2">
+            <ol type="I">
+              <!-- Getting started -->
+              <li>
+                <p class="step-title">Getting started</p>
+                <ul type="disc">
+                  <li>
+                    <p>
+                      Install package selenium version 4.6.0
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Install module Odoo ViettelPost Connector
+                    </p>
+                  </li>
+                  <img alt="step-2" src="./images/step2.png" class="img-tut" />
+                </ul>
+              </li>
+              <!-- end Getting started -->
+
+              <!-- Login and get token -->
+              <li>
+                <p class="step-title">Login and get token</p>
+                <p>
+                  <strong>Summary:</strong> Login and get the token. This token will
+                  help authenticate API connections with ViettelPost.
+                </p>
+                <p>
+                  <strong>Path:</strong> ViettelPost/Configuration/ViettelPost
+                  API Technical/Connection Config
+                </p>
+                <p>
+                  <strong>Note:</strong> (1) & (2): The username and password
+                  registed with viettelpost
+                </p>
+                <p>
+                  <strong>Step 1:</strong> Enter username<sup>(1)</sup> and
+                  password<sup>(2)</sup>. Press button Get token
+                </p>
+
+                <img alt="step-3" src="./images/step3.png" class="img-tut" />
+              </li>
+              <!-- end Login and get token -->
+
+              <!-- Test Connection -->
+              <li>
+                <p class="step-title">Test Connection</p>
+                <p>
+                  <strong>Summary:</strong> Check connection with ViettelPost's
+                  host
+                </p>
+                <p>
+                  <strong>Path:</strong> ViettelPost/Configuration/ViettelPost
+                  API Technical/Connection History
+                </p>
+                <p><strong>Step 1:</strong> Press button Test connection</p>
+                <img alt="step-4" src="./images/step4.png" class="img-tut" />
+              </li>
+              <!-- end Test Connection -->
+
+              <!-- Address synchronization -->
+              <li>
+                <p class="step-title">Address synchronous</p>
+                <p>
+                  <strong>Summary:</strong> Synchronous the list of provinces,
+                  districts, wards from ViettelPost and save it in odoo. This is
+                  required to configure the correct address information in odoo
+                  and ensure no errors when connecting to ViettelPost.
+                </p>
+                <p>
+                  <strong>Step 1:</strong> Go to
+                  ViettelPost/Configuration/Province. Press button
+                  <strong>Sync Province</strong>
+                </p>
+                <img alt="step-5" src="./images/step5.png" class="img-tut" />
+                <p>
+                  <strong>Step 2:</strong> Go to
+                  ViettelPost/Configuration/District. Press button
+                  <strong>Sync District</strong>
+                </p>
+                <img alt="step-6" src="./images/step6.png" class="img-tut" />
+                <p>
+                  <strong>Step 3:</strong> Go to ViettelPost/Configuration/Ward.
+                  Press button <strong>Sync Ward</strong>
+                </p>
+                <img alt="step-7" src="./images/step7.png" class="img-tut" />
+              </li>
+              <!-- end Address synchronization -->
+
+              <!-- Post office synchronization -->
+              <li>
+                <p class="step-title">Post offices synchronous</p>
+                <p>
+                  <strong>Summary:</strong> Synchronous the list of post offices 
+                  across the country to Odoo. It makes it easy to find the nearest post office at Odoo
+                </p>
+                <p><strong>Path:</strong> ViettelPost/Post Office</p>
+                <p>
+                  <strong>Step 1:</strong> Press button
+                  <strong>Sync Post Office</strong>
+                </p>
+                <img alt="step-8" src="./images/step8.png" class="img-tut" />
+              </li>
+              <!-- end Post office synchronization -->
+
+              <!-- Service synchronization -->
+              <li>
+                <p class="step-title">Service synchronous</p>
+                <p>
+                  <strong>Summary:</strong> Synchronous the list of services and
+                  extend services available at ViettelPost.
+                </p>
+                <p><strong>Path:</strong> ViettelPost/Service</p>
+                <p>
+                  <strong>Step 1:</strong> Press button
+                  <strong>Sync Service</strong>
+                </p>
+                <img alt="step-9" src="./images/step9.png" class="img-tut" />
+                <p>
+                  <strong>Step 2:</strong> Press button
+                  <strong>Sync Extend Service</strong>
+                </p>
+                <img alt="step-10" src="./images/step10.png" class="img-tut" />
+              </li>
+              <!-- end Service synchronization -->
+
+              <!-- Warehouse synchronization -->
+              <li>
+                <p class="step-title">Warehouse synchronous</p>
+                <p>
+                  <strong>Summary:</strong> Synchronous the list of repositories
+                  that you have configured on the ViettelPost dashboard.
+                </p>
+                <p><strong>Path:</strong> ViettelPost/Warehouse</p>
+                <p>
+                  <strong>Step 1:</strong> Press button
+                  <strong>Sync Warehouse</strong>
+                </p>
+                <img alt="step-11" src="./images/step11.png" class="img-tut" />
+              </li>
+              <!-- end Warehouse synchronization -->
+
+              <!-- Configuration warehouse ViettelPost from Odoo -->
+              <li>
+                <p class="step-title">
+                  Configuration warehouse ViettelPost from Odoo
+                </p>
+                <p>
+                  <strong>Summary:</strong> Help you configure directly and
+                  quickly a ViettelPost warehouse at Odoo.
+                </p>
+                <p><strong>Path:</strong> ViettelPost/Warehouse</p>
+                <p>
+                  <strong>Step 1:</strong> Press button
+                  <strong>Create</strong>
+                </p>
+                <img alt="step-12" src="./images/step12.png" class="img-tut" />
+                <p><strong>Step 2:</strong> Enter warehouse information</p>
+                <img alt="step-13" src="./images/step13.png" class="img-tut" />
+              </li>
+              <!-- end Configuration warehouse ViettelPost from Odoo -->
+
+              <!--  Create waybill -->
+              <li>
+                <p class="step-title">Create waybill</p>
+                <p>
+                  <strong>Summary:</strong> Create a viettelpost bill of lading
+                  directly and quickly at Odoo.
+                </p>
+                <p>
+                  <strong>Step 1:</strong> Go to Sales/Products. Create and
+                  configure a product.
+                </p>
+                <p><strong>Note:</strong> Weight, Depth, Height is required.</p>
+                <img alt="step-14" src="./images/step14.png" class="img-tut" />
+                <p>
+                  <strong>Step 2:</strong> Goto Contacts. Create a customer and
+                  configure receiver address.
+                </p>
+                <p>
+                  <strong>Note:</strong> Street, Ward, District, Province, Phone
+                  is required.
+                </p>
+                <p>
+                  <strong>Advance:</strong> You can search more and select a
+                  ward. Odoo will auto fill district and province.
+                </p>
+                <img alt="step-15" src="./images/step15.png" class="img-tut" />
+                <p><strong>Step 3:</strong> Visit Sale. Create a sale order.</p>
+                <p><strong>Step 3.1:</strong> Add a customer</p>
+                <p><strong>Step 3.2:</strong> Add a product</p>
+                <p><strong>Step 3.3</strong> Action Confirm</p>
+                <img alt="step-16" src="./images/step16.png" class="img-tut" />
+                <p>
+                  <strong>Step 3.4:</strong> Now the field Delivery Method will appear. Add a Delivery Method (Select
+                  ViettelPost)
+                </p>
+                <p><strong>Step 3.5:</strong> Add a warehouse</p>
+                <p><strong>Step 3.6:</strong> Select product type</p>
+                <p><strong>Step 3.7:</strong> Select National type</p>
+                <p><strong>Step 3.8:</strong> Select Waybill type</p>
+                <img alt="step-17" src="./images/step17.png" class="img-tut" />
+                <p>
+                  <strong>Step 3.9:</strong> Press button
+                  <strong
+                    >Get a list of services that match itinerary</strong> to receive
+                    services that match itinerary
+                </p>
+                <img alt="step-18" src="./images/step18.png" class="img-tut" />
+                <p>
+                  <strong>Step 3.10:</strong> Select the service and extension
+                  service that matches the list of services that match the
+                  itineraries obtained.
+                </p>
+                <img alt="step-19" src="./images/step19.png" class="img-tut" />
+                <p>
+                  <strong>Step 3.11:</strong> Check information and create
+                  waybill
+                </p>
+                <img alt="step-20" src="./images/step20.png" class="img-tut" />
+                <p>
+                  <strong>Step 3.12:</strong> Check information 3pls created
+                </p>
+                <img alt="step-20_success" src="./images/step20_success.png" class="img-tut" />
+                <img alt="step-23" src="./images/step23.png" class="img-tut" />
+              </li>
+              <!-- end  Create waybill -->
+
+              <!-- Print and save waybill -->
+              <li>
+                <p class="step-title">Print and save waybill</p>
+                <p>
+                  <strong>Summary:</strong> Print and save the image of the bill
+                  of lading information to odoo.
+                </p>
+                <p>
+                  <strong>Advance:</strong> You have 3 choices of bill of lading
+                  (A5, A6, A7)
+                </p>
+                <p>
+                  <strong>Step 1:</strong> Press button
+                  <strong>Print waybill</strong>
+                  <img alt="step-21" src="./images/step21.png" class="img-tut" />
+                </p>
+                <p>
+                  <strong>Step 2:</strong> Choice bill of lading and press
+                  button
+                </p>
+                <img alt="step-22" src="./images/step22.png" class="img-tut" />
+                <p><strong>Step 3:</strong> Check bill of lading printed</p>
+                
+                <img alt="step-24" src="./images/step24.png" class="img-tut" />
+              </li>
+              <!-- end Print and save waybill -->
+
+              <!-- Update status waybill -->
+              <li>
+                <p class="step-title">Update status waybill</p>
+                <p>
+                  <strong>Summary:</strong> We will use two main states: confirm
+                  and cancel the bill of lading.
+                </p>
+                <p>
+                  <strong>Note:</strong> These operations work on both orders
+                  and bills of lading
+                </p>
+                <ol type="1">
+                  <li>
+                    <p>Confirm waybill</p>
+                    <p>
+                      <strong>Step 1:</strong> Press button
+                      <strong>Confirm waybill</strong>
+                    </p>
+                    <img
+                      alt="step-25"
+                      src="./images/step25.png"
+                      class="img-tut"
+                    />
+                  </li>
+                  <li>
+                    <p>Cancel waybill</p>
+                    <p>
+                      <strong>Step 1:</strong> Press button
+                      <strong>Cancel</strong>
+                    </p>
+                    <img
+                      alt="step-26"
+                      src="./images/step26.png"
+                      class="img-tut"
+                    />
+                    <img
+                      alt="step-28"
+                      src="./images/step28.png"
+                      class="img-tut"
+                    />
+                  </li>
+                </ol>
+              </li>
+              <!-- end Update status waybill -->
+
+              <!-- Tracking log connect api -->
+              <li>
+                <p class="step-title">Tracking log connect api</p>
+                <p>
+                  <strong>Summary:</strong> Track all connection requests with
+                  api ViettelPost.
+                </p>
+                <p>
+                  <strong>Path:</strong> ViettelPost/Configuration/ ViettelPost
+                  API Technical/Connection History
+                </p>
+                <img alt="step-27" src="./images/step27.png" class="img-tut" />
+              </li>
+              <!-- end Tracking log connect api -->
+            </ol>
+          </div>
+          <div class="content3" id="content3">
+            <div>
+              <a
+                class="contact"
+                href="skype:live:.cid.219379873c9199d1?chat"
+                target="_blank"
+              >
+                <img
+                  style="width: 40px"
+                  alt="skype"
+                  src="./assets/icons/skype.svg"
+                />
+                <p>Skype</p>
+              </a>
+              <a
+                class="contact"
+                href="mailto:l99store.long@gmail.com"
+                target="_blank"
+              >
+                <img
+                  style="width: 40px"
+                  alt="skype"
+                  src="./assets/icons/gmail.svg"
+                />
+                <p>Email</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

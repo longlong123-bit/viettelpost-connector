@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="sale_order_view_vtp_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.view.vtp.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="payment_term_id" position="after">
+                <field name="delivery_carrier_vtp_id" attrs="{'invisible': [('state', '!=', 'sale')]}"/>
+            </field>
+            <button name="action_quotation_send" position="before">
+                <button name="action_create_waybill_code" attrs="{'invisible': [('state', '!=', 'sale')]}" class="btn btn-primary" type="object" string="Create waybill"/>
+            </button>
+            <button name="action_cancel" position="before">
+                <button name="get_list_service" attrs="{'invisible': ['|', ('is_check_service', '=', True), ('delivery_carrier_vtp_id', '=', False)]}" string="Get a list of services that match itinerary" type="object"/>
+            </button>
+            <xpath expr="//notebook" position="before">
+                <group string="ViettelPost Information" attrs="{'invisible': [('waybill_code', '=', False)]}">
+                    <group>
+                        <field name="waybill_code"/>
+                        <field name="exchange_weight"/>
+                        <field name="actual_kpi_ht"/>
+                        <field name="money_collection"/>
+                        <field name="waybill_status" attrs="{'invisible': [('waybill_status', '=', False)]}"/>
+                        <field name="tracking_link" widget="url"/>
+                    </group>
+                    <group>
+                        <field name="money_total_fee"/>
+                        <field name="money_fee"/>
+                        <field name="money_other_fee"/>
+                        <field name="money_collection_fee"/>
+                        <field name="money_vat"/>
+                        <field name="money_total"/>
+                    </group>
+                </group>
+                <group string="Shipment details" attrs="{'invisible': [('delivery_carrier_vtp_id', '=', False)]}">
+                    <group>
+                        <field name="vtp_store_id" attrs="{'required': [('state', '=', 'sale')]}"/>
+                        <field name="vtp_lst_service_id" attrs="{'invisible': [('is_check_service', '=', False)], 'required': [('is_check_service', '=', True)]}"/>
+                        <field name="vtp_lst_extent_service_id" attrs="{'invisible': [('vtp_lst_service_id', '=', False)]}"/>
+                        <field name="is_check_service" invisible="1"/>
+                    </group>
+                    <group>
+                        <field name="vtp_product_type_id" attrs="{'required': [('state', '=', 'sale')]}"/>
+                        <field name="vtp_national_type_id" attrs="{'required': [('state', '=', 'sale')]}"/>
+                        <field name="vtp_waybill_type_id" attrs="{'required': [('state', '=', 'sale')]}"/>
+                    </group>
+                </group>
+                <group>
+                    <group string="Place of sender" attrs="{'invisible': [('delivery_carrier_vtp_id', '=', False)]}">
+                        <field name="sender_fullname"/>
+                        <field name="sender_phone" widget="phone"/>
+                        <field name="sender_email" widget="email"/>
+                        <field name="sender_address"/>
+                        <field name="sender_ward_id"/>
+                        <field name="sender_district_id"/>
+                        <field name="sender_province_id"/>
+                        <field name="vtp_note" placeholder="Note something in the bill of lading"/>
+                        <field name="sender_groupaddress_id" invisible="1"/>
+                        <field name="sender_cus_id" invisible="1"/>
+                    </group>
+                    <group string="Place of receiver" attrs="{'invisible': [('delivery_carrier_vtp_id', '=', False)]}">
+                        <field name="receiver_fullname"/>
+                        <field name="receiver_phone" widget="phone"/>
+                        <field name="receiver_email" widget="email"/>
+                        <field name="receiver_street"/>
+                        <field name="receiver_ward_id"/>
+                        <field name="receiver_district_id"/>
+                        <field name="receiver_province_id"/>
+                    </group>
+                </group>
+            </xpath>
+
+            <xpath expr="//notebook/page[last()]" position="after">
+                <page string="List services math itinerary" attrs="{'invisible': [('delivery_carrier_vtp_id', '=', False)]}" name="lst_service" groups="base.group_system">
+                    <field name="list_service_supported_ids" widget="section_and_note_one2many" mode="tree,kanban">
+                        <form create="0" edit="0">
+                            <field name="service_id" />
+                            <field name="kpi_ht"/>
+                            <field name="money_total"/>
+                        </form>
+                        <tree create="0" edit="0">
+                            <field name="service_id" />
+                            <field name="kpi_ht"/>
+                            <field name="money_total" widget="monetary"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

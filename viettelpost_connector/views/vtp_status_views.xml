@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="vtp_status_form_view" model="ir.ui.view">
+        <field name="name">viettelpost.status.form.view</field>
+        <field name="model">viettelpost.status</field>
+        <field name="arch" type="xml">
+            <form string="Status" create="0" edit="0" import="0">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="vtp_status_tree_view" model="ir.ui.view">
+        <field name="name">viettelpost.status.tree.view</field>
+        <field name="model">viettelpost.status</field>
+        <field name="arch" type="xml">
+            <tree string="Status" export_xlsx="0" create="0">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="vtp_status_search_view" model="ir.ui.view">
+        <field name="name">viettelpost.status.search</field>
+        <field name="model">viettelpost.status</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="vtp_status_action_view">
+        <field name="name">Status</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">viettelpost.status</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('vtp_status_tree_view')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('vtp_status_form_view')})]"/>
+        <field name="search_view_id" ref="vtp_status_search_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new status.
+            </p>
+        </field>
+    </record>
+</odoo>
