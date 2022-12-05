@@ -64,4 +64,6 @@
     },
     'images': ['static/description/thumbnail.png'],
     'application': True,
+    'currency': 'USD',
+    'price': '52.00'
 }
