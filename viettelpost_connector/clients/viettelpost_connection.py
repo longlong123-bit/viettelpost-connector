@@ -1,10 +1,11 @@
-import json
 import requests
+import json
 from datetime import datetime
 from odoo.exceptions import UserError
 from odoo.tools.translate import _
 import logging
-from odoo.addons.viettelpost_connector.contanst.dataclass import ROUTES
+from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import FuncName
+from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Method
 
 _logger = logging.getLogger(__name__)
 
@@ -18,24 +19,25 @@ class ViettelPostConnection:
 
     def execute_restful(self, func_name, method, *args, **kwargs):
         try:
-            if not hasattr(ROUTES, func_name):
-                raise UserError(_(f'Function name {func_name} is not existed'))
-            endpoint = getattr(ROUTES, func_name)
-            if func_name == 'GetExtendServices':
+            endpoint_id = self.external_model.env['api.endpoint.config'].search([('name', '=', func_name)])
+            if not endpoint_id:
+                raise UserError(_('Function name %s is not existed') % func_name)
+            endpoint = endpoint_id.endpoint
+            if func_name == FuncName.GetExtendServices:
                 endpoint = endpoint.format(*args)
             url = self.host + endpoint
             headers = {
                 'Content-Type': 'application/json'
             }
-            if func_name != 'SignIn':
+            if func_name != FuncName.SignIn:
                 headers.update({'Token': self.token})
-            if method == 'GET':
+            if method == Method.Get:
                 res = requests.get(url, params=kwargs, headers=headers, timeout=300)
-            elif method == 'POST':
+            elif method == Method.Post:
                 res = requests.post(url, json=kwargs, headers=headers, timeout=300)
             data = res.json()
             if isinstance(data, dict):
-                if func_name == 'UpdateWaybill':
+                if func_name == FuncName.UpdateWaybill:
                     self.update_sale_order(kwargs.get('ORDER_NUMBER', False), data.get('message', False))
                 self.create_connect_history(func_name, method, url, json.dumps(kwargs), data.get('message', False), data.get('status', False))
             else:

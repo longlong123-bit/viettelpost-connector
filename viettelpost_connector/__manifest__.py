@@ -7,8 +7,9 @@
         The application provides features, which through the api to manipulate directly into the dashboard of ViettelPost.
     """,
     'category': 'Services/Connector',
+    'support': 'odoo.tangerine@gmail.com',
     'author': 'Tangerine',
-    'license': 'LGPL-3',
+    'license': 'OPL-1',
     'depends': [
         'base',
         'mail',
@@ -27,6 +28,7 @@
         'data/viettelpost_waybill_type_data.xml',
         'data/viettelpost_status_data.xml',
         'data/delivery_carrier_data.xml',
+        'data/api_endpoints_config_data.xml',
         'wizard/create_store_wizard_views.xml',
         'wizard/print_waybill_wizard.xml',
         'views/api_connect_config_views.xml',
@@ -46,6 +48,7 @@
         'views/vtp_status_views.xml',
         'views/res_partner_views.xml',
         'views/stock_picking_views.xml',
+        'views/api_endpoint_config_views.xml',
         'views/menus.xml'
     ],
     'assets': {

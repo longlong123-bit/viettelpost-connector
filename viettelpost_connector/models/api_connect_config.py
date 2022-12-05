@@ -21,6 +21,7 @@ class ApiConnectConfig(models.Model):
     active = fields.Boolean(string='Active', default=True, tracking=True)
     user_name = fields.Char(string='Username', tracking=True)
     password = fields.Char(string='Password', tracking=True)
+    endpoint_ids = fields.One2many('api.endpoint.config', 'api_connect_config_id', string='Endpoint')
 
     def btn_test_connection(self):
         self.ensure_one()
@@ -78,3 +79,14 @@ class ApiConnectHistory(models.Model):
     url = fields.Char(string='Url')
     method = fields.Char(string='Method')
     body = fields.Text(string='Body')
+
+
+class ApiEndpointConfig(models.Model):
+    _name = 'api.endpoint.config'
+    _description = 'Configuration dynamic endpoint for host when there is a change of routes from ViettelPost. '
+
+    endpoint = fields.Char(string='Endpoint', required=True)
+    name = fields.Char(string='Function name', required=True, readonly=True)
+    api_connect_config_id = fields.Many2one('api.connect.config', string='Api connect config id')
+    host = fields.Char(related='api_connect_config_id.host', string='Host')
+    description = fields.Text(string='Description')

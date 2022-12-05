@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="api_endpoint_config_form_view" model="ir.ui.view">
+        <field name="name">api.endpoint.config.form.view</field>
+        <field name="model">api.endpoint.config</field>
+        <field name="arch" type="xml">
+            <form string="Endpoint config" delete="0">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="host"/>
+                        <field name="endpoint"/>
+                        <field name="description"/>
+                        <field name="api_connect_config_id" invisible="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="api_endpoint_config_tree_view" model="ir.ui.view">
+        <field name="name">api.endpoint.config.tree.view</field>
+        <field name="model">api.endpoint.config</field>
+        <field name="arch" type="xml">
+            <tree string="Connection History" delete="0">
+                <field name="name"/>
+                <field name="host"/>
+                <field name="endpoint"/>
+                <field name="description"/>
+                <field name="api_connect_config_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="api_endpoint_config_search_view" model="ir.ui.view">
+        <field name="name">api.endpoint.config.search</field>
+        <field name="model">api.endpoint.config</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="endpoint"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="api_endpoint_config_action_view">
+        <field name="name">Endpoint Config</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">api.endpoint.config</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('api_endpoint_config_tree_view')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('api_endpoint_config_form_view')})]"/>
+        <field name="search_view_id" ref="api_endpoint_config_search_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new endpoint config.
+            </p>
+        </field>
+    </record>
+</odoo>
