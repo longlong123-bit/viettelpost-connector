@@ -1,6 +1,6 @@
 {
     'name': 'Odoo Viettel Post Connector',
-    'version': '15.0.1.0',
+    'version': '16.0.1.0',
     'summary': 'Connect Odoo Application with Viettel Post',
     'description': """
         The Odoo Viettel Post Connector module is an integrated product between the odoo application and the carrier Viettel Post. 
@@ -52,11 +52,9 @@
         'views/menus.xml'
     ],
     'assets': {
-        'web.assets_qweb': [
-            'viettelpost_connector/static/src/xml/button.xml'
-        ],
         'web.assets_backend': [
-            'viettelpost_connector/static/src/js/handle_button.js'
+            'viettelpost_connector/static/src/**/*.js',
+            'viettelpost_connector/static/src/**/*.xml'
         ]
     },
     'external_dependencies': {

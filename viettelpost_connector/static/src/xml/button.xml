@@ -1,56 +1,62 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates id="template" xml:space="preserve">
-    <t t-extend="ListView.buttons">
-        <t t-jquery="div.o_list_buttons" t-operation="append">
-            <t t-name="ListView.recoverBtn">
-                <button t-if="widget.modelName=='vtp.country.province'"
-                        type="button"
-                        class="btn btn-primary o_button_sync_province"
-                        style="margin-left: 5px !important;">
-                    Sync Province
-                </button>
-                <button t-if="widget.modelName=='vtp.country.district'"
-                        type="button"
-                        class="btn btn-primary o_button_sync_district"
-                        style="margin-left: 5px !important;">
-                    Sync District
-                </button>
-                <button t-if="widget.modelName=='vtp.country.ward'"
-                        type="button"
-                        class="btn btn-primary o_button_sync_ward"
-                        style="margin-left: 5px !important;">
-                    Sync Ward
-                </button>
-                <button t-if="widget.modelName=='viettelpost.office'"
-                        type="button"
-                        class="btn btn-primary o_button_sync_office"
-                        style="margin-left: 5px !important;">
-                    Sync Post Office
-                </button>
-                <button t-if="widget.modelName=='viettelpost.service'"
-                        type="button"
-                        class="btn btn-primary o_button_sync_service"
-                        style="margin-left: 5px !important;">
-                    Sync Service
-                </button>
-                <button t-if="widget.modelName=='viettelpost.service'"
-                        type="button"
-                        class="btn btn-primary o_button_sync_extend_service"
-                        style="margin-left: 5px !important;">
-                    Sync Extend Service
-                </button>
-                <button t-if="widget.modelName=='viettelpost.store'"
-                        type="button"
-                        class="btn btn-primary o_button_create_store">
-                    Create
-                </button>
-                <button t-if="widget.modelName=='viettelpost.store'"
-                        type="button"
-                        class="btn btn-primary o_button_sync_store"
-                        style="margin-left: 5px !important;">
-                    Sync Warehouse
-                </button>
-            </t>
-        </t>
+    <t t-name="Sync.Buttons" t-inherit="web.ListView.Buttons" t-inherit-mode="primary" owl="1">
+        <xpath expr="(//div/*)[last()]" position="after">
+            <button t-if="props.resModel=='vtp.country.province'"
+                    type="button"
+                    class="btn btn-primary o_button_sync_province"
+                    style="margin-left: 5px !important;"
+                    t-on-click="onClickSyncProvince">
+                Sync Province
+            </button>
+            <button t-if="props.resModel=='vtp.country.district'"
+                    type="button"
+                    class="btn btn-primary o_button_sync_district"
+                    t-on-click="onClickSyncDistrict"
+                    style="margin-left: 5px !important;">
+                Sync District
+            </button>
+            <button t-if="props.resModel=='vtp.country.ward'"
+                    type="button"
+                    class="btn btn-primary o_button_sync_ward"
+                    t-on-click="onClickSyncWard"
+                    style="margin-left: 5px !important;">
+                Sync Ward
+            </button>
+            <button t-if="props.resModel=='viettelpost.office'"
+                    type="button"
+                    class="btn btn-primary o_button_sync_office"
+                    t-on-click="onClickSyncOffice"
+                    style="margin-left: 5px !important;">
+                Sync Post Office
+            </button>
+            <button t-if="props.resModel=='viettelpost.service'"
+                    type="button"
+                    class="btn btn-primary o_button_sync_service"
+                    t-on-click="onClickSyncService"
+                    style="margin-left: 5px !important;">
+                Sync Service
+            </button>
+            <button t-if="props.resModel=='viettelpost.service'"
+                    type="button"
+                    class="btn btn-primary o_button_sync_extend_service"
+                    t-on-click="onClickSyncExtendService"
+                    style="margin-left: 5px !important;">
+                Sync Extend Service
+            </button>
+            <button t-if="props.resModel=='viettelpost.store'"
+                    type="button"
+                    t-on-click="onClickCreateStore"
+                    class="btn btn-primary o_button_create_store">
+                Create
+            </button>
+            <button t-if="props.resModel=='viettelpost.store'"
+                    type="button"
+                    t-on-click="onClickSyncStore"
+                    class="btn btn-primary o_button_sync_store"
+                    style="margin-left: 5px !important;">
+                Sync Warehouse
+            </button>
+        </xpath>
     </t>
 </templates>

@@ -31,7 +31,7 @@
         <field name="name">viettelpost.service.tree.view</field>
         <field name="model">viettelpost.service</field>
         <field name="arch" type="xml">
-            <tree string="Service" export_xlsx="0" create="0">
+            <tree string="Service" export_xlsx="0" create="0" js_class="handle_button_list">
                 <field name="name"/>
                 <field name="code"/>
                 <field name="delivery_carrier_id"/>

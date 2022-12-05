@@ -25,7 +25,7 @@
         <field name="name">vtp.country.ward.tree.view</field>
         <field name="model">vtp.country.ward</field>
         <field name="arch" type="xml">
-            <tree string="Ward" export_xlsx="0">
+            <tree string="Ward" export_xlsx="0" js_class="handle_button_list">
                 <field name="district_id"/>
                 <field name="ward_name"/>
                 <field name="ward_id" invisible="1"/>
