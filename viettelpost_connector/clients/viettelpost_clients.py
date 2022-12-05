@@ -71,6 +71,11 @@ class ViettelPostClient:
         res = self.check_response(res)
         return res
 
+    def check_ship_cost(self, payload):
+        res = self.conn.execute_restful(FuncName.CheckShipCost, Method.Post, **payload)
+        res = self.check_response(res)
+        return res
+
     def update_waybill(self, payload):
         res = self.conn.execute_restful(FuncName.UpdateWaybill, Method.Post, **payload)
         res = self.check_response(res)
