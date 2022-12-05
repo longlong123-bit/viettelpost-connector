@@ -60,17 +60,6 @@ class PrintWaybillWizard(models.Model):
             self.env['ir.attachment'].sudo().create(data_do)
             self.env['ir.attachment'].sudo().create(data_so)
             time.sleep(2)
-            return {
-                "type": "ir.actions.client",
-                "tag": "display_notification",
-                "params": {
-                    "title": _("Print waybill successfully!"),
-                    "type": "success",
-                    "message": _(Message.MSG_ACTION_SUCCESS),
-                    "sticky": False,
-                    "next": {"type": "ir.actions.act_window_close"},
-                },
-            }
         except Exception as e:
             raise UserError(_(f'Print waybill failed. {e}'))
 

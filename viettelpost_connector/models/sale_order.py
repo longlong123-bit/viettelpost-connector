@@ -120,17 +120,6 @@ class SaleOrderVTPost(models.Model):
                 'exchange_weight': res['EXCHANGE_WEIGHT'],
                 'money_other_fee': res['MONEY_OTHER_FEE'],
             })
-            return {
-                "type": "ir.actions.client",
-                "tag": "display_notification",
-                "params": {
-                    "title": _("Create waybill successfully!"),
-                    "type": "success",
-                    "message": _(Message.MSG_ACTION_SUCCESS),
-                    "sticky": False,
-                    "next": {"type": "ir.actions.act_window_close"},
-                },
-            }
         except Exception as e:
             raise UserError(_(f'Create waybill failed. {e}'))
 
@@ -161,17 +150,6 @@ class SaleOrderVTPost(models.Model):
                         'sale_id': self.id
                     })
             self.write({'is_check_service': True})
-            return {
-                "type": "ir.actions.client",
-                "tag": "display_notification",
-                "params": {
-                    "title": _("Get list service Successfully!"),
-                    "type": "success",
-                    "message": _(Message.MSG_ACTION_SUCCESS),
-                    "sticky": False,
-                    "next": {"type": "ir.actions.act_window_close"},
-                },
-            }
         except Exception as e:
             raise UserError(_(f'Get a list of services that match itinerary failed. {e}'))
 

@@ -6,37 +6,37 @@
                 <button t-if="widget.modelName=='vtp.country.province'"
                         type="button"
                         class="btn btn-primary o_button_sync_province"
-                        style="margin-left: 5px !important;">
+                        style="margin-left: 2px !important;">
                     Sync Province
                 </button>
                 <button t-if="widget.modelName=='vtp.country.district'"
                         type="button"
                         class="btn btn-primary o_button_sync_district"
-                        style="margin-left: 5px !important;">
+                        style="margin-left: 2px !important;">
                     Sync District
                 </button>
                 <button t-if="widget.modelName=='vtp.country.ward'"
                         type="button"
                         class="btn btn-primary o_button_sync_ward"
-                        style="margin-left: 5px !important;">
+                        style="margin-left: 2px !important;">
                     Sync Ward
                 </button>
                 <button t-if="widget.modelName=='viettelpost.office'"
                         type="button"
                         class="btn btn-primary o_button_sync_office"
-                        style="margin-left: 5px !important;">
+                        style="margin-left: 2px !important;">
                     Sync Post Office
                 </button>
                 <button t-if="widget.modelName=='viettelpost.service'"
                         type="button"
                         class="btn btn-primary o_button_sync_service"
-                        style="margin-left: 5px !important;">
+                        style="margin-left: 2px !important;">
                     Sync Service
                 </button>
                 <button t-if="widget.modelName=='viettelpost.service'"
                         type="button"
                         class="btn btn-primary o_button_sync_extend_service"
-                        style="margin-left: 5px !important;">
+                        style="margin-left: 2px !important;">
                     Sync Extend Service
                 </button>
                 <button t-if="widget.modelName=='viettelpost.store'"
@@ -47,7 +47,7 @@
                 <button t-if="widget.modelName=='viettelpost.store'"
                         type="button"
                         class="btn btn-primary o_button_sync_store"
-                        style="margin-left: 5px !important;">
+                        style="margin-left: 2px !important;">
                     Sync Warehouse
                 </button>
             </t>

@@ -1,10 +1,10 @@
 {
-    'name': 'ViettelPost Connector',
-    'version': '15.0.1.0',
-    'summary': 'Connect Odoo Application with ViettelPost',
+    'name': 'Odoo Viettel Post Connector',
+    'version': '13.0.1.0',
+    'summary': 'Connect Odoo Application with Viettel Post',
     'description': """
-        The Odoo ViettelPost Connector module is an integrated product between the odoo application and the carrier ViettelPost. 
-        The application provides features, which through the api to manipulate directly into the dashboard of ViettelPost.
+        The Odoo Viettel Post Connector module is an integrated product between the odoo application and the carrier Viettel Post. 
+        The application provides features, which through the api to manipulate directly into the dashboard of Viettel Post.
     """,
     'category': 'Services/Connector',
     'support': 'odoo.tangerine@gmail.com',
@@ -31,6 +31,7 @@
         'data/api_endpoints_config_data.xml',
         'wizard/create_store_wizard_views.xml',
         'wizard/print_waybill_wizard.xml',
+        'views/assets.xml',
         'views/api_connect_config_views.xml',
         'views/api_connect_history_views.xml',
         'views/vtp_country_province_views.xml',
@@ -51,14 +52,7 @@
         'views/api_endpoint_config_views.xml',
         'views/menus.xml'
     ],
-    'assets': {
-        'web.assets_qweb': [
-            'viettelpost_connector/static/src/xml/button.xml'
-        ],
-        'web.assets_backend': [
-            'viettelpost_connector/static/src/js/handle_button.js'
-        ]
-    },
+    'qweb': ['static/src/xml/button.xml'],
     'external_dependencies': {
         'python': ['selenium']
     },
