@@ -8,6 +8,7 @@
                 <sheet>
                     <group>
                         <field name="name"/>
+                        <field name="host"/>
                         <field name="endpoint"/>
                         <field name="description"/>
                         <field name="api_connect_config_id" invisible="1"/>
@@ -23,6 +24,7 @@
         <field name="arch" type="xml">
             <tree string="Connection History" delete="0">
                 <field name="name"/>
+                <field name="host"/>
                 <field name="endpoint"/>
                 <field name="description"/>
                 <field name="api_connect_config_id" invisible="1"/>

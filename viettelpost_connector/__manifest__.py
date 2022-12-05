@@ -7,9 +7,9 @@
         The application provides features, which through the api to manipulate directly into the dashboard of ViettelPost.
     """,
     'category': 'Services/Connector',
-    'support': 'l99store.long@gmail.com',
+    'support': 'odoo.tangerine@gmail.com',
     'author': 'Tangerine',
-    'license': 'LGPL-3',
+    'license': 'OPL-1',
     'depends': [
         'base',
         'mail',
