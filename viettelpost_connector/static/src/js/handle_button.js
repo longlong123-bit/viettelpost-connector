@@ -24,10 +24,7 @@ odoo.define('viettelpost_connector.handle_button', function (require) {
             }).then(function(result) {
                 self.do_action(result);
             }).then(function(result) {
-                self.do_action({
-                    'type': 'ir.actions.client',
-                    'tag': 'reload'
-                });
+                self.reload();
             });
         },
         _onClickSyncDistrict: function (e) {
@@ -38,10 +35,7 @@ odoo.define('viettelpost_connector.handle_button', function (require) {
             }).then(function(result) {
                 self.do_action(result);
             }).then(function(result) {
-                self.do_action({
-                    'type': 'ir.actions.client',
-                    'tag': 'reload'
-                });
+                self.reload();
             });
         },
         _onClickSyncWard: function (e) {
@@ -52,10 +46,7 @@ odoo.define('viettelpost_connector.handle_button', function (require) {
             }).then(function(result) {
                 self.do_action(result);
             }).then(function(result) {
-                self.do_action({
-                    'type': 'ir.actions.client',
-                    'tag': 'reload'
-                });
+                self.reload();
             });
         },
         _onClickSyncService: function (e) {
@@ -66,10 +57,7 @@ odoo.define('viettelpost_connector.handle_button', function (require) {
             }).then(function(result) {
                 self.do_action(result);
             }).then(function(result) {
-                self.do_action({
-                    'type': 'ir.actions.client',
-                    'tag': 'reload'
-                });
+                self.reload();
             });
         },
         _onClickSyncOffice: function (e) {
@@ -80,10 +68,7 @@ odoo.define('viettelpost_connector.handle_button', function (require) {
             }).then(function(result) {
                 self.do_action(result);
             }).then(function(result) {
-                self.do_action({
-                    'type': 'ir.actions.client',
-                    'tag': 'reload'
-                });
+                self.reload();
             });
         },
         _onClickSyncStore: function (e) {
@@ -94,10 +79,7 @@ odoo.define('viettelpost_connector.handle_button', function (require) {
             }).then(function(result) {
                 self.do_action(result);
             }).then(function(result) {
-                self.do_action({
-                    'type': 'ir.actions.client',
-                    'tag': 'reload'
-                });
+                self.reload();
             });
         },
         _onClickCreateStore: function (e) {
@@ -117,10 +99,7 @@ odoo.define('viettelpost_connector.handle_button', function (require) {
             }).then(function(result) {
                 self.do_action(result);
             }).then(function(result) {
-                self.do_action({
-                    'type': 'ir.actions.client',
-                    'tag': 'reload'
-                });
+                self.reload();
             });
         }
     });
