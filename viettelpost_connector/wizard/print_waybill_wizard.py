@@ -4,7 +4,6 @@ from datetime import datetime, timedelta
 from odoo.exceptions import UserError
 from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Const
 from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Message
-from odoo.addons.viettelpost_connector.clients.viettelpost_clients import ViettelPostClient
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -27,10 +26,7 @@ class PrintWaybillWizard(models.Model):
     waybill_code = fields.Char(related='picking_id.sale_id.waybill_code', string='Waybill code')
 
     def action_print_waybill(self):
-        server_id = self.env['api.connect.config'].search([('code', '=', Const.BASE_CODE), ('active', '=', True)])
-        if not server_id:
-            raise UserError(_(Message.BASE_MSG))
-        client = ViettelPostClient(server_id.host, server_id.token, self)
+        client = self.env['api.connect.config'].generate_client_api_ghn()
         try:
             payload = self._prepare_data_print_waybill()
             token = client.print_waybill(payload)
