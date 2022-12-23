@@ -5,7 +5,6 @@ from datetime import datetime, timedelta
 from odoo.exceptions import UserError
 from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Const
 from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Message
-from odoo.addons.viettelpost_connector.clients.viettelpost_clients import ViettelPostClient
 
 
 class SaleOrderVTPost(models.Model):
@@ -89,10 +88,7 @@ class SaleOrderVTPost(models.Model):
                     }
 
     def action_create_waybill_code(self):
-        server_id = self.env['api.connect.config'].search([('code', '=', Const.BASE_CODE), ('active', '=', True)])
-        if not server_id:
-            raise UserError(_(Message.BASE_MSG))
-        client = ViettelPostClient(server_id.host, server_id.token, self)
+        client = self.env['api.connect.config'].generate_client_api()
         try:
             payload = self._prepare_data_create_waybill()
             res = client.create_waybill(payload)
@@ -135,10 +131,7 @@ class SaleOrderVTPost(models.Model):
             raise UserError(_(f'Create waybill failed. {e}'))
 
     def get_list_service(self):
-        server_id = self.env['api.connect.config'].search([('code', '=', Const.BASE_CODE), ('active', '=', True)])
-        if not server_id:
-            raise UserError(_(Message.BASE_MSG))
-        client = ViettelPostClient(server_id.host, server_id.token, self)
+        client = self.env['api.connect.config'].generate_client_api()
         try:
             payload = self._prepare_payload_for_get_list_service()
             res = client.compute_fee_ship_all(payload)
@@ -250,10 +243,7 @@ class SaleOrderVTPost(models.Model):
         fee = 0.0
         list_item, total_weight, total_qty, total_price = self._prepare_data_order_line()
         if self.vtp_waybill_type_id.code in [Const.WAYBILL_TYPE_CODE_2, Const.WAYBILL_TYPE_CODE_4]:
-            server_id = self.env['api.connect.config'].search([('code', '=', Const.BASE_CODE), ('active', '=', True)])
-            if not server_id:
-                raise UserError(_(Message.BASE_MSG))
-            client = ViettelPostClient(server_id.host, server_id.token, self)
+            client = self.env['api.connect.config'].generate_client_api()
             payload = self._prepare_payload_check_ship_code()
             res = client.check_ship_cost(payload)
         if self.vtp_waybill_type_id.code == Const.WAYBILL_TYPE_CODE_2:

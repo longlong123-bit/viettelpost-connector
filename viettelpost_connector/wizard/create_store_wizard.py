@@ -1,6 +1,5 @@
 from odoo import fields, models, _, api
 from odoo.exceptions import UserError
-from odoo.addons.viettelpost_connector.clients.viettelpost_clients import ViettelPostClient
 from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Const
 from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Message
 
@@ -20,11 +19,9 @@ class CreateStoreWizard(models.Model):
         return action
 
     def vtp_create_store(self):
-        server = self.env['api.connect.config'].search([('code', '=', Const.BASE_CODE), ('active', '=', True)])
-        if not server:
-            raise UserError(_(Message.BASE_MSG))
-        client = ViettelPostClient(server.host, server.token, self)
+        client = self.env['api.connect.config'].generate_client_api_ghn()
         try:
+            data_offices = []
             payload = {
                 'NAME': self.name,
                 'PHONE': self.phone,
@@ -37,20 +34,19 @@ class CreateStoreWizard(models.Model):
                 province_id = self.env['vtp.country.province'].search([('province_id', '=', data['provinceId'])])
                 district_id = self.env['vtp.country.district'].search([('district_id', '=', data['districtId'])])
                 ward_id = self.env['vtp.country.ward'].search([('ward_id', '=', data['wardsId'])])
-                dict_store = {
-                    'name': data['name'],
-                    'phone': data['phone'],
-                    'group_address_id': data['groupaddressId'],
-                    'customer_id': data['cusId'],
-                    'address': data['address'],
-                    'province_id': province_id.id,
-                    'district_id': district_id.id,
-                    'ward_id': ward_id.id
-                }
                 if not store_id:
-                    self.env['viettelpost.store'].create(dict_store)
-                else:
-                    self.env['viettelpost.store'].write(dict_store)
+                    dict_store = {
+                        'name': data['name'],
+                        'phone': data['phone'],
+                        'group_address_id': data['groupaddressId'],
+                        'customer_id': data['cusId'],
+                        'address': data['address'],
+                        'province_id': province_id.id,
+                        'district_id': district_id.id,
+                        'ward_id': ward_id.id
+                    }
+                    data_offices.append(dict_store)
+            self.create(data_offices)
             return {
                 "type": "ir.actions.client",
                 "tag": "display_notification",

@@ -43,6 +43,13 @@ class ApiConnectConfig(models.Model):
             },
         }
 
+    def generate_client_api(self):
+        server_id = self.search([('code', '=', Const.BASE_CODE), ('active', '=', True)])
+        if not server_id:
+            raise UserError(_(Message.BASE_MSG))
+        client = ViettelPostClient(server_id.host, server_id.token, self)
+        return client
+
     def get_owner_token(self):
         server_id = self.env['api.connect.config'].search([('code', '=', Const.BASE_CODE), ('active', '=', True)])
         if not server_id:
