@@ -97,7 +97,7 @@ class VTPCountryDistrict(models.Model):
                         data_district: dict = {
                             'district_id': data.get('DISTRICT_ID'),
                             'district_code': data.get('DISTRICT_VALUE'),
-                            'district_name': data.create('DISTRICT_NAME').title(),
+                            'district_name': data.get('DISTRICT_NAME').title(),
                             'province_id': province_id.id,
                             'delivery_carrier_id': delivery_carrier_id.id
                         }
