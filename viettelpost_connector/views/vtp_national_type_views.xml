@@ -38,7 +38,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="vtp_national_type_action_view">
-        <field name="name">National type</field>
+        <field name="name">National types</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">viettelpost.national.type</field>
         <field name="view_ids" eval="[(5, 0, 0),

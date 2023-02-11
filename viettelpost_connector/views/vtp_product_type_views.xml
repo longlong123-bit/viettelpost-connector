@@ -38,7 +38,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="vtp_product_type_action_view">
-        <field name="name">Product Type</field>
+        <field name="name">Product Types</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">viettelpost.product.type</field>
         <field name="view_ids" eval="[(5, 0, 0),

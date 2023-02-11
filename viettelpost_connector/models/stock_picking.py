@@ -1,7 +1,7 @@
 from odoo import models, _
 from odoo.exceptions import UserError
-from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Const
-from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Message
+from odoo.addons.viettelpost_connector.common.constants import Const
+from odoo.addons.viettelpost_connector.common.constants import Message
 
 
 class StockPickingVTP(models.Model):
@@ -36,7 +36,7 @@ class StockPickingVTP(models.Model):
         except Exception as e:
             raise UserError(_(f'Cancel waybill failed. {e}'))
 
-    def _prepare_payload_update_waybill(self, type_update, note) -> dict:
+    def _prepare_payload_update_waybill(self, type_update: str, note: str) -> dict:
         if not self.sale_id.waybill_code:
             raise UserError(_('The waybill code not found.'))
         if not type_update:

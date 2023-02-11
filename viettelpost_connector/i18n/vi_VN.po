@@ -64,7 +64,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:viettelpost_connector.field_create_store_wizard__address
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_store__address
 msgid "Address"
-msgstr "Địa chỉ"
+msgstr ""
+
+#. module: viettelpost_connector
+#: model:ir.model.fields,field_description:viettelpost_connector.field_api_endpoint_config__api_connect_config_id
+msgid "Api connect config id"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__message_attachment_count
@@ -86,39 +91,47 @@ msgstr ""
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_status__code
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_waybill_type__code
 msgid "Code"
-msgstr "Mã"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.ui.menu,name:viettelpost_connector.menu_viettel_post_configuration
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.delivery_carrier_view_vtp_form_inherit
 msgid "Configuration"
-msgstr "Cấu hình"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model,name:viettelpost_connector.model_res_partner
 msgid "Configuration Address"
-msgstr "Cấu hình địa chỉ nhận hàng"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model,name:viettelpost_connector.model_delivery_carrier
 msgid "Configuration ViettelPost Carrier"
-msgstr "Cấu hình đơn vị vận chuyển ViettelPost"
+msgstr ""
+
+#. module: viettelpost_connector
+#: model:ir.model,name:viettelpost_connector.model_api_endpoint_config
+msgid ""
+"Configuration dynamic endpoint for host when there is a change of routes "
+"from ViettelPost. "
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.stock_picking_form_inherit_vtp
 msgid "Confirm waybill"
-msgstr "Duyệt vận đơn"
+msgstr ""
 
 #. module: viettelpost_connector
+#. odoo-python
 #: code:addons/viettelpost_connector/models/stock_picking.py:0
 #, python-format
 msgid "Confirm waybill successfully!"
-msgstr "Duyệt vận đơn thành công!"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.api_connect_history_form_view
 msgid "Connect History"
-msgstr "Lịch sử kết nối"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.actions.act_window,name:viettelpost_connector.api_connect_config_action_view
@@ -126,113 +139,126 @@ msgstr "Lịch sử kết nối"
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.api_connect_config_form_view
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.api_connect_config_tree_view
 msgid "Connection Config"
-msgstr "Cấu hình kết nối"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.actions.act_window,name:viettelpost_connector.api_connect_history_action_view
 #: model:ir.ui.menu,name:viettelpost_connector.menu_api_connect_history
+msgid "Connection Histories"
+msgstr ""
+
+#. module: viettelpost_connector
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.api_connect_history_tree_view
+#: model_terms:ir.ui.view,arch_db:viettelpost_connector.api_endpoint_config_tree_view
 msgid "Connection History"
-msgstr "Lịch sử kết nối"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__country_id
 msgid "Country"
-msgstr "Quốc gia"
+msgstr ""
 
 #. module: viettelpost_connector
-#. openerp-web
+#. odoo-javascript
 #: code:addons/viettelpost_connector/static/src/xml/button.xml:0
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.create_store_wizard_form_view
 #, python-format
 msgid "Create"
-msgstr "Tạo"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.actions.act_window,name:viettelpost_connector.create_store_wizard_wizard_action
 msgid "Create Store"
-msgstr "Tạo cửa hàng"
+msgstr ""
 
 #. module: viettelpost_connector
+#. odoo-python
 #: code:addons/viettelpost_connector/wizard/create_store_wizard.py:0
 #, python-format
 msgid "Create Store Successfully!"
-msgstr "Tạo cửa hàng thành công!"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.actions.act_window,help:viettelpost_connector.vtp_country_district_action_view
 msgid "Create a new District."
-msgstr "Tạo mới một Quận/Huyện"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.actions.act_window,help:viettelpost_connector.vtp_office_action_view
 msgid "Create a new Post office."
-msgstr "Tạo mới một bưu cục"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.actions.act_window,help:viettelpost_connector.vtp_country_province_action_view
 msgid "Create a new Province."
-msgstr "Tạo tới một Tỉnh/Thành"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.actions.act_window,help:viettelpost_connector.vtp_country_ward_action_view
 msgid "Create a new Ward."
-msgstr "Tạo mới một Phường/Xã"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.actions.act_window,help:viettelpost_connector.api_connect_config_action_view
 msgid "Create a new api connect config."
-msgstr "Tạo mới một cấu hình kết nối API."
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.actions.act_window,help:viettelpost_connector.api_connect_history_action_view
 msgid "Create a new api connect history."
-msgstr "Tạo mới một lịch sử kết nối API."
+msgstr ""
+
+#. module: viettelpost_connector
+#: model_terms:ir.actions.act_window,help:viettelpost_connector.api_endpoint_config_action_view
+msgid "Create a new endpoint config."
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.actions.act_window,help:viettelpost_connector.vtp_national_type_action_view
 msgid "Create a new national type."
-msgstr "Tạo mới một loại bảng phí."
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.actions.act_window,help:viettelpost_connector.vtp_product_type_action_view
 msgid "Create a new product type."
-msgstr "Tạo mới một loại sản phẩm."
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.actions.act_window,help:viettelpost_connector.vtp_service_action_view
 msgid "Create a new service."
-msgstr "Tạo mới một dịch vụ."
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.actions.act_window,help:viettelpost_connector.vtp_status_action_view
 msgid "Create a new status."
-msgstr "Tạo mới một trạng thái."
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.actions.act_window,help:viettelpost_connector.vtp_store_action_view
 msgid "Create a new warehouse."
-msgstr "Tạo mới một kho."
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.actions.act_window,help:viettelpost_connector.vtp_waybill_type_action_view
 msgid "Create a new waybill type."
-msgstr "Tạo mới một loại vận đơn."
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.sale_order_view_vtp_form_inherit
 msgid "Create waybill"
-msgstr "Tạo vận đơn"
+msgstr ""
 
 #. module: viettelpost_connector
+#. odoo-python
 #: code:addons/viettelpost_connector/models/sale_order.py:0
 #, python-format
 msgid "Create waybill successfully!"
-msgstr "Tạo vận đơn thành công."
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__create_uid
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_history__create_uid
+#: model:ir.model.fields,field_description:viettelpost_connector.field_api_endpoint_config__create_uid
 #: model:ir.model.fields,field_description:viettelpost_connector.field_create_store_wizard__create_uid
 #: model:ir.model.fields,field_description:viettelpost_connector.field_list_service_supported__create_uid
 #: model:ir.model.fields,field_description:viettelpost_connector.field_print_waybill_wizard__create_uid
@@ -248,11 +274,12 @@ msgstr "Tạo vận đơn thành công."
 #: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__create_uid
 #: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__create_uid
 msgid "Created by"
-msgstr "Tạo bởi"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__create_date
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_history__create_date
+#: model:ir.model.fields,field_description:viettelpost_connector.field_api_endpoint_config__create_date
 #: model:ir.model.fields,field_description:viettelpost_connector.field_create_store_wizard__create_date
 #: model:ir.model.fields,field_description:viettelpost_connector.field_list_service_supported__create_date
 #: model:ir.model.fields,field_description:viettelpost_connector.field_print_waybill_wizard__create_date
@@ -268,22 +295,23 @@ msgstr "Tạo bởi"
 #: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__create_date
 #: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__create_date
 msgid "Created on"
-msgstr "Được tạo ra"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_list_service_supported__currency_id
+#: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__vta_currency_id
 msgid "Currency"
 msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__partner_id
 msgid "Customer"
-msgstr "Khách hàng"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_store__customer_id
 msgid "Customer Id"
-msgstr "Mã khách hàng"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model,name:viettelpost_connector.model_product_template
@@ -293,7 +321,7 @@ msgstr ""
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_list_service_supported__kpi_ht
 msgid "Deadline"
-msgstr "Thời gian giao hàng cam kết"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_office__delivery_carrier_id
@@ -303,44 +331,45 @@ msgstr "Thời gian giao hàng cam kết"
 #: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__delivery_carrier_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__delivery_carrier_id
 msgid "Delivery Carrier"
-msgstr "Phương thức vận chuyển"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_delivery_carrier__delivery_carrier_code
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.delivery_carrier_view_vtp_form_inherit
 msgid "Delivery Carrier Code"
-msgstr "Mã phương thức vận chuyển"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__delivery_carrier_vtp_id
 msgid "Delivery Method"
-msgstr "Phương thức vận chuyển"
+msgstr ""
 
 #. module: viettelpost_connector
-#: model:product.product,name:viettelpost_connector.product_product_delivery_vtp
 #: model:product.template,name:viettelpost_connector.product_product_delivery_vtp_product_template
 msgid "Delivery charges"
-msgstr "Phí vận chuyển"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_print_waybill_wizard__picking_id
 msgid "Delivery order"
-msgstr "Phiếu giao hàng"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_product_product__gross_depth
 #: model:ir.model.fields,field_description:viettelpost_connector.field_product_template__gross_depth
-msgid "Depth (mm)"
-msgstr "Chiều dài (mm)"
+msgid "Depth"
+msgstr ""
 
 #. module: viettelpost_connector
+#: model:ir.model.fields,field_description:viettelpost_connector.field_api_endpoint_config__description
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_status__description
 msgid "Description"
-msgstr "Mô tả"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__display_name
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_history__display_name
+#: model:ir.model.fields,field_description:viettelpost_connector.field_api_endpoint_config__display_name
 #: model:ir.model.fields,field_description:viettelpost_connector.field_create_store_wizard__display_name
 #: model:ir.model.fields,field_description:viettelpost_connector.field_list_service_supported__display_name
 #: model:ir.model.fields,field_description:viettelpost_connector.field_print_waybill_wizard__display_name
@@ -359,7 +388,6 @@ msgid "Display Name"
 msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.actions.act_window,name:viettelpost_connector.vtp_country_district_action_view
 #: model:ir.model.fields,field_description:viettelpost_connector.field_res_partner__vtp_district_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_res_users__vtp_district_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__receiver_district_id
@@ -367,38 +395,39 @@ msgstr ""
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_store__district_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__district_ids
 #: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__district_id
-#: model:ir.ui.menu,name:viettelpost_connector.menu_district
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.delivery_carrier_view_vtp_form_inherit
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_country_district_form_view
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_country_district_tree_view
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_country_province_form_view
 msgid "District"
-msgstr "Quận/Huyện"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__district_code
 msgid "District Code"
-msgstr "Mã"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__district_id
 msgid "District ID"
-msgstr "ID"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__district_name
 msgid "District Name"
-msgstr "Tên"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_office__district_name
 msgid "District name"
-msgstr "Quận/Huyện"
+msgstr ""
 
 #. module: viettelpost_connector
+#: model:ir.actions.act_window,name:viettelpost_connector.vtp_country_district_action_view
 #: model:ir.model.fields,field_description:viettelpost_connector.field_delivery_carrier__vtp_district_ids
+#: model:ir.ui.menu,name:viettelpost_connector.menu_district
 msgid "Districts"
-msgstr "Quận/Huyện"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__receiver_email
@@ -408,7 +437,30 @@ msgid "Email"
 msgstr ""
 
 #. module: viettelpost_connector
-#: code:addons/viettelpost_connector/clients/viettelpost_clients.py:0
+#: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__endpoint_ids
+#: model:ir.model.fields,field_description:viettelpost_connector.field_api_endpoint_config__endpoint
+msgid "Endpoint"
+msgstr ""
+
+#. module: viettelpost_connector
+#: model:ir.actions.act_window,name:viettelpost_connector.api_endpoint_config_action_view
+#: model:ir.ui.menu,name:viettelpost_connector.menu_api_endpoint_config
+msgid "Endpoint Config"
+msgstr ""
+
+#. module: viettelpost_connector
+#: model_terms:ir.ui.view,arch_db:viettelpost_connector.api_endpoint_config_form_view
+msgid "Endpoint config"
+msgstr ""
+
+#. module: viettelpost_connector
+#: model_terms:ir.ui.view,arch_db:viettelpost_connector.api_connect_config_form_view
+msgid "Endpoints"
+msgstr ""
+
+#. module: viettelpost_connector
+#. odoo-python
+#: code:addons/viettelpost_connector/api/viettelpost_clients.py:0
 #, python-format
 msgid "Error: %s"
 msgstr ""
@@ -416,20 +468,20 @@ msgstr ""
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__exchange_weight
 msgid "Exchange weight (g)"
-msgstr "Trọng lượng quy đổi (g)"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_service__extend_service_ids
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_service_form_view
 msgid "Extend Service"
-msgstr "Dịch vụ mở rộng"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__vtp_lst_extent_service_id
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_extend_service_form_view
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_extend_service_tree_view
 msgid "Extend service"
-msgstr "Dịch vụ mở rộng"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__message_follower_ids
@@ -464,23 +516,42 @@ msgstr ""
 #. module: viettelpost_connector
 #: model:ir.model,name:viettelpost_connector.model_create_store_wizard
 msgid "Form Create Store To ViettelPost"
-msgstr "Tại mới cửa hàng vận chuyển"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__receiver_fullname
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__sender_fullname
 msgid "Fullname"
-msgstr "Tên"
+msgstr ""
+
+#. module: viettelpost_connector
+#: model:ir.model.fields,field_description:viettelpost_connector.field_api_endpoint_config__name
+msgid "Function name"
+msgstr ""
+
+#. module: viettelpost_connector
+#. odoo-python
+#: code:addons/viettelpost_connector/api/viettelpost_connection.py:0
+#, python-format
+msgid "Function name %s is not existed"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.sale_order_view_vtp_form_inherit
 msgid "Get a list of services that match itinerary"
-msgstr "Nhận danh sách các dịch vụ phù hợp"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.api_connect_config_form_view
 msgid "Get token"
-msgstr "Nhận token"
+msgstr ""
+
+#. module: viettelpost_connector
+#: model:ir.model.fields,field_description:viettelpost_connector.field_product_product__gram_uom_name
+#: model:ir.model.fields,field_description:viettelpost_connector.field_product_template__gram_uom_name
+#: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__gram_uom_name
+msgid "Gram unit of measure label"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_store__group_address_id
@@ -498,17 +569,19 @@ msgstr ""
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_product_product__gross_height
 #: model:ir.model.fields,field_description:viettelpost_connector.field_product_template__gross_height
-msgid "Height (mm)"
-msgstr "Chiều cao (mm)"
+msgid "Height"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__host
+#: model:ir.model.fields,field_description:viettelpost_connector.field_api_endpoint_config__host
 msgid "Host"
 msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_history__id
+#: model:ir.model.fields,field_description:viettelpost_connector.field_api_endpoint_config__id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_create_store_wizard__id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_list_service_supported__id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_print_waybill_wizard__id
@@ -544,13 +617,9 @@ msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,help:viettelpost_connector.field_api_connect_config__message_needaction
-#: model:ir.model.fields,help:viettelpost_connector.field_api_connect_config__message_unread
 #: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_district__message_needaction
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_district__message_unread
 #: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_province__message_needaction
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_province__message_unread
 #: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_ward__message_needaction
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_ward__message_unread
 msgid "If checked, new messages require your attention."
 msgstr ""
 
@@ -582,11 +651,12 @@ msgstr ""
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__actual_kpi_ht
 msgid "KPI HT"
-msgstr "Tổng thời gian giao hàng cam kết"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config____last_update
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_history____last_update
+#: model:ir.model.fields,field_description:viettelpost_connector.field_api_endpoint_config____last_update
 #: model:ir.model.fields,field_description:viettelpost_connector.field_create_store_wizard____last_update
 #: model:ir.model.fields,field_description:viettelpost_connector.field_list_service_supported____last_update
 #: model:ir.model.fields,field_description:viettelpost_connector.field_print_waybill_wizard____last_update
@@ -607,6 +677,7 @@ msgstr ""
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__write_uid
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_history__write_uid
+#: model:ir.model.fields,field_description:viettelpost_connector.field_api_endpoint_config__write_uid
 #: model:ir.model.fields,field_description:viettelpost_connector.field_create_store_wizard__write_uid
 #: model:ir.model.fields,field_description:viettelpost_connector.field_list_service_supported__write_uid
 #: model:ir.model.fields,field_description:viettelpost_connector.field_print_waybill_wizard__write_uid
@@ -627,6 +698,7 @@ msgstr ""
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__write_date
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_history__write_date
+#: model:ir.model.fields,field_description:viettelpost_connector.field_api_endpoint_config__write_date
 #: model:ir.model.fields,field_description:viettelpost_connector.field_create_store_wizard__write_date
 #: model:ir.model.fields,field_description:viettelpost_connector.field_list_service_supported__write_date
 #: model:ir.model.fields,field_description:viettelpost_connector.field_print_waybill_wizard__write_date
@@ -647,38 +719,38 @@ msgstr ""
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_office__latitude
 msgid "Latitude"
-msgstr "Vĩ độ"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model,name:viettelpost_connector.model_viettelpost_office
 msgid "List ViettelPost Office"
-msgstr "Danh sách bưu cục"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model,name:viettelpost_connector.model_viettelpost_service
 msgid "List ViettelPost Service"
-msgstr "Danh sách dịch vụ"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model,name:viettelpost_connector.model_viettelpost_store
 msgid "List ViettelPost Store"
-msgstr "Danh sách cửa hàng"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model,name:viettelpost_connector.model_viettelpost_extend_service
 msgid "List extend service ViettelPost"
-msgstr "Danh sách dịch vụ mở rộng"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.sale_order_view_vtp_form_inherit
 msgid "List services math itinerary"
-msgstr "Danh sách các dịch vụ phù hợp"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model,name:viettelpost_connector.model_list_service_supported
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__list_service_supported_ids
 msgid "List services supported"
-msgstr "Danh sách các dịch vụ phù hợp"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model,name:viettelpost_connector.model_api_connect_history
@@ -688,7 +760,7 @@ msgstr ""
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_office__longitude
 msgid "Longitude"
-msgstr "Kinh độ"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__message_main_attachment_id
@@ -701,7 +773,7 @@ msgstr ""
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_history__message
 msgid "Message"
-msgstr "Thông điệp"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__message_has_error
@@ -722,42 +794,48 @@ msgstr ""
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_history__method
 msgid "Method"
-msgstr "Phương thức"
+msgstr ""
+
+#. module: viettelpost_connector
+#: model:ir.model.fields,field_description:viettelpost_connector.field_product_product__millimeter_uom_name
+#: model:ir.model.fields,field_description:viettelpost_connector.field_product_template__millimeter_uom_name
+msgid "Millimeter unit of measure label"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__money_vat
 msgid "Money VAT"
-msgstr "Thuế giá trị gia tăng"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__money_collection
 msgid "Money collection"
-msgstr "Tổng tiền thu hộ"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__money_collection_fee
 msgid "Money collection fee"
-msgstr "Phí thu hộ"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__money_fee
 msgid "Money fee"
-msgstr "Phí xăng dầu"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__money_other_fee
 msgid "Money other fee"
-msgstr "Các phí khác"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__money_total
 msgid "Money total"
-msgstr "Tổng cước phí"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__money_total_fee
 msgid "Money total fee"
-msgstr "Phí vận chuyển"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__my_activity_date_deadline
@@ -776,20 +854,24 @@ msgstr ""
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_store__name
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_waybill_type__name
 msgid "Name"
-msgstr "Tên"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.ui.menu,name:viettelpost_connector.menu_national_type
-msgid "National Type"
-msgstr "Loại bảng giá"
+msgid "National Types"
+msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.actions.act_window,name:viettelpost_connector.vtp_national_type_action_view
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__vtp_national_type_id
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_national_type_form_view
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_national_type_tree_view
 msgid "National type"
-msgstr "Loại bảng giá"
+msgstr ""
+
+#. module: viettelpost_connector
+#: model:ir.actions.act_window,name:viettelpost_connector.vtp_national_type_action_view
+msgid "National types"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__activity_date_deadline
@@ -816,7 +898,8 @@ msgid "Next Activity Type"
 msgstr ""
 
 #. module: viettelpost_connector
-#: code:addons/viettelpost_connector/clients/viettelpost_clients.py:0
+#. odoo-python
+#: code:addons/viettelpost_connector/api/viettelpost_clients.py:0
 #, python-format
 msgid "No description error"
 msgstr ""
@@ -824,12 +907,12 @@ msgstr ""
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__vtp_note
 msgid "Note"
-msgstr "Ghi chú"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.sale_order_view_vtp_form_inherit
 msgid "Note something in the bill of lading"
-msgstr "Ghi chú một cái gì đó ở vận đơn"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__message_needaction_counter
@@ -864,27 +947,19 @@ msgid "Number of messages with delivery error"
 msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.model.fields,help:viettelpost_connector.field_api_connect_config__message_unread_counter
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_district__message_unread_counter
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_province__message_unread_counter
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_ward__message_unread_counter
-msgid "Number of unread messages"
-msgstr ""
-
-#. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__password
 msgid "Password"
-msgstr "Mật khẩu"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_office__person_in_charge
 msgid "Person in charge"
-msgstr "Người phụ trách"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_office__person_in_charge_phone
 msgid "Person in charge phone"
-msgstr "Số điện thoại"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_create_store_wizard__phone
@@ -893,71 +968,72 @@ msgstr "Số điện thoại"
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_office__number_phone
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_store__phone
 msgid "Phone"
-msgstr "Số điện thoại"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.sale_order_view_vtp_form_inherit
 msgid "Place of receiver"
-msgstr "Thông tin nơi nhận"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.sale_order_view_vtp_form_inherit
 msgid "Place of sender"
-msgstr "Thông tin nơi gửi"
-
-#. module: viettelpost_connector
-#: model:ir.ui.menu,name:viettelpost_connector.menu_viettel_post_office
-msgid "Post Office"
-msgstr "Bưu cục"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_delivery_carrier__vtp_post_office_ids
+#: model:ir.ui.menu,name:viettelpost_connector.menu_viettel_post_office
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.delivery_carrier_view_vtp_form_inherit
 msgid "Post Offices"
-msgstr "Bưu cục"
+msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.actions.act_window,name:viettelpost_connector.vtp_office_action_view
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_office_tree_view
 msgid "Post office"
-msgstr "Bưu cục"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_office__code
 msgid "Post office code"
-msgstr "Mã bưu cục"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_office__name
 msgid "Post office name"
-msgstr "Tên bưu cục"
+msgstr ""
+
+#. module: viettelpost_connector
+#: model:ir.actions.act_window,name:viettelpost_connector.vtp_office_action_view
+msgid "Post offices"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.print_waybill_wizard_form_view
 msgid "Print A5"
-msgstr "In A5"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.print_waybill_wizard_form_view
 msgid "Print A6"
-msgstr "In A6"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.print_waybill_wizard_form_view
 msgid "Print A7"
-msgstr "In A7"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.actions.act_window,name:viettelpost_connector.print_waybill_wizard_wizard_action
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.stock_picking_form_inherit_vtp
 msgid "Print waybill"
-msgstr "In vận đơn"
+msgstr ""
 
 #. module: viettelpost_connector
+#. odoo-python
 #: code:addons/viettelpost_connector/wizard/print_waybill_wizard.py:0
 #, python-format
 msgid "Print waybill successfully!"
-msgstr "In vận đơn thàng công!"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model,name:viettelpost_connector.model_print_waybill_wizard
@@ -967,53 +1043,53 @@ msgstr ""
 #. module: viettelpost_connector
 #: model:ir.actions.act_window,name:viettelpost_connector.vtp_product_type_action_view
 #: model:ir.ui.menu,name:viettelpost_connector.menu_product_type
-msgid "Product Type"
-msgstr "Loại hàng hóa"
+msgid "Product Types"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__vtp_product_type_id
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_product_type_form_view
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_product_type_tree_view
 msgid "Product type"
-msgstr "Loại hàng hóa"
+msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.actions.act_window,name:viettelpost_connector.vtp_country_province_action_view
 #: model:ir.model.fields,field_description:viettelpost_connector.field_res_partner__vtp_province_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_res_users__vtp_province_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__receiver_province_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__sender_province_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_store__province_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__province_id
-#: model:ir.ui.menu,name:viettelpost_connector.menu_province
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.delivery_carrier_view_vtp_form_inherit
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_country_province_form_view
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_country_province_tree_view
 msgid "Province"
-msgstr "Tỉnh/Thành"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__province_code
 msgid "Province Code"
-msgstr "Mã"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__province_id
 msgid "Province ID"
-msgstr "ID"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__province_name
 msgid "Province Name"
-msgstr "Tên"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_office__province_name
 msgid "Province name"
-msgstr "Tỉnh/Thành"
+msgstr ""
 
 #. module: viettelpost_connector
+#: model:ir.actions.act_window,name:viettelpost_connector.vtp_country_province_action_view
 #: model:ir.model.fields,field_description:viettelpost_connector.field_delivery_carrier__vtp_province_ids
+#: model:ir.ui.menu,name:viettelpost_connector.menu_province
 msgid "Provinces"
 msgstr ""
 
@@ -1021,6 +1097,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_history__name
 msgid "Request"
 msgstr "Yêu cầu"
+
+#. module: viettelpost_connector
+#. odoo-python
+#: code:addons/viettelpost_connector/api/viettelpost_connection.py:0
+#, python-format
+msgid "Request failed with status: %s - Message: %s"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__activity_user_id
@@ -1042,7 +1125,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:viettelpost_connector.field_list_service_supported__sale_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_print_waybill_wizard__sale_id
 msgid "Sale order"
-msgstr "Đơn hàng"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__sender_cus_id
@@ -1055,55 +1138,53 @@ msgid "Sender groupaddress"
 msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.actions.act_window,name:viettelpost_connector.vtp_service_action_view
 #: model:ir.model.fields,field_description:viettelpost_connector.field_list_service_supported__service_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__vtp_lst_service_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_extend_service__service_id
-#: model:ir.ui.menu,name:viettelpost_connector.menu_viettel_post_service
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_service_form_view
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_service_tree_view
 msgid "Service"
-msgstr "Dịch vụ"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_extend_service__extend_code
 msgid "Service Code"
-msgstr "Mã"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_extend_service__extend_name
 msgid "Service Name"
-msgstr "Tên"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_service__code
 msgid "Service code"
-msgstr "Mã"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_service__name
 msgid "Service name"
-msgstr "Tên"
+msgstr ""
 
 #. module: viettelpost_connector
+#: model:ir.actions.act_window,name:viettelpost_connector.vtp_service_action_view
 #: model:ir.model.fields,field_description:viettelpost_connector.field_delivery_carrier__vtp_service_ids
+#: model:ir.ui.menu,name:viettelpost_connector.menu_viettel_post_service
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.delivery_carrier_view_vtp_form_inherit
 msgid "Services"
-msgstr "Dịch vụ"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.sale_order_view_vtp_form_inherit
 msgid "Shipment details"
-msgstr "Thông tin lô hàng"
+msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.actions.act_window,name:viettelpost_connector.vtp_status_action_view
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_history__status
-#: model:ir.ui.menu,name:viettelpost_connector.menu_viettel_post_status
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_status_form_view
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_status_tree_view
 msgid "Status"
-msgstr "Trạng thái"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,help:viettelpost_connector.field_api_connect_config__activity_state
@@ -1118,9 +1199,15 @@ msgid ""
 msgstr ""
 
 #. module: viettelpost_connector
+#: model:ir.actions.act_window,name:viettelpost_connector.vtp_status_action_view
+#: model:ir.ui.menu,name:viettelpost_connector.menu_viettel_post_status
+msgid "Statuses"
+msgstr ""
+
+#. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_delivery_carrier__vtp_store_ids
 msgid "Stores"
-msgstr "Cửa hàng"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_res_partner__vtp_street
@@ -1129,85 +1216,89 @@ msgstr "Cửa hàng"
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__sender_address
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_office__street
 msgid "Street"
-msgstr "Đường"
+msgstr ""
 
 #. module: viettelpost_connector
-#. openerp-web
+#. odoo-javascript
 #: code:addons/viettelpost_connector/static/src/xml/button.xml:0
 #, python-format
 msgid "Sync District"
-msgstr "Đồng bộ Quận/Huyện"
+msgstr ""
 
 #. module: viettelpost_connector
-#. openerp-web
+#. odoo-javascript
 #: code:addons/viettelpost_connector/static/src/xml/button.xml:0
 #, python-format
 msgid "Sync Extend Service"
-msgstr "Đồng bộ dịch vụ mở rộng"
+msgstr ""
 
 #. module: viettelpost_connector
-#. openerp-web
+#. odoo-javascript
 #: code:addons/viettelpost_connector/static/src/xml/button.xml:0
 #, python-format
 msgid "Sync Post Office"
-msgstr "Đồng bộ bưu cục"
+msgstr ""
 
 #. module: viettelpost_connector
+#. odoo-python
 #: code:addons/viettelpost_connector/models/viettelpost_office.py:0
 #, python-format
 msgid "Sync Post Office Successfully!"
-msgstr "Đồng bộ bưu cục thành công"
+msgstr ""
 
 #. module: viettelpost_connector
-#. openerp-web
+#. odoo-javascript
 #: code:addons/viettelpost_connector/static/src/xml/button.xml:0
 #, python-format
 msgid "Sync Province"
-msgstr "Đồng bộ Tỉnh/Thành"
+msgstr ""
 
 #. module: viettelpost_connector
+#. odoo-python
 #: code:addons/viettelpost_connector/models/viettelpost_address.py:0
 #, python-format
 msgid "Sync Provinces Successfully!"
-msgstr "Đồng bộ Tỉnh/Thành thành công"
+msgstr ""
 
 #. module: viettelpost_connector
-#. openerp-web
+#. odoo-javascript
 #: code:addons/viettelpost_connector/static/src/xml/button.xml:0
 #, python-format
 msgid "Sync Service"
-msgstr "Đồng bộ dịch vụ"
+msgstr ""
 
 #. module: viettelpost_connector
+#. odoo-python
 #: code:addons/viettelpost_connector/models/viettelpost_service.py:0
 #, python-format
 msgid "Sync Service Successfully!"
-msgstr "Đồng bộ dịch vụ thành công"
+msgstr ""
 
 #. module: viettelpost_connector
+#. odoo-python
 #: code:addons/viettelpost_connector/models/viettelpost_store.py:0
 #, python-format
 msgid "Sync Store Successfully!"
-msgstr "Đồng bộ nơi gửi hàng thành công"
+msgstr ""
 
 #. module: viettelpost_connector
-#. openerp-web
+#. odoo-javascript
 #: code:addons/viettelpost_connector/static/src/xml/button.xml:0
 #, python-format
 msgid "Sync Ward"
-msgstr "Đồng bộ Phường/Xã"
+msgstr ""
 
 #. module: viettelpost_connector
-#. openerp-web
+#. odoo-javascript
 #: code:addons/viettelpost_connector/static/src/xml/button.xml:0
 #, python-format
 msgid "Sync Warehouse"
-msgstr "Đồng bộ nơi gửi hàng"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.api_connect_config_form_view
 msgid "Test Connection"
-msgstr "Kiểm tra kết nối"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model,name:viettelpost_connector.model_api_connect_config
@@ -1222,12 +1313,12 @@ msgstr ""
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_list_service_supported__money_total
 msgid "Total"
-msgstr "Phí vận chuyển"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__tracking_link
 msgid "Tracking link"
-msgstr "Liên kết theo dõi"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,help:viettelpost_connector.field_api_connect_config__activity_exception_decoration
@@ -1238,28 +1329,6 @@ msgid "Type of the exception activity on record."
 msgstr ""
 
 #. module: viettelpost_connector
-#: model:product.product,uom_name:viettelpost_connector.product_product_delivery_vtp
-#: model:product.template,uom_name:viettelpost_connector.product_product_delivery_vtp_product_template
-msgid "Units"
-msgstr ""
-
-#. module: viettelpost_connector
-#: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__message_unread
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__message_unread
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__message_unread
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__message_unread
-msgid "Unread Messages"
-msgstr ""
-
-#. module: viettelpost_connector
-#: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__message_unread_counter
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__message_unread_counter
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__message_unread_counter
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__message_unread_counter
-msgid "Unread Messages Counter"
-msgstr ""
-
-#. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_history__url
 msgid "Url"
 msgstr ""
@@ -1267,7 +1336,7 @@ msgstr ""
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__user_name
 msgid "Username"
-msgstr "Tên đăng nhập"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:delivery.carrier,name:viettelpost_connector.free_delivery_carrier_vtp
@@ -1283,7 +1352,7 @@ msgstr ""
 #. module: viettelpost_connector
 #: model:ir.ui.menu,name:viettelpost_connector.menu_viettelpost_address_main
 msgid "ViettelPost Address"
-msgstr "Địa chỉ ViettelPost"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model,name:viettelpost_connector.model_vtp_country_district
@@ -1303,27 +1372,27 @@ msgstr ""
 #. module: viettelpost_connector
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.sale_order_view_vtp_form_inherit
 msgid "ViettelPost Information"
-msgstr "Thông tin vận đơn"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model,name:viettelpost_connector.model_viettelpost_national_type
 msgid "ViettelPost National Type"
-msgstr "Loại bảng giá"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model,name:viettelpost_connector.model_viettelpost_product_type
 msgid "ViettelPost Product Type"
-msgstr "Loại hàng hóa"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.res_partner_view_vtp_form_inherit
 msgid "ViettelPost Receiver Address"
-msgstr "Địa chỉ nhận hàng ViettelPost"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model,name:viettelpost_connector.model_viettelpost_status
 msgid "ViettelPost Status"
-msgstr "Trạng thái"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.ui.menu,name:viettelpost_connector.menu_viettelpost_variable_main
@@ -1333,15 +1402,14 @@ msgstr ""
 #. module: viettelpost_connector
 #: model:ir.model,name:viettelpost_connector.model_viettelpost_waybill_type
 msgid "ViettelPost Waybill Type"
-msgstr "Loại vận đơn"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_office_form_view
 msgid "ViettelPost office"
-msgstr "Bưu cục"
+msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.actions.act_window,name:viettelpost_connector.vtp_country_ward_action_view
 #: model:ir.model.fields,field_description:viettelpost_connector.field_create_store_wizard__ward_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_res_partner__vtp_ward_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_res_users__vtp_ward_id
@@ -1349,13 +1417,12 @@ msgstr "Bưu cục"
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__sender_ward_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_store__ward_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__ward_ids
-#: model:ir.ui.menu,name:viettelpost_connector.menu_ward
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.delivery_carrier_view_vtp_form_inherit
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_country_district_form_view
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_country_ward_form_view
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_country_ward_tree_view
 msgid "Ward"
-msgstr "Phường/Xã"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__ward_id
@@ -1365,51 +1432,61 @@ msgstr ""
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__ward_name
 msgid "Ward Name"
-msgstr "Tên"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_office__ward_name
 msgid "Ward name"
-msgstr "Phường/Xã"
+msgstr ""
 
 #. module: viettelpost_connector
+#: model:ir.actions.act_window,name:viettelpost_connector.vtp_country_ward_action_view
 #: model:ir.model.fields,field_description:viettelpost_connector.field_delivery_carrier__vtp_ward_ids
+#: model:ir.ui.menu,name:viettelpost_connector.menu_ward
 msgid "Wards"
-msgstr "Phường/Xã"
+msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.actions.act_window,name:viettelpost_connector.vtp_store_action_view
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__vtp_store_id
-#: model:ir.ui.menu,name:viettelpost_connector.menu_viettel_post_store
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.delivery_carrier_view_vtp_form_inherit
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_store_form_view
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_store_tree_view
 msgid "Warehouse"
-msgstr "Nơi gửi hàng"
+msgstr ""
+
+#. module: viettelpost_connector
+#: model:ir.actions.act_window,name:viettelpost_connector.vtp_store_action_view
+#: model:ir.ui.menu,name:viettelpost_connector.menu_viettel_post_store
+msgid "Warehouses"
+msgstr ""
+
+#. module: viettelpost_connector
+#: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_waybill_type_tree_view
+msgid "Waybill Type"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.actions.act_window,name:viettelpost_connector.vtp_waybill_type_action_view
 #: model:ir.ui.menu,name:viettelpost_connector.menu_waybill_type
-#: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_waybill_type_tree_view
-msgid "Waybill Type"
-msgstr "Loại vận đơn"
+msgid "Waybill Types"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_print_waybill_wizard__waybill_code
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__waybill_code
 msgid "Waybill code"
-msgstr "Mã vận đơn"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__waybill_status
 msgid "Waybill status"
-msgstr "Trạng thái vận đơn"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__vtp_waybill_type_id
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_waybill_type_form_view
 msgid "Waybill type"
-msgstr "Loại vận đơn"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__website_message_ids
@@ -1430,11 +1507,11 @@ msgstr ""
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_product_product__gross_weight
 #: model:ir.model.fields,field_description:viettelpost_connector.field_product_template__gross_weight
-msgid "Weight (g)"
-msgstr "Khối lượng (g)"
+msgid "Weight"
+msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_product_product__gross_width
 #: model:ir.model.fields,field_description:viettelpost_connector.field_product_template__gross_width
-msgid "Width (mm)"
-msgstr "Chiều rộng"
+msgid "Width"
+msgstr ""

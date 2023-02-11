@@ -63,5 +63,7 @@
         'python': ['selenium']
     },
     'images': ['static/description/thumbnail.png'],
-    'application': True
+    'application': True,
+    'currency': 'USD',
+    'price': '52.00'
 }

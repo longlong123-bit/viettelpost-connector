@@ -45,7 +45,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="vtp_country_ward_action_view">
-        <field name="name">Ward</field>
+        <field name="name">Wards</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">vtp.country.ward</field>
         <field name="view_ids" eval="[(5, 0, 0),

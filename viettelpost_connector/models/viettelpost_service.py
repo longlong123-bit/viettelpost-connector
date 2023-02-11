@@ -1,8 +1,8 @@
 from odoo import fields, api, models, _
 from odoo.exceptions import UserError
 
-from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Const
-from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Message
+from odoo.addons.viettelpost_connector.common.constants import Const
+from odoo.addons.viettelpost_connector.common.constants import Message
 
 
 class ViettelPostService(models.Model):
@@ -18,27 +18,27 @@ class ViettelPostService(models.Model):
     def sync_service(self):
         client = self.env['api.connect.config'].generate_client_api()
         try:
-            data_services = []
+            data_services: list = []
             delivery_carrier_id = self.env['delivery.carrier'].search(
                 [('delivery_carrier_code', '=', Const.DELIVERY_CARRIER_CODE)])
             if not delivery_carrier_id:
                 raise UserError(_(Message.MSG_NOT_CARRIER))
-            payload = {'TYPE': Const.TYPE_SERVICE}
+            payload: dict = {'TYPE': Const.TYPE_SERVICE}
             dataset = client.get_services(payload)
             if len(dataset) > 0:
-                lst_service_ids = [rec['SERVICE_CODE'] for rec in dataset]
+                lst_service_ids: list = [rec.get('SERVICE_CODE') for rec in dataset]
                 results = self.search([('code', 'in', lst_service_ids)])
-                result_ids = [res.id for res in results]
-                dataset = list(filter(lambda x: x['SERVICE_CODE'] not in result_ids, dataset))
+                result_ids: list = [res.id for res in results]
+                dataset = list(filter(lambda x: x.get('SERVICE_CODE') not in result_ids, dataset))
                 if len(dataset) > 0:
                     for data in dataset:
-                        dict_service = {
-                            'name': data['SERVICE_NAME'],
-                            'code': data['SERVICE_CODE'],
+                        dict_service: dict = {
+                            'name': data.get('SERVICE_NAME'),
+                            'code': data.get('SERVICE_CODE'),
                             'delivery_carrier_id': delivery_carrier_id.id
                         }
                         data_services.append(dict_service)
-            self.create(data_services)
+                    self.create(data_services)
             return {
                 "type": "ir.actions.client",
                 "tag": "display_notification",
@@ -67,29 +67,24 @@ class ViettelPostService(models.Model):
     def sync_extend_services(self):
         client = self.env['api.connect.config'].generate_client_api()
         try:
-            data_service_extend_ids = []
+            data_service_extend_ids: list = []
             lst_service_id = self.search([])
             if len(lst_service_id) > 0:
                 for service in lst_service_id:
                     dataset = client.get_extend_services(service.code)
                     for data in dataset:
                         extend_service_id = self.env['viettelpost.extend.service'].search([
-                            ('extend_code', '=', data['SERVICE_CODE']),
+                            ('extend_code', '=', data.get('SERVICE_CODE')),
                             ('service_id', '=', service.id)
                         ])
-                        data = {
-                            'extend_code': data['SERVICE_CODE'],
-                            'extend_name': data['SERVICE_NAME'],
-                            'service_id': service.id
-                        }
                         if not extend_service_id:
-                            data = {
-                                'extend_code': data['SERVICE_CODE'],
-                                'extend_name': data['SERVICE_NAME'],
+                            data: dict = {
+                                'extend_code': data.get('SERVICE_CODE'),
+                                'extend_name': data.get('SERVICE_NAME'),
                                 'service_id': service.id
                             }
                             data_service_extend_ids.append(data)
-                self.env['viettelpost.extend.service'].create(data_service_extend_ids)
+                    self.env['viettelpost.extend.service'].create(data_service_extend_ids)
                 return {
                     "type": "ir.actions.client",
                     "tag": "display_notification",
