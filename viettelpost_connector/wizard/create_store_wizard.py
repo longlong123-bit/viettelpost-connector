@@ -1,7 +1,7 @@
 from odoo import fields, models, _, api
 from odoo.exceptions import UserError
-from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Const
-from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Message
+from odoo.addons.viettelpost_connector.common.constants import Const
+from odoo.addons.viettelpost_connector.common.constants import Message
 
 
 class CreateStoreWizard(models.Model):
@@ -19,10 +19,10 @@ class CreateStoreWizard(models.Model):
         return action
 
     def vtp_create_store(self):
-        client = self.env['api.connect.config'].generate_client_api_ghn()
+        client = self.env['api.connect.config'].generate_client_api()
         try:
-            data_offices = []
-            payload = {
+            data_offices: list = []
+            payload: dict = {
                 'NAME': self.name,
                 'PHONE': self.phone,
                 'ADDRESS': self.address,
@@ -35,7 +35,7 @@ class CreateStoreWizard(models.Model):
                 district_id = self.env['vtp.country.district'].search([('district_id', '=', data['districtId'])])
                 ward_id = self.env['vtp.country.ward'].search([('ward_id', '=', data['wardsId'])])
                 if not store_id:
-                    dict_store = {
+                    dict_store: dict = {
                         'name': data['name'],
                         'phone': data['phone'],
                         'group_address_id': data['groupaddressId'],

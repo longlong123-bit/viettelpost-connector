@@ -6,10 +6,26 @@
         <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='barcode']" position="after">
-                <field name="gross_weight"/>
-                <field name="gross_depth"/>
-                <field name="gross_width"/>
-                <field name="gross_height"/>
+                <label for="gross_weight" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}"/>
+                <div class="o_row" name="gross_weight" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}">
+                    <field name="gross_weight" class="oe_inline"/>
+                    <field name="gram_uom_name"/>
+                </div>
+                <label for="gross_depth" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}"/>
+                <div class="o_row" name="gross_depth" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}">
+                    <field name="gross_depth" class="oe_inline"/>
+                    <field name="millimeter_uom_name"/>
+                </div>
+                <label for="gross_width" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}"/>
+                <div class="o_row" name="gross_width" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}">
+                    <field name="gross_width" class="oe_inline"/>
+                    <field name="millimeter_uom_name"/>
+                </div>
+                <label for="gross_height" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}"/>
+                <div class="o_row" name="gross_height" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}">
+                    <field name="gross_height" class="oe_inline"/>
+                    <field name="millimeter_uom_name"/>
+                </div>
             </xpath>
         </field>
     </record>

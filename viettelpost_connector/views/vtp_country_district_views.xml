@@ -63,7 +63,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="vtp_country_district_action_view">
-        <field name="name">District</field>
+        <field name="name">Districts</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">vtp.country.district</field>
         <field name="view_ids" eval="[(5, 0, 0),

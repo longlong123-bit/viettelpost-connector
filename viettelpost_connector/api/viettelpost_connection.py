@@ -4,8 +4,8 @@ from datetime import datetime
 from odoo.exceptions import UserError
 from odoo.tools.translate import _
 import logging
-from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import FuncName
-from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Method
+from odoo.addons.viettelpost_connector.common.constants import FuncName
+from odoo.addons.viettelpost_connector.common.constants import Method
 
 _logger = logging.getLogger(__name__)
 

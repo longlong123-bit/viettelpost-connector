@@ -58,7 +58,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="vtp_office_action_view">
-        <field name="name">Post office</field>
+        <field name="name">Post offices</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">viettelpost.office</field>
         <field name="view_ids" eval="[(5, 0, 0),
