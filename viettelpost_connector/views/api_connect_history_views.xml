@@ -49,7 +49,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="api_connect_history_action_view">
-        <field name="name">Connection History</field>
+        <field name="name">Connection Histories</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">api.connect.history</field>
         <field name="view_ids" eval="[(5, 0, 0),

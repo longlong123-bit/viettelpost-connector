@@ -18,7 +18,11 @@
                 <group string="ViettelPost Information" attrs="{'invisible': [('waybill_code', '=', False)]}">
                     <group>
                         <field name="waybill_code"/>
-                        <field name="exchange_weight"/>
+                        <label for="exchange_weight"/>
+                        <div class="o_row" name="exchange_weight">
+                            <field name="exchange_weight" class="oe_inline"/>
+                            <field name="gram_uom_name"/>
+                        </div>
                         <field name="actual_kpi_ht"/>
                         <field name="money_collection"/>
                         <field name="waybill_status" attrs="{'invisible': [('waybill_status', '=', False)]}"/>
@@ -31,6 +35,7 @@
                         <field name="money_collection_fee"/>
                         <field name="money_vat"/>
                         <field name="money_total"/>
+                        <field name="vta_currency_id" invisible="1"/>
                     </group>
                 </group>
                 <group string="Shipment details" attrs="{'invisible': [('delivery_carrier_vtp_id', '=', False)]}">

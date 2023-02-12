@@ -3,28 +3,28 @@
     <menuitem id="menu_viettel_post_root" name="ViettelPost" sequence="270" groups="base.group_system" />
     <!--    Menu status-->
     <menuitem id="menu_viettel_post_status"
-              name="Status"
+              name="Statuses"
               parent="menu_viettel_post_root"
               action="vtp_status_action_view"
               sequence="80"
               groups="base.group_system" />
     <!--    Menu store-->
     <menuitem id="menu_viettel_post_store"
-              name="Warehouse"
+              name="Warehouses"
               parent="menu_viettel_post_root"
               action="vtp_store_action_view"
               sequence="85"
               groups="base.group_system" />
     <!--    Menu viettelpost service-->
     <menuitem id="menu_viettel_post_service"
-              name="Service"
+              name="Services"
               parent="menu_viettel_post_root"
               action="vtp_service_action_view"
               sequence="90"
               groups="base.group_system" />
     <!--    Menu viettelpost office-->
     <menuitem id="menu_viettel_post_office"
-              name="Post Office"
+              name="Post Offices"
               parent="menu_viettel_post_root"
               action="vtp_office_action_view"
               sequence="95"
@@ -34,45 +34,45 @@
     <menuitem id="menu_viettelpost_variable_main" parent="menu_viettel_post_configuration" name="ViettelPost Variable" groups="base.group_system" sequence="1"/>
     <menuitem id="menu_product_type"
               parent="menu_viettelpost_variable_main"
-              name="Product Type"
+              name="Product Types"
               sequence="1"
               action="vtp_product_type_action_view"
     />
     <menuitem id="menu_national_type"
               parent="menu_viettelpost_variable_main"
-              name="National Type"
+              name="National Types"
               sequence="2"
               action="vtp_national_type_action_view"
     />
     <menuitem id="menu_waybill_type"
               parent="menu_viettelpost_variable_main"
-              name="Waybill Type"
+              name="Waybill Types"
               sequence="3"
               action="vtp_waybill_type_action_view"
     />
     <menuitem id="menu_viettelpost_address_main" parent="menu_viettel_post_configuration" name="ViettelPost Address" groups="base.group_system" sequence="90"/>
     <menuitem id="menu_province"
               parent="menu_viettelpost_address_main"
-              name="Province"
+              name="Provinces"
               action="vtp_country_province_action_view"
               sequence="1"
     />
     <menuitem id="menu_district"
               parent="menu_viettelpost_address_main"
-              name="District"
+              name="Districts"
               action="vtp_country_district_action_view"
               sequence="2"
     />
     <menuitem id="menu_ward"
               parent="menu_viettelpost_address_main"
-              name="Ward"
+              name="Wards"
               action="vtp_country_ward_action_view"
               sequence="3"
     />
     <menuitem id="menu_viettelpost_api_main" parent="menu_viettel_post_configuration" name="ViettelPost API Technical" groups="base.group_system" sequence="100"/>
     <menuitem id="menu_api_connect_history"
               parent="menu_viettelpost_api_main"
-              name="Connection History"
+              name="Connection Histories"
               sequence="1"
               action="api_connect_history_action_view"
     />

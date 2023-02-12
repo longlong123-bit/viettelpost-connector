@@ -1,9 +1,8 @@
 from odoo import fields, api, models, _
 from odoo.exceptions import UserError
 
-from odoo.addons.viettelpost_connector.clients.viettelpost_clients import ViettelPostClient
-from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Const
-from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Message
+from odoo.addons.viettelpost_connector.common.constants import Const
+from odoo.addons.viettelpost_connector.common.constants import Message
 
 
 class ViettelPostStore(models.Model):
@@ -23,11 +22,9 @@ class ViettelPostStore(models.Model):
 
     @api.model
     def sync_store(self):
-        server_id = self.env['api.connect.config'].search([('code', '=', Const.BASE_CODE), ('active', '=', True)])
-        if not server_id:
-            raise UserError(_(Message.BASE_MSG))
-        client = ViettelPostClient(server_id.host, server_id.token, self)
+        client = self.env['api.connect.config'].generate_client_api()
         try:
+            data_stores: list = []
             delivery_carrier_id = self.env['delivery.carrier'].search(
                 [('delivery_carrier_code', '=', Const.DELIVERY_CARRIER_CODE)])
             if not delivery_carrier_id:
@@ -39,21 +36,20 @@ class ViettelPostStore(models.Model):
                     province_id = self.env['vtp.country.province'].search([('province_id', '=', data['provinceId'])])
                     district_id = self.env['vtp.country.district'].search([('district_id', '=', data['districtId'])])
                     ward_id = self.env['vtp.country.ward'].search([('ward_id', '=', data['wardsId'])])
-                    dict_store = {
-                        'name': data['name'],
-                        'phone': data['phone'],
-                        'group_address_id': int(data['groupaddressId']),
-                        'customer_id': int(data['cusId']),
-                        'address': data['address'],
-                        'province_id': province_id.id,
-                        'district_id': district_id.id,
-                        'ward_id': ward_id.id,
-                        'delivery_carrier_id': delivery_carrier_id.id
-                    }
                     if not store_id:
-                        self.create(dict_store)
-                    else:
-                        store_id.write(dict_store)
+                        dict_store: dict = {
+                            'name': data.get('name'),
+                            'phone': data.get('phone'),
+                            'group_address_id': int(data.get('groupaddressId')),
+                            'customer_id': int(data.get('cusId')),
+                            'address': data.get('address'),
+                            'province_id': province_id.id,
+                            'district_id': district_id.id,
+                            'ward_id': ward_id.id,
+                            'delivery_carrier_id': delivery_carrier_id.id
+                        }
+                        data_stores.append(dict_store)
+                self.create(data_stores)
             return {
                 "type": "ir.actions.client",
                 "tag": "display_notification",

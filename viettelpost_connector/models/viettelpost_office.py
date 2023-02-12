@@ -1,9 +1,8 @@
 from odoo import fields, api, models, _
 from odoo.exceptions import UserError
 
-from odoo.addons.viettelpost_connector.clients.viettelpost_clients import ViettelPostClient
-from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Const
-from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Message
+from odoo.addons.viettelpost_connector.common.constants import Const
+from odoo.addons.viettelpost_connector.common.constants import Message
 
 
 class ViettelPostOffice(models.Model):
@@ -25,37 +24,37 @@ class ViettelPostOffice(models.Model):
 
     @api.model
     def sync_office(self):
-        server_id = self.env['api.connect.config'].search([('code', '=', Const.BASE_CODE), ('active', '=', True)])
-        if not server_id:
-            raise UserError(_(Message.BASE_MSG))
-        client = ViettelPostClient(server_id.host, server_id.token, self)
+        client = self.env['api.connect.config'].generate_client_api()
         try:
+            data_offices: list = []
             delivery_carrier_id = self.env['delivery.carrier'].search(
                 [('delivery_carrier_code', '=', Const.DELIVERY_CARRIER_CODE)])
             if not delivery_carrier_id:
                 raise UserError(_(Message.MSG_NOT_CARRIER))
             dataset = client.get_offices()
             if len(dataset) > 0:
-                for data in dataset:
-                    office_id = self.search([('code', '=', data['MA_BUUCUC'])])
-                    dict_office = {
-                        'name': data['TEN_BUUCUC'],
-                        'code': data['MA_BUUCUC'],
-                        'province_name': data['TEN_TINH'],
-                        'district_name': data['TEN_QUANHUYEN'],
-                        'ward_name': data['TEN_PHUONGXA'],
-                        'street': data['DIA_CHI'],
-                        'latitude': data['LATITUDE'],
-                        'longitude': data['LONGITUDE'],
-                        'number_phone': data['DIEN_THOAI'],
-                        'person_in_charge': data['PHUTRACH'],
-                        'person_in_charge_phone': data['PHUTRACHPHONE'],
-                        'delivery_carrier_id': delivery_carrier_id.id
-                    }
-                    if not office_id:
-                        self.create(dict_office)
-                    else:
-                        office_id.write(dict_office)
+                lst_office_ids: list = [rec.get('MA_BUUCUC') for rec in dataset]
+                results = self.search([('code', 'in', lst_office_ids)])
+                result_ids: list = [res.id for res in results]
+                dataset = list(filter(lambda x: x.get('MA_BUUCUC') not in result_ids, dataset))
+                if len(dataset) > 0:
+                    for data in dataset:
+                        dict_office: dict = {
+                            'name': data.get('TEN_BUUCUC'),
+                            'code': data.get('MA_BUUCUC'),
+                            'province_name': data.get('TEN_TINH'),
+                            'district_name': data.get('TEN_QUANHUYEN'),
+                            'ward_name': data.get('TEN_PHUONGXA'),
+                            'street': data.get('DIA_CHI'),
+                            'latitude': data.get('LATITUDE'),
+                            'longitude': data.get('LONGITUDE'),
+                            'number_phone': data.get('DIEN_THOAI'),
+                            'person_in_charge': data.get('PHUTRACH'),
+                            'person_in_charge_phone': data.get('PHUTRACHPHONE'),
+                            'delivery_carrier_id': delivery_carrier_id.id
+                        }
+                        data_offices.append(dict_office)
+                    self.create(data_offices)
             return {
                 "type": "ir.actions.client",
                 "tag": "display_notification",

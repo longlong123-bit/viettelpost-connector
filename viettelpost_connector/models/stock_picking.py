@@ -1,8 +1,7 @@
 from odoo import models, _
 from odoo.exceptions import UserError
-from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Const
-from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Message
-from odoo.addons.viettelpost_connector.clients.viettelpost_clients import ViettelPostClient
+from odoo.addons.viettelpost_connector.common.constants import Const
+from odoo.addons.viettelpost_connector.common.constants import Message
 
 
 class StockPickingVTP(models.Model):
@@ -10,10 +9,7 @@ class StockPickingVTP(models.Model):
     _description = 'For ViettelPost'
 
     def action_confirm_waybill(self):
-        server_id = self.env['api.connect.config'].search([('code', '=', Const.BASE_CODE), ('active', '=', True)])
-        if not server_id:
-            raise UserError(_(Message.BASE_MSG))
-        client = ViettelPostClient(server_id.host, server_id.token, self)
+        client = self.env['api.connect.config'].generate_client_api()
         try:
             payload = self._prepare_payload_update_waybill(Const.VTP_STATUS_TYPE_1, Message.NOTE_CONFIRM_ORDER)
             client.update_waybill(payload)
@@ -32,10 +28,7 @@ class StockPickingVTP(models.Model):
 
     def action_cancel(self):
         res = super(StockPickingVTP, self).action_cancel()
-        server_id = self.env['api.connect.config'].search([('code', '=', Const.BASE_CODE), ('active', '=', True)])
-        if not server_id:
-            raise UserError(_(Message.BASE_MSG))
-        client = ViettelPostClient(server_id.host, server_id.token, self)
+        client = self.env['api.connect.config'].generate_client_api()
         try:
             payload = self._prepare_payload_update_waybill(Const.VTP_STATUS_TYPE_4, Message.NOTE_CANCEL_ORDER)
             client.update_waybill(payload)
@@ -43,12 +36,12 @@ class StockPickingVTP(models.Model):
         except Exception as e:
             raise UserError(_(f'Cancel waybill failed. {e}'))
 
-    def _prepare_payload_update_waybill(self, type_update, note) -> dict:
+    def _prepare_payload_update_waybill(self, type_update: str, note: str) -> dict:
         if not self.sale_id.waybill_code:
             raise UserError(_('The waybill code not found.'))
         if not type_update:
             raise UserError(_('The type function not found.'))
-        payload = {
+        payload: dict = {
             "TYPE": type_update,
             "ORDER_NUMBER": self.sale_id.waybill_code,
             "NOTE": note

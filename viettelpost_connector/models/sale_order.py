@@ -1,31 +1,33 @@
 import base64
+from typing import Tuple
 
 from odoo import fields, models, api, _
 from datetime import datetime, timedelta
 from odoo.exceptions import UserError
-from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Const
-from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Message
-from odoo.addons.viettelpost_connector.clients.viettelpost_clients import ViettelPostClient
+from odoo.addons.viettelpost_connector.common.constants import Const
+from odoo.addons.viettelpost_connector.common.constants import Message
 
 
 class SaleOrderVTPost(models.Model):
     _inherit = 'sale.order'
     _description = 'For ViettelPost'
 
-    def _default_product_type(self):
+    def _default_product_type(self) -> models:
         product_type_id = self.env['viettelpost.product.type'].search([('code', '=', Const.PRODUCT_TYPE_CODE_HH)])
         if product_type_id:
             return product_type_id
 
-    def _default_national_type(self):
+    def _default_national_type(self) -> models:
         national_type_id = self.env['viettelpost.national.type'].search([('code', '=', Const.NATIONAL_TYPE_CODE)])
         if national_type_id:
             return national_type_id
 
-    def _default_waybill_type(self):
+    def _default_waybill_type(self) -> models:
         waybill_type_id = self.env['viettelpost.waybill.type'].search([('code', '=', Const.WAYBILL_TYPE_CODE_1)])
         if waybill_type_id:
             return waybill_type_id
+
+    vta_currency_id = fields.Many2one('res.currency', string='Currency', default=lambda self: self.env.company.currency_id)
 
     partner_id = fields.Many2one(
         'res.partner', string='Customer', readonly=True,
@@ -65,17 +67,26 @@ class SaleOrderVTPost(models.Model):
 
     list_service_supported_ids = fields.One2many('list.service.supported', 'sale_id', string='List services supported')
 
-    money_total = fields.Monetary(string='Money total', readonly=True)
-    money_total_fee = fields.Monetary(string='Money total fee', readonly=True)
-    money_fee = fields.Monetary(string='Money fee', readonly=True)
-    money_collection_fee = fields.Monetary(string='Money collection fee', readonly=True)
-    money_vat = fields.Monetary(string='Money VAT', readonly=True)
+    money_total = fields.Monetary(string='Money total', readonly=True, currency_field='vta_currency_id')
+    money_total_fee = fields.Monetary(string='Money total fee', readonly=True, currency_field='vta_currency_id')
+    money_fee = fields.Monetary(string='Money fee', readonly=True, currency_field='vta_currency_id')
+    money_collection_fee = fields.Monetary(string='Money collection fee', readonly=True, currency_field='vta_currency_id')
+    money_vat = fields.Monetary(string='Money VAT', readonly=True, currency_field='vta_currency_id')
     actual_kpi_ht = fields.Char(string='KPI HT', readonly=True)
     exchange_weight = fields.Integer(string='Exchange weight (g)', readonly=True)
-    money_collection = fields.Monetary(string='Money collection', readonly=True)
-    money_other_fee = fields.Monetary(string='Money other fee', readonly=True)
+    money_collection = fields.Monetary(string='Money collection', readonly=True, currency_field='vta_currency_id')
+    money_other_fee = fields.Monetary(string='Money other fee', readonly=True, currency_field='vta_currency_id')
     waybill_status = fields.Char(string='Waybill status', readonly=True)
     is_check_service = fields.Boolean(string='Is check service', default=False)
+    gram_uom_name = fields.Char(string='Gram unit of measure label', compute='_compute_gram_uom_name')
+
+    @api.model
+    def _get_weight_uom_name(self):
+        return self.env.ref('uom.product_uom_gram').display_name
+
+    def _compute_gram_uom_name(self):
+        for rec in self:
+            rec.gram_uom_name = self._get_weight_uom_name()
 
     @api.onchange('vtp_lst_service_id')
     def _onchange_vtp_lst_service_id(self):
@@ -88,55 +99,59 @@ class SaleOrderVTPost(models.Model):
                         },
                     }
 
+    def _prepare_data_create_line_amount_ship_fee(self, data: dict) -> dict:
+        payload: dict = {
+            'product_id': self.delivery_carrier_vtp_id.product_id.id,
+            'name': f'{self.vtp_lst_service_id.display_name}\n{self.vtp_lst_extent_service_id.display_name}'
+            if self.vtp_lst_extent_service_id else f'{self.vtp_lst_service_id.display_name}',
+            'product_uom_qty': 1.0,
+            'price_unit': data.get('MONEY_TOTAL'),
+            'price_subtotal': data.get('MONEY_TOTAL'),
+            'price_total': data.get('MONEY_TOTAL'),
+            'sequence': self.order_line[-1].sequence + 1,
+            'order_id': self.order_line[-1].order_id.id,
+            'is_delivery': True
+        }
+        return payload
+
+    def _prepare_data_write_sale_order_fee_infor(self, data: dict) -> dict:
+        payload: dict = {
+            'waybill_code': data.get('ORDER_NUMBER'),
+            'money_collection': data.get('MONEY_COLLECTION'),
+            'money_total': data.get('MONEY_TOTAL'),
+            'money_total_fee': data.get('MONEY_TOTAL_FEE'),
+            'money_fee': data.get('MONEY_FEE'),
+            'money_collection_fee': data.get('MONEY_COLLECTION_FEE'),
+            'money_vat': data.get('MONEY_VAT'),
+            'actual_kpi_ht': f"{int(data.get('KPI_HT'))} giờ",
+            'exchange_weight': data.get('EXCHANGE_WEIGHT'),
+            'money_other_fee': data.get('MONEY_OTHER_FEE'),
+        }
+        return payload
+
     def action_create_waybill_code(self):
-        server_id = self.env['api.connect.config'].search([('code', '=', Const.BASE_CODE), ('active', '=', True)])
-        if not server_id:
-            raise UserError(_(Message.BASE_MSG))
-        client = ViettelPostClient(server_id.host, server_id.token, self)
+        client = self.env['api.connect.config'].generate_client_api()
         try:
             payload = self._prepare_data_create_waybill()
             res = client.create_waybill(payload)
-            self.env['sale.order.line'].create({
-                'product_id': self.delivery_carrier_vtp_id.product_id.id,
-                'name': f'{self.vtp_lst_service_id.display_name}\n{self.vtp_lst_extent_service_id.display_name}'
-                if self.vtp_lst_extent_service_id else f'{self.vtp_lst_service_id.display_name}',
-                'product_uom_qty': 1.0,
-                'price_unit': res['MONEY_TOTAL'],
-                'price_subtotal': res['MONEY_TOTAL'],
-                'price_total': res['MONEY_TOTAL'],
-                'sequence': self.order_line[-1].sequence + 1,
-                'order_id': self.order_line[-1].order_id.id,
-                'is_delivery': True
-            })
-            self.write({
-                'waybill_code': res['ORDER_NUMBER'],
-                'money_collection': res['MONEY_COLLECTION'],
-                'money_total': res['MONEY_TOTAL'],
-                'money_total_fee': res['MONEY_TOTAL_FEE'],
-                'money_fee': res['MONEY_FEE'],
-                'money_collection_fee': res['MONEY_COLLECTION_FEE'],
-                'money_vat': res['MONEY_VAT'],
-                'actual_kpi_ht': f"{int(res['KPI_HT'])} giờ",
-                'exchange_weight': res['EXCHANGE_WEIGHT'],
-                'money_other_fee': res['MONEY_OTHER_FEE'],
-            })
+            line_data_ship_fee = self._prepare_data_create_line_amount_ship_fee(res)
+            self.env['sale.order.line'].create(line_data_ship_fee)
+            payload_sale_order_fee = self._prepare_data_write_sale_order_fee_infor(res)
+            self.write(payload_sale_order_fee)
         except Exception as e:
             raise UserError(_(f'Create waybill failed. {e}'))
 
     def get_list_service(self):
-        server_id = self.env['api.connect.config'].search([('code', '=', Const.BASE_CODE), ('active', '=', True)])
-        if not server_id:
-            raise UserError(_(Message.BASE_MSG))
-        client = ViettelPostClient(server_id.host, server_id.token, self)
+        client = self.env['api.connect.config'].generate_client_api()
         try:
             payload = self._prepare_payload_for_get_list_service()
             res = client.compute_fee_ship_all(payload)
             for dict_service in res:
-                service_id = self.env['viettelpost.service'].search([('code', '=', dict_service['MA_DV_CHINH'])])
+                service_id = self.env['viettelpost.service'].search([('code', '=', dict_service.get('MA_DV_CHINH'))])
                 if not service_id:
                     new_service_id = self.env['viettelpost.service'].create({
-                        'name': dict_service['TEN_DICHVU'],
-                        'code': dict_service['MA_DV_CHINH']
+                        'name': dict_service.get('TEN_DICHVU'),
+                        'code': dict_service.get('MA_DV_CHINH')
                     })
                 lst_service_id = self.env['list.service.supported'].search([
                     ('service_id', '=', service_id.id if service_id else new_service_id.id),
@@ -145,8 +160,8 @@ class SaleOrderVTPost(models.Model):
                 if not lst_service_id:
                     lst_service_id.create({
                         'service_id': service_id.id if service_id else new_service_id.id,
-                        'money_total': dict_service['GIA_CUOC'],
-                        'kpi_ht': dict_service['THOI_GIAN'],
+                        'money_total': dict_service.get('GIA_CUOC'),
+                        'kpi_ht': dict_service.get('THOI_GIAN'),
                         'sale_id': self.id
                     })
             self.write({'is_check_service': True})
@@ -154,8 +169,8 @@ class SaleOrderVTPost(models.Model):
             raise UserError(_(f'Get a list of services that match itinerary failed. {e}'))
 
     def _compute_weight_and_qty(self) -> (float, float):
-        total_weight = 0.0
-        total_qty = 0.0
+        total_weight: float = 0.0
+        total_qty: float = 0.0
         if len(self.order_line) > 0:
             for line in self.order_line:
                 total_weight += line.product_id.product_tmpl_id.gross_weight
@@ -164,18 +179,18 @@ class SaleOrderVTPost(models.Model):
         else:
             raise UserError(_('Please add products to order line.'))
 
-    def _prepare_data_order_line(self) -> (list, float, float):
-        list_item = []
-        total_weight = 0.0
-        total_qty = 0.0
-        total_price = 0.0
+    def _prepare_data_order_line(self) -> (list, float, float, float):
+        list_item: list = []
+        total_weight: float = 0.0
+        total_qty: float = 0.0
+        total_price: float = 0.0
         if len(self.order_line) > 0:
             for line in self.order_line:
-                gross_width = line.product_id.product_tmpl_id.gross_width
-                gross_height = line.product_id.product_tmpl_id.gross_height
-                gross_depth = line.product_id.product_tmpl_id.gross_depth
-                weight = (gross_width * gross_height * gross_depth) / 6000
-                order_line = {
+                gross_width: float = line.product_id.product_tmpl_id.gross_width
+                gross_height: float = line.product_id.product_tmpl_id.gross_height
+                gross_depth: float = line.product_id.product_tmpl_id.gross_depth
+                weight: float = (gross_width * gross_height * gross_depth) / 6000.0
+                order_line: dict = {
                     'PRODUCT_NAME': line.product_id.product_tmpl_id.name,
                     'PRODUCT_PRICE': line.price_subtotal,
                     'PRODUCT_WEIGHT': weight,
@@ -193,7 +208,7 @@ class SaleOrderVTPost(models.Model):
         if not self.partner_id:
             raise UserError(_('Please add customer to sale order.'))
         list_item, total_weight, total_qty, total_price = self._prepare_data_order_line()
-        payload = {
+        payload: dict = {
             'PRODUCT_WEIGHT': total_weight,
             'PRODUCT_PRICE': total_price,
             'MONEY_COLLECTION': 0,
@@ -206,9 +221,9 @@ class SaleOrderVTPost(models.Model):
         }
         return payload
 
-    def _prepare_payload_check_ship_code(self):
+    def _prepare_payload_check_ship_code(self) -> dict:
         list_item, total_weight, total_qty, total_price = self._prepare_data_order_line()
-        payload = {
+        payload: dict = {
             "PRODUCT_WEIGHT": total_weight,
             "PRODUCT_PRICE": total_price,
             "MONEY_COLLECTION": 0,
@@ -224,23 +239,20 @@ class SaleOrderVTPost(models.Model):
         return payload
 
     def _compute_money_collection(self) -> (float, float):
-        collection = 0.0
-        fee = 0.0
+        collection: float = 0.0
+        fee: float = 0.0
         list_item, total_weight, total_qty, total_price = self._prepare_data_order_line()
         if self.vtp_waybill_type_id.code in [Const.WAYBILL_TYPE_CODE_2, Const.WAYBILL_TYPE_CODE_4]:
-            server_id = self.env['api.connect.config'].search([('code', '=', Const.BASE_CODE), ('active', '=', True)])
-            if not server_id:
-                raise UserError(_(Message.BASE_MSG))
-            client = ViettelPostClient(server_id.host, server_id.token, self)
+            client = self.env['api.connect.config'].generate_client_api()
             payload = self._prepare_payload_check_ship_code()
             res = client.check_ship_cost(payload)
-        if self.vtp_waybill_type_id.code == Const.WAYBILL_TYPE_CODE_2:
-            collection = total_price
-            fee = res['MONEY_TOTAL']
+            if self.vtp_waybill_type_id.code == Const.WAYBILL_TYPE_CODE_2:
+                collection = total_price
+                fee = res.get('MONEY_TOTAL')
+            elif self.vtp_waybill_type_id.code == Const.WAYBILL_TYPE_CODE_4:
+                collection = res.get('MONEY_TOTAL')
         elif self.vtp_waybill_type_id.code == Const.WAYBILL_TYPE_CODE_3:
             collection = float(self.amount_untaxed)
-        elif self.vtp_waybill_type_id.code == Const.WAYBILL_TYPE_CODE_4:
-            collection = res['MONEY_TOTAL']
         return collection, fee
 
     def _prepare_data_create_waybill(self) -> dict:
@@ -264,7 +276,7 @@ class SaleOrderVTPost(models.Model):
         code_service_support = [rec.service_id.code for rec in lst_service_support]
         if self.vtp_lst_service_id.code not in code_service_support:
             raise UserError(_('Please choose a service in list of services that match itinerary'))
-        payload = {
+        payload: dict = {
             'ORDER_NUMBER': self.name,
             'GROUPADDRESS_ID': self.vtp_store_id.group_address_id,
             'CUS_ID': self.vtp_store_id.customer_id,
@@ -299,8 +311,8 @@ class SaleOrderVTPost(models.Model):
             'ORDER_VOUCHER': '',
             'ORDER_NOTE': self.vtp_note or '',
             'MONEY_COLLECTION': collection,
-            "MONEY_TOTAL": money_total,
-            # "CHECK_UNIQUE": True,
+            'MONEY_TOTAL': money_total,
+            'CHECK_UNIQUE': True,
             'LIST_ITEM': list_item
         }
         return payload

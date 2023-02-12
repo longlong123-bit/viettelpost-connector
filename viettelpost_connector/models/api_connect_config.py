@@ -1,12 +1,14 @@
+import logging
+import requests
+
 from odoo import fields, models, _
 from odoo.exceptions import UserError
 from odoo.tools.misc import ustr
-import logging
-import requests
+
 _logger = logging.getLogger(__name__)
-from odoo.addons.viettelpost_connector.clients.viettelpost_clients import ViettelPostClient
-from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Const
-from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Message
+from odoo.addons.viettelpost_connector.api.viettelpost_clients import ViettelPostClient
+from odoo.addons.viettelpost_connector.common.constants import Const
+from odoo.addons.viettelpost_connector.common.constants import Message
 
 
 class ApiConnectConfig(models.Model):
@@ -43,29 +45,36 @@ class ApiConnectConfig(models.Model):
             },
         }
 
-    def get_owner_token(self):
-        server_id = self.env['api.connect.config'].search([('code', '=', Const.BASE_CODE), ('active', '=', True)])
+    def generate_client_api(self):
+        server_id = self.search([('code', '=', Const.BASE_CODE), ('active', '=', True)])
         if not server_id:
             raise UserError(_(Message.BASE_MSG))
         client = ViettelPostClient(server_id.host, server_id.token, self)
+        return client
+
+    def get_owner_token(self):
+        client = self.generate_client_api()
         if not self.user_name:
             raise UserError(_('Username not found.'))
         if not self.password:
             raise UserError(_('Password not found.'))
-        payload = {
+        payload: dict = {
             'USERNAME': self.user_name,
             'PASSWORD': self.password
         }
         res = client.sign_in(payload)
-        self.get_token_long_term(payload, res['token'])
+        token: str or bool = res.get('token', False)
+        if not token:
+            raise UserError(_('Get token failed.'))
+        self.get_token_long_term(payload, token)
 
-    def get_token_long_term(self, payload, token):
-        server_id = self.env['api.connect.config'].search([('code', '=', Const.BASE_CODE), ('active', '=', True)])
+    def get_token_long_term(self, payload: dict, token: str):
+        server_id = self.search([('code', '=', Const.BASE_CODE), ('active', '=', True)])
         if not server_id:
             raise UserError(_(Message.BASE_MSG))
         client = ViettelPostClient(server_id.host, token, self)
         res = client.sign_in_owner(payload)
-        self.write({'token': res['token']})
+        self.write({'token': res.get('token')})
 
 
 class ApiConnectHistory(models.Model):

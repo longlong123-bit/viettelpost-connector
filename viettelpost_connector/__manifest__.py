@@ -29,6 +29,7 @@
         'data/viettelpost_status_data.xml',
         'data/delivery_carrier_data.xml',
         'data/api_endpoints_config_data.xml',
+        'data/uom_uom_data.xml',
         'wizard/create_store_wizard_views.xml',
         'wizard/print_waybill_wizard.xml',
         'views/assets.xml',
@@ -57,7 +58,5 @@
         'python': ['selenium']
     },
     'images': ['static/description/thumbnail.png'],
-    'application': True,
-    'currency': 'USD',
-    'price': '52.00'
+    'application': True
 }

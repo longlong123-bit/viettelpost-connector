@@ -51,7 +51,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="vtp_store_action_view">
-        <field name="name">Warehouse</field>
+        <field name="name">Warehouses</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">viettelpost.store</field>
         <field name="view_ids" eval="[(5, 0, 0),
