@@ -2,9 +2,8 @@ import base64
 from odoo import fields, models, api, _
 from datetime import datetime, timedelta
 from odoo.exceptions import UserError
-from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Const
-from odoo.addons.viettelpost_connector.contanst.viettelpost_contanst import Message
-from odoo.addons.viettelpost_connector.clients.viettelpost_clients import ViettelPostClient
+from odoo.addons.viettelpost_connector.common.constants import Const
+from odoo.addons.viettelpost_connector.common.constants import Message
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -27,10 +26,7 @@ class PrintWaybillWizard(models.Model):
     waybill_code = fields.Char(related='picking_id.sale_id.waybill_code', string='Waybill code')
 
     def action_print_waybill(self):
-        server_id = self.env['api.connect.config'].search([('code', '=', Const.BASE_CODE), ('active', '=', True)])
-        if not server_id:
-            raise UserError(_(Message.BASE_MSG))
-        client = ViettelPostClient(server_id.host, server_id.token, self)
+        client = self.env['api.connect.config'].generate_client_api()
         try:
             payload = self._prepare_data_print_waybill()
             token = client.print_waybill(payload)
@@ -45,26 +41,25 @@ class PrintWaybillWizard(models.Model):
             Driver = webdriver.Chrome(options=options)
             Driver.get(url)
             img = Driver.find_elements(By.TAG_NAME, 'img')[0].screenshot_as_png
-            data_do = {
-                'name': self.picking_id.sale_id.name + '.png',
+            data_do: dict = {
+                'name': f'{self.picking_id.sale_id.name}.png',
                 'res_model': self.picking_id._name,
                 'res_id': self.picking_id.id,
                 'datas': base64.b64encode(img)
             }
-            data_so = {
-                'name': self.picking_id.sale_id.name + '.png',
+            data_so: dict = {
+                'name': f'{self.picking_id.sale_id.name}.png',
                 'res_model': self.picking_id.sale_id._name,
                 'res_id': self.picking_id.sale_id.id,
                 'datas': base64.b64encode(img)
             }
-            self.env['ir.attachment'].sudo().create(data_do)
-            self.env['ir.attachment'].sudo().create(data_so)
+            self.env['ir.attachment'].sudo().create([data_do, data_so])
             time.sleep(2)
         except Exception as e:
             raise UserError(_(f'Print waybill failed. {e}'))
 
-    def _prepare_data_print_waybill(self):
-        payload = {
+    def _prepare_data_print_waybill(self) -> dict:
+        payload: dict = {
             "ORDER_ARRAY": [self.picking_id.sale_id.waybill_code],
             "EXPIRY_TIME": int((datetime.utcnow() + timedelta(hours=1)).timestamp()) * 1000,
         }
