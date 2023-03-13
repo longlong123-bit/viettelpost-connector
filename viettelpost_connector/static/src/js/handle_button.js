@@ -16,7 +16,7 @@ ListController.include({
     _onClickSyncProvince: function (e) {
         var self = this;
         return this._rpc({
-            model: 'vtp.country.province',
+            model: 'viettelpost.province',
             method: 'sync_province'
         }).then(function(result) {
             self.do_action(result);
@@ -30,7 +30,7 @@ ListController.include({
     _onClickSyncDistrict: function (e) {
         var self = this;
         return this._rpc({
-            model: 'vtp.country.district',
+            model: 'viettelpost.district',
             method: 'sync_district'
         }).then(function(result) {
             self.do_action(result);
@@ -44,7 +44,7 @@ ListController.include({
     _onClickSyncWard: function (e) {
         var self = this;
         return this._rpc({
-            model: 'vtp.country.ward',
+            model: 'viettelpost.ward',
             method: 'sync_ward'
         }).then(function(result) {
             self.do_action(result);

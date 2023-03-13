@@ -1,8 +1,6 @@
-import base64
-from typing import Tuple
+from datetime import datetime
 
 from odoo import fields, models, api, _
-from datetime import datetime, timedelta
 from odoo.exceptions import UserError
 from odoo.addons.viettelpost_connector.common.constants import Const
 from odoo.addons.viettelpost_connector.common.constants import Message
@@ -130,8 +128,8 @@ class SaleOrderVTPost(models.Model):
         return payload
 
     def action_create_waybill_code(self):
-        client = self.env['api.connect.config'].generate_client_api()
         try:
+            client = self.env['api.connect.config'].generate_client_api()
             payload: dict = self._prepare_data_create_waybill()
             res = client.create_waybill(payload)
             line_data_ship_fee = self._prepare_data_create_line_amount_ship_fee(res)
@@ -153,8 +151,8 @@ class SaleOrderVTPost(models.Model):
             raise UserError(_(f'Create waybill failed. {e}'))
 
     def get_list_service(self):
-        client = self.env['api.connect.config'].generate_client_api()
         try:
+            client = self.env['api.connect.config'].generate_client_api()
             payload = self._prepare_payload_for_get_list_service()
             res = client.compute_fee_ship_all(payload)
             for dict_service in res:

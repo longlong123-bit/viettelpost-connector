@@ -17,9 +17,9 @@ msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__message_needaction
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__message_needaction
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__message_needaction
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__message_needaction
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__message_needaction
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__message_needaction
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__message_needaction
 msgid "Action Needed"
 msgstr ""
 
@@ -30,33 +30,33 @@ msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__activity_ids
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__activity_ids
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__activity_ids
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__activity_ids
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__activity_ids
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__activity_ids
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__activity_ids
 msgid "Activities"
 msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__activity_exception_decoration
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__activity_exception_decoration
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__activity_exception_decoration
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__activity_exception_decoration
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__activity_exception_decoration
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__activity_exception_decoration
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__activity_exception_decoration
 msgid "Activity Exception Decoration"
 msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__activity_state
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__activity_state
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__activity_state
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__activity_state
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__activity_state
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__activity_state
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__activity_state
 msgid "Activity State"
 msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__activity_type_icon
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__activity_type_icon
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__activity_type_icon
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__activity_type_icon
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__activity_type_icon
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__activity_type_icon
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__activity_type_icon
 msgid "Activity Type Icon"
 msgstr ""
 
@@ -73,9 +73,9 @@ msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__message_attachment_count
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__message_attachment_count
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__message_attachment_count
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__message_attachment_count
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__message_attachment_count
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__message_attachment_count
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__message_attachment_count
 msgid "Attachment Count"
 msgstr ""
 
@@ -154,7 +154,7 @@ msgid "Connection History"
 msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__country_id
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__country_id
 msgid "Country"
 msgstr ""
 
@@ -179,7 +179,7 @@ msgid "Create Store Successfully!"
 msgstr ""
 
 #. module: viettelpost_connector
-#: model_terms:ir.actions.act_window,help:viettelpost_connector.vtp_country_district_action_view
+#: model_terms:ir.actions.act_window,help:viettelpost_connector.viettelpost_district_action_view
 msgid "Create a new District."
 msgstr ""
 
@@ -189,12 +189,12 @@ msgid "Create a new Post office."
 msgstr ""
 
 #. module: viettelpost_connector
-#: model_terms:ir.actions.act_window,help:viettelpost_connector.vtp_country_province_action_view
+#: model_terms:ir.actions.act_window,help:viettelpost_connector.viettelpost_province_action_view
 msgid "Create a new Province."
 msgstr ""
 
 #. module: viettelpost_connector
-#: model_terms:ir.actions.act_window,help:viettelpost_connector.vtp_country_ward_action_view
+#: model_terms:ir.actions.act_window,help:viettelpost_connector.viettelpost_ward_action_view
 msgid "Create a new Ward."
 msgstr ""
 
@@ -270,9 +270,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_status__create_uid
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_store__create_uid
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_waybill_type__create_uid
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__create_uid
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__create_uid
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__create_uid
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__create_uid
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__create_uid
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__create_uid
 msgid "Created by"
 msgstr ""
 
@@ -291,9 +291,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_status__create_date
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_store__create_date
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_waybill_type__create_date
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__create_date
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__create_date
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__create_date
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__create_date
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__create_date
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__create_date
 msgid "Created on"
 msgstr ""
 
@@ -327,9 +327,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_office__delivery_carrier_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_service__delivery_carrier_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_store__delivery_carrier_id
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__delivery_carrier_id
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__delivery_carrier_id
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__delivery_carrier_id
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__delivery_carrier_id
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__delivery_carrier_id
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__delivery_carrier_id
 msgid "Delivery Carrier"
 msgstr ""
 
@@ -381,9 +381,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_status__display_name
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_store__display_name
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_waybill_type__display_name
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__display_name
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__display_name
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__display_name
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__display_name
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__display_name
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -393,27 +393,27 @@ msgstr ""
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__receiver_district_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__sender_district_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_store__district_id
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__district_ids
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__district_id
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__district_ids
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__district_id
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.delivery_carrier_view_vtp_form_inherit
-#: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_country_district_form_view
-#: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_country_district_tree_view
-#: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_country_province_form_view
+#: model_terms:ir.ui.view,arch_db:viettelpost_connector.viettelpost_district_form_view
+#: model_terms:ir.ui.view,arch_db:viettelpost_connector.viettelpost_district_tree_view
+#: model_terms:ir.ui.view,arch_db:viettelpost_connector.viettelpost_province_form_view
 msgid "District"
 msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__district_code
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__district_code
 msgid "District Code"
 msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__district_id
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__district_id
 msgid "District ID"
 msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__district_name
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__district_name
 msgid "District Name"
 msgstr ""
 
@@ -423,7 +423,7 @@ msgid "District name"
 msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.actions.act_window,name:viettelpost_connector.vtp_country_district_action_view
+#: model:ir.actions.act_window,name:viettelpost_connector.viettelpost_district_action_view
 #: model:ir.model.fields,field_description:viettelpost_connector.field_delivery_carrier__vtp_district_ids
 #: model:ir.ui.menu,name:viettelpost_connector.menu_district
 msgid "Districts"
@@ -485,25 +485,25 @@ msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__message_follower_ids
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__message_follower_ids
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__message_follower_ids
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__message_follower_ids
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__message_follower_ids
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__message_follower_ids
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__message_follower_ids
 msgid "Followers"
 msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__message_partner_ids
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__message_partner_ids
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__message_partner_ids
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__message_partner_ids
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__message_partner_ids
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__message_partner_ids
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__message_partner_ids
 msgid "Followers (Partners)"
 msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,help:viettelpost_connector.field_api_connect_config__activity_type_icon
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_district__activity_type_icon
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_province__activity_type_icon
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_ward__activity_type_icon
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_district__activity_type_icon
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_province__activity_type_icon
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_ward__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
 msgstr ""
 
@@ -560,9 +560,9 @@ msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__has_message
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__has_message
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__has_message
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__has_message
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__has_message
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__has_message
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__has_message
 msgid "Has Message"
 msgstr ""
 
@@ -593,53 +593,53 @@ msgstr ""
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_status__id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_store__id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_waybill_type__id
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__id
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__id
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__id
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__id
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__id
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__id
 msgid "ID"
 msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__activity_exception_icon
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__activity_exception_icon
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__activity_exception_icon
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__activity_exception_icon
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__activity_exception_icon
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__activity_exception_icon
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__activity_exception_icon
 msgid "Icon"
 msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,help:viettelpost_connector.field_api_connect_config__activity_exception_icon
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_district__activity_exception_icon
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_province__activity_exception_icon
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_ward__activity_exception_icon
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_district__activity_exception_icon
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_province__activity_exception_icon
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_ward__activity_exception_icon
 msgid "Icon to indicate an exception activity."
 msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,help:viettelpost_connector.field_api_connect_config__message_needaction
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_district__message_needaction
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_province__message_needaction
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_ward__message_needaction
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_district__message_needaction
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_province__message_needaction
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_ward__message_needaction
 msgid "If checked, new messages require your attention."
 msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,help:viettelpost_connector.field_api_connect_config__message_has_error
 #: model:ir.model.fields,help:viettelpost_connector.field_api_connect_config__message_has_sms_error
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_district__message_has_error
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_district__message_has_sms_error
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_province__message_has_error
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_province__message_has_sms_error
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_ward__message_has_error
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_ward__message_has_sms_error
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_district__message_has_error
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_district__message_has_sms_error
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_province__message_has_error
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_province__message_has_sms_error
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_ward__message_has_error
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_ward__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__message_is_follower
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__message_is_follower
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__message_is_follower
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__message_is_follower
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__message_is_follower
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__message_is_follower
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__message_is_follower
 msgid "Is Follower"
 msgstr ""
 
@@ -668,9 +668,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_status____last_update
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_store____last_update
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_waybill_type____last_update
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district____last_update
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province____last_update
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward____last_update
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district____last_update
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province____last_update
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward____last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -689,9 +689,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_status__write_uid
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_store__write_uid
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_waybill_type__write_uid
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__write_uid
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__write_uid
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__write_uid
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__write_uid
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__write_uid
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__write_uid
 msgid "Last Updated by"
 msgstr ""
 
@@ -710,9 +710,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_status__write_date
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_store__write_date
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_waybill_type__write_date
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__write_date
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__write_date
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__write_date
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__write_date
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__write_date
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__write_date
 msgid "Last Updated on"
 msgstr ""
 
@@ -764,9 +764,9 @@ msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__message_main_attachment_id
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__message_main_attachment_id
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__message_main_attachment_id
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__message_main_attachment_id
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__message_main_attachment_id
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__message_main_attachment_id
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__message_main_attachment_id
 msgid "Main Attachment"
 msgstr ""
 
@@ -777,17 +777,17 @@ msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__message_has_error
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__message_has_error
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__message_has_error
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__message_has_error
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__message_has_error
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__message_has_error
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__message_has_error
 msgid "Message Delivery error"
 msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__message_ids
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__message_ids
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__message_ids
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__message_ids
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__message_ids
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__message_ids
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__message_ids
 msgid "Messages"
 msgstr ""
 
@@ -839,9 +839,9 @@ msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__my_activity_date_deadline
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__my_activity_date_deadline
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__my_activity_date_deadline
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__my_activity_date_deadline
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__my_activity_date_deadline
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__my_activity_date_deadline
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__my_activity_date_deadline
 msgid "My Activity Deadline"
 msgstr ""
 
@@ -875,25 +875,25 @@ msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__activity_date_deadline
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__activity_date_deadline
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__activity_date_deadline
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__activity_date_deadline
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__activity_date_deadline
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__activity_date_deadline
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__activity_date_deadline
 msgid "Next Activity Deadline"
 msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__activity_summary
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__activity_summary
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__activity_summary
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__activity_summary
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__activity_summary
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__activity_summary
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__activity_summary
 msgid "Next Activity Summary"
 msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__activity_type_id
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__activity_type_id
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__activity_type_id
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__activity_type_id
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__activity_type_id
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__activity_type_id
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__activity_type_id
 msgid "Next Activity Type"
 msgstr ""
 
@@ -916,33 +916,33 @@ msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__message_needaction_counter
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__message_needaction_counter
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__message_needaction_counter
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__message_needaction_counter
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__message_needaction_counter
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__message_needaction_counter
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__message_needaction_counter
 msgid "Number of Actions"
 msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__message_has_error_counter
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__message_has_error_counter
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__message_has_error_counter
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__message_has_error_counter
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__message_has_error_counter
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__message_has_error_counter
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__message_has_error_counter
 msgid "Number of errors"
 msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,help:viettelpost_connector.field_api_connect_config__message_needaction_counter
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_district__message_needaction_counter
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_province__message_needaction_counter
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_ward__message_needaction_counter
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_district__message_needaction_counter
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_province__message_needaction_counter
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_ward__message_needaction_counter
 msgid "Number of messages which requires an action"
 msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,help:viettelpost_connector.field_api_connect_config__message_has_error_counter
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_district__message_has_error_counter
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_province__message_has_error_counter
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_ward__message_has_error_counter
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_district__message_has_error_counter
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_province__message_has_error_counter
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_ward__message_has_error_counter
 msgid "Number of messages with delivery error"
 msgstr ""
 
@@ -1059,25 +1059,25 @@ msgstr ""
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__receiver_province_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__sender_province_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_store__province_id
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__province_id
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__province_id
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.delivery_carrier_view_vtp_form_inherit
-#: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_country_province_form_view
-#: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_country_province_tree_view
+#: model_terms:ir.ui.view,arch_db:viettelpost_connector.viettelpost_province_form_view
+#: model_terms:ir.ui.view,arch_db:viettelpost_connector.viettelpost_province_tree_view
 msgid "Province"
 msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__province_code
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__province_code
 msgid "Province Code"
 msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__province_id
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__province_id
 msgid "Province ID"
 msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__province_name
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__province_name
 msgid "Province Name"
 msgstr ""
 
@@ -1087,7 +1087,7 @@ msgid "Province name"
 msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.actions.act_window,name:viettelpost_connector.vtp_country_province_action_view
+#: model:ir.actions.act_window,name:viettelpost_connector.viettelpost_province_action_view
 #: model:ir.model.fields,field_description:viettelpost_connector.field_delivery_carrier__vtp_province_ids
 #: model:ir.ui.menu,name:viettelpost_connector.menu_province
 msgid "Provinces"
@@ -1107,17 +1107,17 @@ msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__activity_user_id
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__activity_user_id
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__activity_user_id
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__activity_user_id
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__activity_user_id
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__activity_user_id
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__activity_user_id
 msgid "Responsible User"
 msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__message_has_sms_error
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__message_has_sms_error
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__message_has_sms_error
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__message_has_sms_error
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__message_has_sms_error
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__message_has_sms_error
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__message_has_sms_error
 msgid "SMS Delivery error"
 msgstr ""
 
@@ -1188,9 +1188,9 @@ msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,help:viettelpost_connector.field_api_connect_config__activity_state
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_district__activity_state
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_province__activity_state
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_ward__activity_state
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_district__activity_state
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_province__activity_state
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_ward__activity_state
 msgid ""
 "Status based on activities\n"
 "Overdue: Due date is already passed\n"
@@ -1322,9 +1322,9 @@ msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,help:viettelpost_connector.field_api_connect_config__activity_exception_decoration
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_district__activity_exception_decoration
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_province__activity_exception_decoration
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_ward__activity_exception_decoration
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_district__activity_exception_decoration
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_province__activity_exception_decoration
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_ward__activity_exception_decoration
 msgid "Type of the exception activity on record."
 msgstr ""
 
@@ -1355,17 +1355,17 @@ msgid "ViettelPost Address"
 msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.model,name:viettelpost_connector.model_vtp_country_district
+#: model:ir.model,name:viettelpost_connector.model_viettelpost_district
 msgid "ViettelPost Country District"
 msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.model,name:viettelpost_connector.model_vtp_country_province
+#: model:ir.model,name:viettelpost_connector.model_viettelpost_province
 msgid "ViettelPost Country Province"
 msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.model,name:viettelpost_connector.model_vtp_country_ward
+#: model:ir.model,name:viettelpost_connector.model_viettelpost_ward
 msgid "ViettelPost Country Ward"
 msgstr ""
 
@@ -1416,21 +1416,21 @@ msgstr ""
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__receiver_ward_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__sender_ward_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_store__ward_id
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__ward_ids
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__ward_ids
 #: model_terms:ir.ui.view,arch_db:viettelpost_connector.delivery_carrier_view_vtp_form_inherit
-#: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_country_district_form_view
-#: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_country_ward_form_view
-#: model_terms:ir.ui.view,arch_db:viettelpost_connector.vtp_country_ward_tree_view
+#: model_terms:ir.ui.view,arch_db:viettelpost_connector.viettelpost_district_form_view
+#: model_terms:ir.ui.view,arch_db:viettelpost_connector.viettelpost_ward_form_view
+#: model_terms:ir.ui.view,arch_db:viettelpost_connector.viettelpost_ward_tree_view
 msgid "Ward"
 msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__ward_id
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__ward_id
 msgid "Ward ID"
 msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__ward_name
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__ward_name
 msgid "Ward Name"
 msgstr ""
 
@@ -1440,7 +1440,7 @@ msgid "Ward name"
 msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.actions.act_window,name:viettelpost_connector.vtp_country_ward_action_view
+#: model:ir.actions.act_window,name:viettelpost_connector.viettelpost_ward_action_view
 #: model:ir.model.fields,field_description:viettelpost_connector.field_delivery_carrier__vtp_ward_ids
 #: model:ir.ui.menu,name:viettelpost_connector.menu_ward
 msgid "Wards"
@@ -1490,17 +1490,17 @@ msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,field_description:viettelpost_connector.field_api_connect_config__website_message_ids
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_district__website_message_ids
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_province__website_message_ids
-#: model:ir.model.fields,field_description:viettelpost_connector.field_vtp_country_ward__website_message_ids
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_district__website_message_ids
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_province__website_message_ids
+#: model:ir.model.fields,field_description:viettelpost_connector.field_viettelpost_ward__website_message_ids
 msgid "Website Messages"
 msgstr ""
 
 #. module: viettelpost_connector
 #: model:ir.model.fields,help:viettelpost_connector.field_api_connect_config__website_message_ids
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_district__website_message_ids
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_province__website_message_ids
-#: model:ir.model.fields,help:viettelpost_connector.field_vtp_country_ward__website_message_ids
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_district__website_message_ids
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_province__website_message_ids
+#: model:ir.model.fields,help:viettelpost_connector.field_viettelpost_ward__website_message_ids
 msgid "Website communication history"
 msgstr ""
 

@@ -23,19 +23,15 @@
     'data': [
         'security/ir.model.access.csv',
         'data/viettelpost_national_type_data.xml',
-        'data/api_connect_config_data.xml',
         'data/viettelpost_product_type_data.xml',
         'data/viettelpost_waybill_type_data.xml',
         'data/viettelpost_status_data.xml',
         'data/delivery_carrier_data.xml',
-        'data/api_endpoints_config_data.xml',
         'wizard/create_store_wizard_views.xml',
         'wizard/print_waybill_wizard.xml',
-        'views/api_connect_config_views.xml',
-        'views/api_connect_history_views.xml',
-        'views/vtp_country_province_views.xml',
-        'views/vtp_country_district_views.xml',
-        'views/vtp_country_ward_views.xml',
+        'views/viettelpost_province_views.xml',
+        'views/viettelpost_district_views.xml',
+        'views/viettelpost_ward_views.xml',
         'views/vtp_office_views.xml',
         'views/vtp_service_views.xml',
         'views/vtp_store_views.xml',
@@ -48,7 +44,6 @@
         'views/vtp_status_views.xml',
         'views/res_partner_views.xml',
         'views/stock_picking_views.xml',
-        'views/api_endpoint_config_views.xml',
         'views/menus.xml'
     ],
     'assets': {
@@ -62,6 +57,6 @@
     'external_dependencies': {
         'python': ['selenium']
     },
-    'images': ['static/description/thumbnail.png'],
+    'images': ['static/description/thumbnail.gif'],
     'application': True
 }

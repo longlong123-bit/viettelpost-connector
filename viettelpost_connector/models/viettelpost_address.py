@@ -4,11 +4,11 @@ from odoo.addons.viettelpost_connector.common.constants import Const
 from odoo.addons.viettelpost_connector.common.constants import Message
 
 
-class VTPCountryProvince(models.Model):
-    _name = 'vtp.country.province'
+class VTPProvince(models.Model):
+    _name = 'viettelpost.province'
     _rec_name = 'province_name'
     _inherit = ['mail.thread', 'mail.activity.mixin']
-    _description = 'ViettelPost Country Province'
+    _description = 'ViettelPost Province'
 
     def _default_country(self):
         return self.env['res.country'].search([('code', '=', 'VN')]).id
@@ -19,12 +19,12 @@ class VTPCountryProvince(models.Model):
     province_id = fields.Integer(string='Province ID', required=True, tracking=True)
     province_code = fields.Char(string='Province Code', required=True, tracking=True)
     province_name = fields.Char(string='Province Name', required=True, tracking=True)
-    district_ids = fields.One2many('vtp.country.district', 'province_id', string='District')
+    district_ids = fields.One2many('viettelpost.district', 'province_id', string='District')
 
     @api.model
     def sync_province(self):
-        client = self.env['api.connect.config'].generate_client_api()
         try:
+            client = self.env['api.connect.config'].generate_client_api()
             data_provinces: list = []
             delivery_carrier_id = self.env['delivery.carrier'].search(
                 [('delivery_carrier_code', '=', Const.DELIVERY_CARRIER_CODE)])
@@ -34,7 +34,7 @@ class VTPCountryProvince(models.Model):
             if len(dataset) > 0:
                 lst_province_ids: list = [rec.get('PROVINCE_ID') for rec in dataset]
                 results = self.search([('province_id', 'in', lst_province_ids)])
-                result_ids: list = [res.id for res in results]
+                result_ids: list = [res.province_id for res in results]
                 dataset = list(filter(lambda x: x.get('PROVINCE_ID') not in result_ids, dataset))
                 if len(dataset) > 0:
                     for data in dataset:
@@ -50,7 +50,7 @@ class VTPCountryProvince(models.Model):
                 "type": "ir.actions.client",
                 "tag": "display_notification",
                 "params": {
-                    "title": _("Sync Provinces Successfully!"),
+                    "title": _("Sync provinces successfully!"),
                     "type": "success",
                     "message": _(Message.MSG_ACTION_SUCCESS),
                     "sticky": False,
@@ -61,24 +61,24 @@ class VTPCountryProvince(models.Model):
             raise UserError(_(f'Sync province failed. Error: {str(e)}'))
 
 
-class VTPCountryDistrict(models.Model):
-    _name = 'vtp.country.district'
+class VTPDistrict(models.Model):
+    _name = 'viettelpost.district'
     _rec_name = 'district_name'
     _inherit = ['mail.thread', 'mail.activity.mixin']
-    _description = 'ViettelPost Country District'
+    _description = 'ViettelPost District'
 
     delivery_carrier_id = fields.Many2one('delivery.carrier', string='Delivery Carrier')
     district_id = fields.Integer(string='District ID', required=True, tracking=True)
     district_code = fields.Char(string='District Code', required=True, tracking=True)
     district_name = fields.Char(string='District Name', required=True, tracking=True)
-    province_id = fields.Many2one('vtp.country.province', string='Province', required=True, tracking=True)
-    ward_ids = fields.One2many('vtp.country.ward', 'district_id', string='Ward')
+    province_id = fields.Many2one('viettelpost.province', string='Province', required=True, tracking=True)
+    ward_ids = fields.One2many('viettelpost.ward', 'district_id', string='Ward')
 
     @api.model
     def sync_district(self):
         data_districts: list = []
-        client = self.env['api.connect.config'].generate_client_api()
         try:
+            client = self.env['api.connect.config'].generate_client_api()
             delivery_carrier_id = self.env['delivery.carrier'].search(
                 [('delivery_carrier_code', '=', Const.DELIVERY_CARRIER_CODE)])
             if not delivery_carrier_id:
@@ -87,11 +87,11 @@ class VTPCountryDistrict(models.Model):
             if len(dataset) > 0:
                 lst_district_ids: list = [rec.get('DISTRICT_ID') for rec in dataset]
                 results = self.search([('district_id', 'in', lst_district_ids)])
-                result_ids: list = [res.id for res in results]
+                result_ids: list = [res.district_id for res in results]
                 dataset = list(filter(lambda x: x.get('DISTRICT_ID') not in result_ids, dataset))
                 if len(dataset) > 0:
                     for data in dataset:
-                        province_id = self.env['vtp.country.province'].search([('province_id', '=', data.get('PROVINCE_ID'))])
+                        province_id = self.env['viettelpost.province'].search([('province_id', '=', data.get('PROVINCE_ID'))])
                         if not province_id:
                             continue
                         data_district: dict = {
@@ -118,21 +118,21 @@ class VTPCountryDistrict(models.Model):
             raise UserError(_(f'Sync district failed. Error: {str(e)}'))
 
 
-class VTPCountryWard(models.Model):
-    _name = 'vtp.country.ward'
+class VTPWard(models.Model):
+    _name = 'viettelpost.ward'
     _rec_name = 'ward_name'
     _inherit = ['mail.thread', 'mail.activity.mixin']
-    _description = 'ViettelPost Country Ward'
+    _description = 'ViettelPost Ward'
 
     delivery_carrier_id = fields.Many2one('delivery.carrier', string='Delivery Carrier')
     ward_id = fields.Integer(string='Ward ID', required=True, tracking=True)
     ward_name = fields.Char(string='Ward Name', required=True, tracking=True)
-    district_id = fields.Many2one('vtp.country.district', string='District', required=True, tracking=True)
+    district_id = fields.Many2one('viettelpost.district', string='District', required=True, tracking=True)
 
     @api.model
     def sync_ward(self):
-        client = self.env['api.connect.config'].generate_client_api()
         try:
+            client = self.env['api.connect.config'].generate_client_api()
             data_wards: list = []
             delivery_carrier_id = self.env['delivery.carrier'].search(
                 [('delivery_carrier_code', '=', Const.DELIVERY_CARRIER_CODE)])
@@ -142,11 +142,11 @@ class VTPCountryWard(models.Model):
             if len(dataset) > 0:
                 lst_ward_ids: list = [rec.get('WARDS_ID') for rec in dataset]
                 results = self.search([('ward_id', 'in', lst_ward_ids)])
-                result_ids: list = [res.id for res in results]
+                result_ids: list = [res.ward_id for res in results]
                 dataset = list(filter(lambda x: x['WARDS_ID'] not in result_ids, dataset))
                 if len(dataset) > 0:
                     for data in dataset:
-                        district_id = self.env['vtp.country.district'].search([('district_id', '=', data.get('DISTRICT_ID'))])
+                        district_id = self.env['viettelpost.district'].search([('district_id', '=', data.get('DISTRICT_ID'))])
                         if not district_id:
                             continue
                         data_ward: dict = {

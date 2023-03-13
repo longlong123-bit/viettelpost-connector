@@ -12,10 +12,10 @@
 <section id="tangerine_module_content" style="padding-top: 20px;">
    <div class="container">
       <div class="tangerine_center text-center">
-         <h4 style="font-size: 32px;font-weight: 600;color: #FFBD59;margin-bottom: 20px;">Odoo ViettelPost Connector</h4>
+         <h4 style="font-size: 32px;font-weight: 600;color: #FFBD59;margin-bottom: 20px;">ViettelPost Connector</h4>
          <hr style="width: 100px;border-width: 2px;border-color: #FFBD59;" />
          <p style="color: #777;font-size: 18px;margin: 0;letter-spacing: 1px;">
-             The Odoo ViettelPost Connector module is an integrated product between the Odoo application and
+             The ViettelPost Connector module is an integrated product between the Odoo application and
              the ViettelPost carrier. The application provides features, through the API manipulated directly
              into the dashboard of ViettelPost.
          </p>
@@ -325,20 +325,34 @@
                         <!-- Getting started -->
                         <div style="margin-bottom: 20px;">
                             <p class="font-weight-bold" style="color: #FFBD59; font-size: 18px;">I. Getting started</p>
-                            <ul type="disc">
-                                <li>
-                                    <p>
-                                      Install package selenium version 4.6.0.
-                                    </p>
-                                </li>
-                                <li>
-                                    <p>
-                                      Install module Odoo ViettelPost Connector.
-                                    </p>
-                                </li>
-                                <img alt="step-2" src="./images/step2.png" style="height: auto; width: 100%" />
-                            </ul>
+                            <p>
+                              <strong>Summary:</strong> Install dependencies.
+                            </p>
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="card" style="width: 18rem; min-height: 230px;">
+                                      <img src="./images/thumbnail_core.gif" class="card-img-top" alt="Core">
+                                      <div class="card-body">
+                                        <h5 class="card-title">Connection Core</h5>
+                                        <p class="card-text">Install add-ons is required.</p>
+                                        <a href="https://apps.odoo.com/apps/modules/15.0/connection_core/" class="btn btn-primary" style="color: #FFBD59;">Download</a>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="card" style="width: 18rem; min-height: 230px;">
+                                      <img src="./images/selenium.png" class="card-img-top" alt="Selenium">
+                                      <div class="card-body">
+                                        <h5 class="card-title">Install selenium</h5>
+                                        <p class="card-text">pip install selenium==4.6.0</p>
+                                          <a href="https://pypi.org/project/selenium/" class="btn btn-primary" style="color: #FFBD59;">Go visit</a>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <img alt="step-2" class="mt-4" src="./images/step2.png" style="height: auto; width: 100%" />
                         </div>
+
                         <!-- Login and get token -->
                         <div style="margin-bottom: 20px;">
                             <p class="font-weight-bold" style="color: #FFBD59; font-size: 18px;">II. Login and get token</p>
@@ -348,7 +362,7 @@
                             </p>
                             <p>
                               <strong>Path:</strong> ViettelPost/Configuration/ViettelPost
-                              API Technical/Connection Config
+                              API Technical/Connect Configuration
                             </p>
                             <p>
                               <strong>Note:</strong> (1) & (2): The username and password
@@ -385,17 +399,17 @@
                             </p>
                             <p>
                               <strong>Step 1:</strong> Go to
-                              ViettelPost/Configuration/Province. Press button Sync Province
+                              ViettelPost/Configuration/Scheduled Actions. Press record [ViettelPost] - Sync Provinces
                             </p>
                             <img alt="step-5" src="./images/step5.png" style="height: auto; width: 100%" />
                             <p>
                               <strong>Step 2:</strong> Go to
-                              ViettelPost/Configuration/District. Press button Sync District
+                              ViettelPost/Configuration/Scheduled Actions. Press record [ViettelPost] - Sync Districts
                             </p>
                             <img alt="step-6" src="./images/step6.png" style="height: auto; width: 100%" />
                             <p>
-                              <strong>Step 3:</strong> Go to ViettelPost/Configuration/Ward.
-                              Press button Sync Ward
+                              <strong>Step 3:</strong> Go to
+                                ViettelPost/Configuration/Scheduled Actions. Press record [ViettelPost] - Sync Wards
                             </p>
                             <img alt="step-7" src="./images/step7.png" style="height: auto; width: 100%" />
                         </div>
@@ -406,10 +420,8 @@
                               <strong>Summary:</strong> Synchronous the list of post offices
                               across the country to Odoo. It makes it easy to find the nearest post office at Odoo
                             </p>
-                            <p><strong>Path:</strong> ViettelPost/Post Office</p>
-                            <p>
-                              <strong>Step 1:</strong> Press button Sync Post Office
-                            </p>
+                            <strong>Step 1:</strong> Go to
+                              ViettelPost/Configuration/Scheduled Actions. Press record [ViettelPost] - Sync Offices
                             <img alt="step-8" src="./images/step8.png" style="height: auto; width: 100%" />
                         </div>
                         <!-- Service synchronization -->
@@ -419,14 +431,11 @@
                               <strong>Summary:</strong> Synchronous the list of services and
                               extend services available at ViettelPost.
                             </p>
-                            <p><strong>Path:</strong> ViettelPost/Service</p>
-                            <p>
-                              <strong>Step 1:</strong> Press button Sync Service
-                            </p>
+                            <strong>Step 1:</strong> Go to
+                              ViettelPost/Configuration/Scheduled Actions. Press record [ViettelPost] - Sync Services
                             <img alt="step-9" src="./images/step9.png" style="height: auto; width: 100%" />
-                            <p>
-                              <strong>Step 2:</strong> Press button Sync Extend Service
-                            </p>
+                            <strong>Step 2:</strong> Go to
+                              ViettelPost/Configuration/Scheduled Actions. Press record [ViettelPost] - Sync Extend Services
                             <img alt="step-10" src="./images/step10.png" style="height: auto; width: 100%" />
                         </div>
                         <!-- Warehouse synchronization -->
@@ -436,10 +445,8 @@
                               <strong>Summary:</strong> Synchronous the list of repositories
                               that you have configured on the ViettelPost dashboard.
                             </p>
-                            <p><strong>Path:</strong> ViettelPost/Warehouse</p>
-                            <p>
-                              <strong>Step 1:</strong> Press button Sync Warehouse
-                            </p>
+                            <strong>Step 1:</strong> Go to
+                              ViettelPost/Configuration/Scheduled Actions. Press record [ViettelPost] - Sync Warehouses
                             <img alt="step-11" src="./images/step11.png" style="height: auto; width: 100%" />
                         </div>
                         <!-- Configuration warehouse ViettelPost from Odoo -->
