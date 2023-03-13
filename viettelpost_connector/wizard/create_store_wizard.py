@@ -11,7 +11,7 @@ class CreateStoreWizard(models.Model):
     name = fields.Char(string='Name', required=True)
     phone = fields.Char(string='Phone', required=True)
     address = fields.Char(string='Address', required=True)
-    ward_id = fields.Many2one('vtp.country.ward', string='Ward', required=True)
+    ward_id = fields.Many2one('viettelpost.ward', string='Ward', required=True)
 
     @api.model
     def create_store(self):
@@ -31,9 +31,9 @@ class CreateStoreWizard(models.Model):
             dataset = client.set_store(payload)
             for data in dataset:
                 store_id = self.env['viettelpost.store'].search([('group_address_id', '=', data['groupaddressId'])])
-                province_id = self.env['vtp.country.province'].search([('province_id', '=', data['provinceId'])])
-                district_id = self.env['vtp.country.district'].search([('district_id', '=', data['districtId'])])
-                ward_id = self.env['vtp.country.ward'].search([('ward_id', '=', data['wardsId'])])
+                province_id = self.env['viettelpost.province'].search([('province_id', '=', data['provinceId'])])
+                district_id = self.env['viettelpost.district'].search([('district_id', '=', data['districtId'])])
+                ward_id = self.env['viettelpost.ward'].search([('ward_id', '=', data['wardsId'])])
                 if not store_id:
                     dict_store: dict = {
                         'name': data['name'],

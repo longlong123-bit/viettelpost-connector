@@ -1,11 +1,8 @@
-import base64
-from typing import Tuple
+from datetime import datetime
 
 from odoo import fields, models, api, _
-from datetime import datetime, timedelta
 from odoo.exceptions import UserError
 from odoo.addons.viettelpost_connector.common.constants import Const
-from odoo.addons.viettelpost_connector.common.constants import Message
 
 
 class SaleOrderVTPost(models.Model):
@@ -99,7 +96,7 @@ class SaleOrderVTPost(models.Model):
                         },
                     }
 
-    def _prepare_data_create_line_amount_ship_fee(self, data: dict) -> dict:
+    def _prepare_data_create_line_amount_ship_fee(self, data: dict):
         payload: dict = {
             'product_id': self.delivery_carrier_vtp_id.product_id.id,
             'name': f'{self.vtp_lst_service_id.display_name}\n{self.vtp_lst_extent_service_id.display_name}'
@@ -114,7 +111,7 @@ class SaleOrderVTPost(models.Model):
         }
         return payload
 
-    def _prepare_data_write_sale_order_fee_infor(self, data: dict) -> dict:
+    def _prepare_data_write_sale_order_fee_infor(self, data: dict):
         payload: dict = {
             'waybill_code': data.get('ORDER_NUMBER'),
             'money_collection': data.get('MONEY_COLLECTION'),
@@ -130,9 +127,9 @@ class SaleOrderVTPost(models.Model):
         return payload
 
     def action_create_waybill_code(self):
-        client = self.env['api.connect.config'].generate_client_api()
         try:
-            payload = self._prepare_data_create_waybill()
+            client = self.env['api.connect.config'].generate_client_api()
+            payload: dict = self._prepare_data_create_waybill()
             res = client.create_waybill(payload)
             line_data_ship_fee = self._prepare_data_create_line_amount_ship_fee(res)
             self.env['sale.order.line'].create(line_data_ship_fee)
@@ -142,8 +139,8 @@ class SaleOrderVTPost(models.Model):
             raise UserError(_(f'Create waybill failed. {e}'))
 
     def get_list_service(self):
-        client = self.env['api.connect.config'].generate_client_api()
         try:
+            client = self.env['api.connect.config'].generate_client_api()
             payload = self._prepare_payload_for_get_list_service()
             res = client.compute_fee_ship_all(payload)
             for dict_service in res:

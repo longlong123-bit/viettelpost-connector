@@ -28,7 +28,7 @@ class ViettelPostService(models.Model):
             if len(dataset) > 0:
                 lst_service_ids: list = [rec.get('SERVICE_CODE') for rec in dataset]
                 results = self.search([('code', 'in', lst_service_ids)])
-                result_ids: list = [res.id for res in results]
+                result_ids: list = [res.code for res in results]
                 dataset = list(filter(lambda x: x.get('SERVICE_CODE') not in result_ids, dataset))
                 if len(dataset) > 0:
                     for data in dataset:
