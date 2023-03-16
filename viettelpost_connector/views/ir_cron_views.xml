@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.actions.act_window" id="ir_cron_asset_management_inherit_action">
+        <field name="name">Scheduled Actions</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ir.cron</field>
+        <field name="context">{'search_default_all': 1}</field>
+        <field name="domain">[('cron_name', 'ilike', '%[ViettelPost]%')]</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('base.ir_cron_view_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('base.ir_cron_view_form')})]"/>
+        <field name="search_view_id" ref="base.ir_cron_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a scheduled action.
+            </p>
+        </field>
+    </record>
+</odoo>

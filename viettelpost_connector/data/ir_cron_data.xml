@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="ir_cron_vtp_sync_provinces" model="ir.cron">
+            <field name="name">[ViettelPost] - Sync Provinces</field>
+            <field name="model_id" ref="viettelpost_connector.model_viettelpost_province" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="state">code</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">1</field>
+            <field name="code">model.sync_province()</field>
+            <field name="doall">True</field>
+            <field name="active" eval="0" />
+        </record>
+        <record id="ir_cron_vtp_sync_districts" model="ir.cron">
+            <field name="name">[ViettelPost] - Sync Districts</field>
+            <field name="model_id" ref="viettelpost_connector.model_viettelpost_district" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="state">code</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">5</field>
+            <field name="code">model.sync_district()</field>
+            <field name="doall">True</field>
+            <field name="active" eval="0" />
+        </record>
+        <record id="ir_cron_vtp_sync_wards" model="ir.cron">
+            <field name="name">[ViettelPost] - Sync Wards</field>
+            <field name="model_id" ref="viettelpost_connector.model_viettelpost_ward" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="state">code</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">10</field>
+            <field name="code">model.sync_ward()</field>
+            <field name="doall">True</field>
+            <field name="active" eval="0" />
+        </record>
+        <record id="ir_cron_vtp_sync_service" model="ir.cron">
+            <field name="name">[ViettelPost] - Sync Services</field>
+            <field name="model_id" ref="viettelpost_connector.model_viettelpost_service" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="state">code</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">1</field>
+            <field name="code">model.sync_service()</field>
+            <field name="doall">True</field>
+            <field name="active" eval="0" />
+        </record>
+        <record id="ir_cron_vtp_sync_extend_service" model="ir.cron">
+            <field name="name">[ViettelPost] - Sync Extend Services</field>
+            <field name="model_id" ref="viettelpost_connector.model_viettelpost_service" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="state">code</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="code">model.sync_extend_services()</field>
+            <field name="doall">True</field>
+            <field name="active" eval="0" />
+        </record>
+        <record id="ir_cron_vtp_sync_offices" model="ir.cron">
+            <field name="name">[ViettelPost] - Sync Offices</field>
+            <field name="model_id" ref="viettelpost_connector.model_viettelpost_office" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="state">code</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="code">model.sync_office()</field>
+            <field name="doall">True</field>
+            <field name="active" eval="0" />
+        </record>
+        <record id="ir_cron_vtp_sync_stores" model="ir.cron">
+            <field name="name">[ViettelPost] - Sync Warehouses</field>
+            <field name="model_id" ref="viettelpost_connector.model_viettelpost_store" />
+            <field name="user_id" ref="base.user_root" />
+            <field name="state">code</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="code">model.sync_store()</field>
+            <field name="doall">True</field>
+            <field name="active" eval="0" />
+        </record>
+    </data>
+</odoo>

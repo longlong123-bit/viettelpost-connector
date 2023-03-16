@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="api_connect_config_form_view" model="ir.ui.view">
+        <field name="name">api.connect.config.form.view</field>
+        <field name="model">api.connect.config</field>
+        <field name="arch" type="xml">
+            <form string="Connection Config">
+                <header>
+                    <button type="object" name="get_owner_token" string="Get token"  class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_test_connection"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-globe icon">
+                                    <div class="o_field_widget o_stat_info">
+                                        <span class="o_stat_text">Connection</span>
+                                        <span class="o_stat_text">Test</span>
+                                    </div>
+                        </button>
+                        <button name="toggle_active"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-archive">
+                            <field name="active" widget="boolean"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="domain"/>
+                        </group>
+                        <group>
+                            <field name="username"/>
+                            <field name="password" password="True"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="token" widget="CopyClipboardChar"/>
+                    </group>
+                    <notebook>
+                        <page string="Endpoints" name="endpoints">
+                            <field name="endpoint_ids" widget="section_and_note_one2many" mode="tree,kanban">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="endpoint"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                     <field name="message_follower_ids" widget="mail_followers"/>
+                     <field name="message_ids" colspan="4" widget="mail_thread" nolabel="1"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="api_connect_config_tree_view" model="ir.ui.view">
+        <field name="name">api.connect.config.tree.view</field>
+        <field name="model">api.connect.config</field>
+        <field name="arch" type="xml">
+            <tree string="Connection Config" decoration-muted="not active">
+                <field name="name"/>
+                <field name="domain"/>
+                <field name="token"/>
+                <field name="active" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="api_connect_config_search_view" model="ir.ui.view">
+        <field name="name">api.connect.config.search.search</field>
+        <field name="model">api.connect.config</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="api_connect_config_action_view">
+        <field name="name">Connect Configuration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">api.connect.config</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('api_connect_config_tree_view')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('api_connect_config_form_view')})]"/>
+        <field name="search_view_id" ref="api_connect_config_search_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new api connect config.
+            </p>
+        </field>
+    </record>
+</odoo>

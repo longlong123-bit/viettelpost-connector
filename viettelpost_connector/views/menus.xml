@@ -92,4 +92,39 @@
               action="viettelpost_ward_action_view"
               sequence="3"
     />
+    <menuitem id="menu_viettelpost_api_main"
+              parent="menu_viettel_post_configuration"
+              name="ViettelPost API Technical"
+              groups="base.group_system"
+              sequence="100"
+    />
+    <menuitem id="menu_api_connect_history"
+              parent="menu_viettelpost_api_main"
+              name="Connection Histories"
+              sequence="1"
+              action="api_connect_history_action_view"
+    />
+    <menuitem id="menu_api_endpoint_config"
+              parent="menu_viettelpost_api_main"
+              name="Endpoint Config"
+              sequence="2"
+              action="api_endpoint_config_action_view"
+    />
+    <menuitem id="menu_api_connect_config"
+              parent="menu_viettelpost_api_main"
+              name="Connection Config"
+              sequence="100"
+              action="api_connect_config_action_view"
+    />
+    <menuitem   id="menu_vta_automation_scheduled"
+                name="Automation"
+                parent="viettelpost_connector.menu_viettel_post_configuration"
+                sequence="150"
+    />
+    <menuitem   id="menu_scheduled_actions"
+                name="Scheduled Actions"
+                parent="menu_vta_automation_scheduled"
+                action="ir_cron_asset_management_inherit_action"
+                sequence="1"
+    />
 </odoo>
