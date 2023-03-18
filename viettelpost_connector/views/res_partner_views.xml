@@ -9,6 +9,9 @@
                 <page string="ViettelPost Receiver Address">
                     <group>
                         <group>
+                            <field name="vtp_address"/>
+                        </group>
+                        <group>
                             <field name="vtp_street"/>
                             <field name="vtp_ward_id"/>
                             <field name="vtp_district_id"/>

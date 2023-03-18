@@ -8,6 +8,12 @@
                         class="btn btn-primary o_button_create_store">
                     Create
                 </button>
+                <button t-if="widget.modelName=='sale.order'"
+                        type="button"
+                        style="margin-left: 5px !important;"
+                        class="btn btn-primary o_button_register_payment">
+                    Register Payment
+                </button>
             </t>
         </t>
     </t>

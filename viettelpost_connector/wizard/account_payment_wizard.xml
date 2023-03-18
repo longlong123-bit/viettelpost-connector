@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account_payment_wizard_view" model="ir.ui.view">
+        <field name="name">account.payment.wizard.form</field>
+        <field name="model">account.payment.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="date_voucher"/>
+                        <field name="prepared_by_id" options="{'no_edit': True, 'no_create': True, 'no_open': True}"/>
+                        <field name="payment_type" widget="radio" options="{'horizontal': True}"/>
+                        <field name="partner_id" options="{'no_edit': True, 'no_create': True, 'no_open': True}"/>
+                        <field name="reason"/>
+                        <field name="object_receipt_payment"/>
+                    </group>
+                    <group>
+                        <label for="voucher_sequence" class="o_form_label" string="Voucher"/>
+                        <div class="o_row">
+                            <field name="voucher_sequence"/>
+                            <field name="journal_id" domain="[('type', 'in', ('bank', 'cash'))]" options="{'no_edit': True, 'no_create': True, 'no_open': True}"/>
+                        </div>
+                        <field name="payment_category_id" options="{'no_edit': True, 'no_create': True, 'no_open': True}"/>
+                        <field name="payment_amount"/>
+                        <field name="partner_address"/>
+                        <label for="month_of_payment_period" class="o_form_label" string="Month/Year (If debt receipt)"/>
+                        <div class="o_row">
+                            <field name="month_of_payment_period"/>
+                            <field name="year_of_payment_period"/>
+                        </div>
+                        <label for="incurred_customer_debts" class="o_form_label" string="Debts"/>
+                        <div class="o_row">
+                            <field name="incurred_customer_debts" widget="char"/>
+                            <button string="Get debts" class="btn-primary o_get_debts"/>
+                        </div>
+                        <field name="payment_method_line_id" invisible="1" />
+                        <field name="available_payment_method_line_ids" invisible="1" />
+                        <field name="hide_payment_method_line" invisible="1"/>
+                        <field name="currency_id" invisible="1"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="register_payment" string="Create" type="object" class="btn-primary"/>
+                    <button name="register_payment" string="Create &amp; In A5" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="register_payment_wizard_action" model="ir.actions.act_window">
+        <field name="name">Register payment</field>
+        <field name="res_model">account.payment.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

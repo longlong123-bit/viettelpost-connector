@@ -20,6 +20,7 @@ class VTPProvince(models.Model):
     province_code = fields.Char(string='Province Code', required=True, tracking=True)
     province_name = fields.Char(string='Province Name', required=True, tracking=True)
     district_ids = fields.One2many('viettelpost.district', 'province_id', string='District')
+    vtp_aliases = fields.Text(string='Aliases')
 
     @api.model
     def sync_province(self):
@@ -73,6 +74,7 @@ class VTPDistrict(models.Model):
     district_name = fields.Char(string='District Name', required=True, tracking=True)
     province_id = fields.Many2one('viettelpost.province', string='Province', required=True, tracking=True)
     ward_ids = fields.One2many('viettelpost.ward', 'district_id', string='Ward')
+    vtp_aliases = fields.Text(string='Aliases')
 
     @api.model
     def sync_district(self):
@@ -128,6 +130,7 @@ class VTPWard(models.Model):
     ward_id = fields.Integer(string='Ward ID', required=True, tracking=True)
     ward_name = fields.Char(string='Ward Name', required=True, tracking=True)
     district_id = fields.Many2one('viettelpost.district', string='District', required=True, tracking=True)
+    vtp_aliases = fields.Text(string='Aliases')
 
     @api.model
     def sync_ward(self):

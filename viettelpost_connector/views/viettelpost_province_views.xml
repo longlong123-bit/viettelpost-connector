@@ -28,6 +28,13 @@
                                 </tree>
                             </field>
                         </page>
+                        <page string="Aliases">
+                            <group>
+                                <group>
+                                    <field name="vtp_aliases"/>
+                                </group>
+                            </group>
+                        </page>
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">

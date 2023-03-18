@@ -12,6 +12,15 @@
                         <field name="delivery_carrier_id"/>
                         <field name="ward_id" invisible="1"/>
                     </group>
+                    <notebook>
+                        <page string="Aliases">
+                            <group>
+                                <group>
+                                    <field name="vtp_aliases"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
                 </sheet>
                 <div class="oe_chatter">
                      <field name="message_follower_ids" widget="mail_followers"/>

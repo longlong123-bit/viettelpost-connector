@@ -332,7 +332,7 @@ class SaleOrderVTPost(models.Model):
             'ORDER_NOTE': self.vtp_note or '',
             'MONEY_COLLECTION': collection,
             'MONEY_TOTAL': money_total,
-            'CHECK_UNIQUE': True,
+            # 'CHECK_UNIQUE': True,
             'LIST_ITEM': list_item
         }
         return payload

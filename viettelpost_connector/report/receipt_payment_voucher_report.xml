@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="header_footer_custom" inherit_id="web.internal_layout">
+            <xpath expr="//div[hasclass('header')]" position="replace">
+                <div class="header">
+                </div>
+            </xpath>
+        </template>
+        <template id="receipt_payment_voucher_document" >
+            <t t-call="viettelpost_connector.header_footer_custom">
+                <t t-set="doc" t-value="doc.with_context(lang=doc.env.lang)" />
+                <div class="page" style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif; font-style: normal; font-variant: normal;">
+                    <div class="row">
+                        <div class="col-5 text-left">
+                            <div class="row">
+                                <span class="font-weight-bold">Đơn vị:..........</span>
+                            </div>
+                            <div class="row">
+                                <span class="font-weight-bold">Địa chỉ:..........</span>
+                            </div>
+                        </div>
+                        <div class="col-7">
+                            <div class="row">
+                                <div class="col text-center">
+                                    <span class="font-weight-bold">Mẫu số 01 - TT</span>
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col text-center">
+                                    <span>(Ban hành theo Thông tư số 200/2014/TT-BTC <br/> Ngày 22/12/2014 của Bộ Tài chính)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-7">
+                            <t t-if="doc.payment_type == 'inbound'">
+                                <div class="row">
+                                    <div class="col text-right ml-1">
+                                        <span style="font-size: 25px; font-weight: 600;"><strong>PHIẾU THU</strong></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-right ml-3">
+                                        <span>
+                                            <em>
+                                                Ngày <t t-esc="context_timestamp(datetime.datetime.now()).strftime('%d')"/>
+                                                tháng <t t-esc="context_timestamp(datetime.datetime.now()).strftime('%m')"/>
+                                                năm <t t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y')"/>
+                                            </em>
+                                        </span>
+                                    </div>
+                                </div>
+                            </t>
+                            <t t-else="">
+                                <div class="row">
+                                    <div class="col text-right ml-1" >
+                                        <span style="font-size: 25px; font-weight: 600;">PHIẾU CHI</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-right ml-3">
+                                        <span>
+                                            <em>
+                                                Ngày <t t-esc="context_timestamp(datetime.datetime.now()).strftime('%d')"/>
+                                                tháng <t t-esc="context_timestamp(datetime.datetime.now()).strftime('%m')"/>
+                                                năm <t t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y')"/>
+                                            </em>
+                                        </span>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                        <div class="col-5 text-right">
+                            <div class="row">
+                                <div class="col text-right">
+                                    <span>Quyển số:........</span></div>
+                                </div>
+                            <div class="row">
+                                <div class="col text-right">
+                                    <span>Số:........</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-right">
+                                    <span>Nợ:........</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-right">
+                                    <span>Có:........</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span>Họ và tên người nộp tiền: <t t-esc="doc.partner_id.name"/></span>
+                    </div>
+                    <div class="row">
+                        <span>Địa chỉ: <t t-esc="doc.partner_id.vtp_address"/></span>
+                    </div>
+                    <div class="row">
+                        <span>Lý do nộp: <t t-esc="doc.reason"/></span>
+                    </div>
+                    <div class="row">
+                        <span>
+                            Số tiền: <t t-esc="'{:,}'.format(int(doc.amount))"/>đ <i>(Viết bằng chữ): <t t-esc="doc.amount_to_words"/></i>
+                        </span>
+                    </div>
+                    <div class="row">
+                        <span>Kèm theo:....................................................................................................................Chứng từ gốc:</span>
+                    </div>
+                    <div class="row align-items-center" style="margin-top: 10px;">
+                        <div class="col-3">
+                            <div class="row">
+                                <div class="col text-center">
+                                    <span class="font-weight-bold">Kế toán trưởng</span>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: -8px">
+                                <div class="col text-center">
+                                    <span style="font-size: 12px;"><i>(Ký, họ tên)</i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="row">
+                                <div class="col text-center">
+                                    <span class="font-weight-bold">Người nộp tiền</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-center" style="margin-top: -8px">
+                                    <span style="font-size: 12px;"><i>(Ký, họ tên)</i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="row">
+                                <div class="col text-center">
+                                    <span class="font-weight-bold">Người lập phiếu</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-center" style="margin-top: -8px">
+                                    <span style="font-size: 12px;"><i>(Ký, họ tên)</i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="row">
+                                <div class="col text-center">
+                                    <span class="font-weight-bold">Thủ quỹ</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-center" style="margin-top: -8px">
+                                    <span style="font-size: 12px;"><i>(Ký, họ tên)</i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 25px;">
+                        <span>Đã nhận đủ số tiền (viết bằng chữ): <i>Viết bằng chữ: <t t-esc="doc.amount_to_words"/></i></span>
+                    </div>
+                    <div class="row">
+                        <span>+ Tỷ giá ngoại tệ (vàng bạc, đá quý):........................................</span>
+                    </div>
+                    <div class="row">
+                        <span>+ Số tiền quy đổi:........................................</span>
+                    </div>
+                    <p style="page-break-before:always;"> </p>
+                </div>
+            </t>
+        </template>
+        <template id="receipt_payment_voucher_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="viettelpost_connector.receipt_payment_voucher_document"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

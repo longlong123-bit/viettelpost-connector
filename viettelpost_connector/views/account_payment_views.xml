@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="account_payment_inherit_vtp_form_view" model="ir.ui.view">
+            <field name="name">account.payment.inherit.vtp.form.view</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="partner_address"/>
+                    <field name="prepared_by_id"/>
+
+                </field>
+                <field name="partner_bank_id" position="after">
+                    <field name="payment_category_id"/>
+                    <field name="reason"/>
+                    <field name="object_receipt_payment"/>
+                </field>
+                <field name="date" position="before">
+                    <field name="amount_to_words"/>
+                </field>
+                <field name="journal_id" position="before">
+                    <field name="voucher_sequence"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
