@@ -18,7 +18,8 @@
         'product',
         'stock',
         'delivery',
-        'contacts'
+        'contacts',
+        'report_xlsx'
     ],
     'data': [
         'security/ir.model.access.csv',
@@ -37,6 +38,7 @@
         'wizard/account_payment_wizard.xml',
         'wizard/create_store_wizard_views.xml',
         'wizard/print_waybill_wizard.xml',
+        'wizard/debs_report_wizard.xml',
         'views/api_connect_config_views.xml',
         'views/api_endpoint_config_views.xml',
         'views/category_payment_views.xml',

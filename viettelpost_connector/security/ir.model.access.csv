@@ -22,3 +22,4 @@ access_print_waybill_wizard,print_waybill_wizard,model_print_waybill_wizard,base
 access_stock_picking_vtp,stock_picking_vtp,model_stock_picking,base.group_system,1,1,1,1
 access_account_payment_wizard,access_account_payment_wizard,model_account_payment_wizard,base.group_system,1,1,1,1
 access_payment_category,access_payment_category,model_payment_category,base.group_system,1,1,1,1
+access_debs_report_wizard,access_debs_report_wizard,model_debs_report_wizard,base.group_system,1,1,1,1

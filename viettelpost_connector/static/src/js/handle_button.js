@@ -27,7 +27,6 @@ FormController.include({
         }).then(function(result) {
             console.log(self)
             self.renderer.state.data.incurred_customer_debts = new Intl.NumberFormat('vi-VN').format(result.incurred_customer_debts)
-            self.renderer.state.data.payment_amount = new Intl.NumberFormat('vi-VN').format(result.payment_amount)
 //            var incurredCustomerDebtsInput = $("input[name='incurred_customer_debts']");
 //            var paymentAmount = $("input[name='payment_amount']");
 //            incurredCustomerDebtsInput.val(new Intl.NumberFormat('vi-VN').format(result.incurred_customer_debts));

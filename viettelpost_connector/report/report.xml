@@ -28,5 +28,16 @@
             <field name="attachment_use">False</field>
             <field name="paperformat_id" ref="paperformat_payment_receipt_report"/>
         </record>
+        <record id="action_debs_report" model="ir.actions.report">
+            <field name="name">Debs Report</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">viettelpost_connector.debs_report_xls</field>
+            <field name="report_file">viettelpost_connector.debs_report_xls</field>
+            <field name="print_report_name">Hehe</field>
+            <field name="binding_model_id" ref="model_sale_order"/>
+            <field name="binding_type">report</field>
+            <field name="attachment_use">False</field>
+        </record>
     </data>
 </odoo>

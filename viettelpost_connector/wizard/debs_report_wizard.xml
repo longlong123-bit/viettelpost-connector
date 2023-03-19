@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="debs_report_wizard_view" model="ir.ui.view">
+        <field name="name">debs.report.wizard.form.view</field>
+        <field name="model">debs.report.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="date_from"/>
+                    </group>
+                    <group>
+                        <field name="date_to"/>
+                    </group>
+                </group>
+                <notebook>
+                    <page string="Customers">
+                        <field name="partner_ids"/>
+                    </page>
+                </notebook>
+                <footer>
+                    <button name="action_print_debs_report" string="Print report" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="debs_report_wizard_action" model="ir.actions.act_window">
+        <field name="name">Debs report</field>
+        <field name="res_model">debs.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -337,6 +337,20 @@ class SaleOrderVTPost(models.Model):
         }
         return payload
 
+    @api.model
+    def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
+        result = super(SaleOrderVTPost, self).fields_view_get(view_id, view_type, toolbar, submenu)
+        report_id = self.env.ref('viettelpost_connector.action_debs_report').id
+        if view_type == 'form' and report_id and toolbar and result['toolbar'] and result['toolbar'].get('print'):
+            remove_report = [rec for rec in result['toolbar'].get('print') if rec.get('id') == report_id]
+            if remove_report and remove_report[0]:
+                result['toolbar'].get('print').remove(remove_report[0])
+        elif view_type == 'tree' and report_id and toolbar and result['toolbar'] and result['toolbar'].get('print'):
+            remove_report = [rec for rec in result['toolbar'].get('print') if rec.get('id') == report_id]
+            if remove_report and remove_report[0]:
+                result['toolbar'].get('print').remove(remove_report[0])
+        return result
+
 
 class ComputedFeeShip(models.Model):
     _name = 'list.service.supported'

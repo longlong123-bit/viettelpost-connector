@@ -145,5 +145,10 @@
               action="payment_category_action"
               sequence="1"
     />
-
+    <menuitem id="menu_debs_report"
+              name="Debs report"
+              parent="sale.menu_sale_report"
+              action="debs_report_wizard_action"
+              sequence="1"
+    />
 </odoo>
