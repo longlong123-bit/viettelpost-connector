@@ -17,9 +17,6 @@
                     <field name="reason"/>
                     <field name="object_receipt_payment"/>
                 </field>
-                <field name="date" position="before">
-                    <field name="amount_to_words"/>
-                </field>
                 <field name="journal_id" position="before">
                     <field name="voucher_sequence"/>
                 </field>

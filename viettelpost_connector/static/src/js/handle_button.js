@@ -16,6 +16,7 @@ FormController.include({
         var partnerId = state.data.partner_id.data.id;
         var yearOfPaymentPeriod = state.data.year_of_payment_period;
         var monthOfPaymentPeriod = state.data.month_of_payment_period;
+        var context =  this.initialState.context
         return this._rpc({
             model: 'account.payment.wizard',
             method: 'get_debts',
@@ -26,10 +27,9 @@ FormController.include({
             }
         }).then(function(result) {
             console.log(self)
-            self.renderer.state.data.incurred_customer_debts = new Intl.NumberFormat('vi-VN').format(result.incurred_customer_debts)
-//            var incurredCustomerDebtsInput = $("input[name='incurred_customer_debts']");
-//            var paymentAmount = $("input[name='payment_amount']");
-//            incurredCustomerDebtsInput.val(new Intl.NumberFormat('vi-VN').format(result.incurred_customer_debts));
+            var incurredCustomerDebtsInput = $("span[name='debts']");
+            var paymentAmount = $("input[name='payment_amount']");
+            incurredCustomerDebtsInput.text(50000);
 //            paymentAmount.val(result.payment_amount);
         });
    }

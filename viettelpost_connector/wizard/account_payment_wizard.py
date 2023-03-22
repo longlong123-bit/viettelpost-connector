@@ -1,10 +1,9 @@
+from datetime import datetime
 import re
-from typing import Optional, Dict, Any
-from datetime import date, datetime
+from typing import Optional, Dict, Any, List, Tuple, NoReturn
+from datetime import date
 from odoo import fields, models, api, _
 from odoo.exceptions import UserError, ValidationError
-
-from odoo.addons.viettelpost_connector.common.constants import Message
 
 
 class AccountPaymentWizard(models.TransientModel):
@@ -12,7 +11,7 @@ class AccountPaymentWizard(models.TransientModel):
     _description = 'Register payment'
     _rec_name = 'voucher_sequence'
 
-    MONTH_SELECTION = [
+    MONTH_SELECTION: List[Tuple] = [
         ('01', 'Tháng 01'),
         ('02', 'Tháng 02'),
         ('03', 'Tháng 03'),
@@ -27,6 +26,12 @@ class AccountPaymentWizard(models.TransientModel):
         ('12', 'Tháng 12'),
     ]
 
+    @staticmethod
+    def get_years():
+        now = datetime.now()
+        year_list = [(i, f'{i}') for i in range(now.year - 2, now.year + 2)]
+        return year_list
+
     @api.model
     def action_register_payment(self):
         action = self.env.ref('viettelpost_connector.register_payment_wizard_action').read()[0]
@@ -39,14 +44,14 @@ class AccountPaymentWizard(models.TransientModel):
     reason = fields.Text(string='Reason', required=True)
     object_receipt_payment = fields.Text(string='Receipt/Payment Object')
     month_of_payment_period = fields.Selection(MONTH_SELECTION, default='01')
-    year_of_payment_period = fields.Char()
-    payment_amount = fields.Integer(string='Amount', currency_field='currency_id')
+    year_of_payment_period = fields.Selection(selection=lambda self: AccountPaymentWizard.get_years())
+    payment_amount = fields.Monetary(string='Amount', currency_field='currency_id')
     payment_type = fields.Selection([
         ('outbound', 'Send'),
         ('inbound', 'Receive'),
     ], string='Payment Type', default='inbound', required=True)
 
-    def _get_sequence_receipt(self):
+    def _get_sequence_receipt(self) -> str:
         sequence = self.env['ir.sequence'].search([
             ('code', '=', 'account.payment.wizard'),
             ('prefix', '=', 'PT')
@@ -59,7 +64,7 @@ class AccountPaymentWizard(models.TransientModel):
             next_document = next_tmp
         return next_document
 
-    def _get_sequence_payment(self):
+    def _get_sequence_payment(self) -> str:
         sequence = self.env['ir.sequence'].search([
             ('code', '=', 'account.payment.wizard'),
             ('prefix', '=', 'PC')
@@ -72,18 +77,20 @@ class AccountPaymentWizard(models.TransientModel):
             next_document = next_tmp
         return next_document
 
-    def _get_default_sequence(self):
+    def _get_default_sequence(self) -> str:
         next_sequence = self._get_sequence_receipt()
         return next_sequence
 
-    def _get_default_journal(self):
+    def _get_default_journal(self) -> int:
         cash_id = self.env['account.journal'].search([('type', '=', 'cash')])
         return cash_id.id
 
     voucher_sequence = fields.Char(string='Voucher', required=True, default=_get_default_sequence)
     journal_id = fields.Many2one('account.journal', string='Journal', required=True, default=_get_default_journal)
     currency_id = fields.Many2one('res.currency', string='Currency', default=lambda self: self.env.company.currency_id)
-    incurred_customer_debts = fields.Monetary(string='Incurred customer debts', currency_field='currency_id')
+    debts = fields.Monetary(string='Debts', currency_field='currency_id', readonly=True)
+    paid = fields.Monetary(string='Paid', currency_field='currency_id', readonly=True)
+    arise = fields.Monetary(string='Arise', currency_field='currency_id', readonly=True)
     payment_category_id = fields.Many2one('payment.category', string='Category', required=True)
     payment_method_line_id = fields.Many2one('account.payment.method.line', string='Payment Method',
                                              readonly=False, store=True, copy=False,
@@ -131,18 +138,18 @@ class AccountPaymentWizard(models.TransientModel):
                 pay.hide_payment_method_line = len(
                     pay.available_payment_method_line_ids) == 1 and pay.available_payment_method_line_ids.code == 'manual'
 
-    def _get_payment_method_codes_to_exclude(self):
+    def _get_payment_method_codes_to_exclude(self) -> List:
         self.ensure_one()
         return []
 
-    @api.onchange('year_of_payment_period')
+    @api.onchange('month_of_payment_period', 'year_of_payment_period')
     def _onchange_validated_year(self):
-        if self.year_of_payment_period:
-            if not re.match("^\d{4}$", self.year_of_payment_period):
-                raise UserError(_("Invalid year!"))
+        for rec in self:
+            if rec.year_of_payment_period and rec.month_of_payment_period:
+                rec.get_debts()
 
     def _prepare_data_payment_vals_from_wizard(self) -> Dict[str, Any]:
-        payment_vals = {
+        payment_vals: Dict[str, Any] = {
             'date': self.date_voucher,
             'amount': self.payment_amount,
             'payment_type': self.payment_type,
@@ -161,6 +168,13 @@ class AccountPaymentWizard(models.TransientModel):
         payment_vals = self._prepare_data_payment_vals_from_wizard()
         account_payment = self.env['account.payment'].sudo().create(payment_vals)
         account_payment.action_post()
+        if self.debts == self.payment_amount and self.payment_amount > 0:
+            lst_so_ids = self._get_lst_ids_sale_order(self.partner_id.id, self.month_of_payment_period, self.year_of_payment_period)
+            lst_browse_so_ids = self.env['sale.order'].browse(lst_so_ids)
+            for so in lst_browse_so_ids:
+                so.action_done()
+        if self.env.context.get('is_print'):
+            return self.env.ref('viettelpost_connector.action_report_payment_receipt').sudo().report_action(account_payment)
         return {
             'type': 'ir.actions.act_window',
             'name': 'Account payment',
@@ -172,13 +186,34 @@ class AccountPaymentWizard(models.TransientModel):
 
     @staticmethod
     def is_leap_year(year: int) -> bool:
-        is_valid_year = True if (year % 4 == 0 and year % 100 != 0) or year % 400 == 0 else False
-        return is_valid_year
+        is_leap_year = True if (year % 4 == 0 and year % 100 != 0) or year % 400 == 0 else False
+        return is_leap_year
+
+    def _get_lst_ids_sale_order(self, partner_id: int, month: str, year: int):
+        is_leap_year: bool = self.is_leap_year(int(year))
+        day_of_month: int = 31
+        if int(month) == 2:
+            day_of_month = 29 if is_leap_year else 28
+        elif int(self) in [4, 6, 9, 11]:
+            day_of_month = 30
+
+        date_from: str = f"'{year}-{month}-01 00:00:00'"
+        date_to: str = f"'{year}-{month}-{str(day_of_month)} 23:59:59'"
+        self._cr.execute(f'''
+                            SELECT id FROM sale_order 
+                            WHERE partner_id = {partner_id}
+                            AND state = 'sale'
+                            AND date_order BETWEEN {date_from} AND {date_to};
+                        ''')
+        query_res = self._cr.fetchall()
+        formatted_res = [item[0] for item in query_res]
+        return formatted_res
 
     def _get_sum_money_total_sale_orders(self, date_from: str, date_to: str, partner_id: int) -> Optional[float]:
         self._cr.execute(f'''
                             SELECT SUM(COALESCE(money_total, 0)) FROM sale_order 
                             WHERE partner_id = {partner_id}
+                            AND state = 'sale'
                             AND date_order BETWEEN {date_from} AND {date_to};
                         ''')
         query_res = self._cr.fetchall()
@@ -196,38 +231,29 @@ class AccountPaymentWizard(models.TransientModel):
         query_res = self._cr.fetchall()
         return query_res[0][0]
 
-    @api.model
-    def get_debts(self, **kwargs) -> Dict[str, Any]:
-        partner_id = kwargs.get('partnerId')
-        month_of_payment_period = kwargs.get('monthOfPaymentPeriod')
-        year_of_payment_period = kwargs.get('yearOfPaymentPeriod')
-        if not partner_id:
+    def get_debts(self):
+        if not self.partner_id:
             raise ValidationError(_('The value of customer is required.'))
-        elif not month_of_payment_period:
+        elif not self.month_of_payment_period:
             raise ValidationError(_('The value of month is required.'))
-        elif not year_of_payment_period:
+        elif not self.year_of_payment_period:
             raise ValidationError(_('The value of year is required.'))
-        is_leap_year = self.is_leap_year(int(year_of_payment_period))
-        month = 31
-        if int(month_of_payment_period) == 2:
+        is_leap_year: bool = self.is_leap_year(int(self.year_of_payment_period))
+        month: int = 31
+        if int(self.month_of_payment_period) == 2:
             month = 29 if is_leap_year else 28
-        elif int(month_of_payment_period) in [4, 6, 9, 11]:
+        elif int(self.month_of_payment_period) in [4, 6, 9, 11]:
             month = 30
 
-        date_from = f"'{year_of_payment_period}-{month_of_payment_period}-01 00:00:00'"
-        date_to = f"'{year_of_payment_period}-{month_of_payment_period}-{str(month)} 23:59:59'"
+        date_from: str = f"'{self.year_of_payment_period}-{self.month_of_payment_period}-01 00:00:00'"
+        date_to: str = f"'{self.year_of_payment_period}-{self.month_of_payment_period}-{str(month)} 23:59:59'"
 
-        money_total = self._get_sum_money_total_sale_orders(date_from, date_to, partner_id)
-        if not money_total:
-            raise UserError(_(f'Sale orders from {date_from} - {date_to} not found.'))
-        paid_by_customer = self._get_sum_paid_money_payments(date_from, date_to, partner_id)
-        if not paid_by_customer: paid_by_customer = 0.0
-        incurred_customer_debts = money_total - paid_by_customer
-        data = {
-            'paid_by_customer': paid_by_customer,
-            'money_total': money_total,
-            'incurred_customer_debts': incurred_customer_debts,
-            'payment_amount': incurred_customer_debts
-        }
-        return data
-
+        arise: float = self._get_sum_money_total_sale_orders(date_from, date_to, self.partner_id.id)
+        if not arise:
+            raise UserError(f'Khách hàng {self.partner_id.name} không có công nợ trong tháng {self.month_of_payment_period}/{self.year_of_payment_period}')
+        paid: float = self._get_sum_paid_money_payments(date_from, date_to, self.partner_id.id)
+        if not paid: paid = 0.0
+        self.paid = paid
+        self.arise = arise
+        self.debts = arise - paid
+        self.payment_amount = self.debts

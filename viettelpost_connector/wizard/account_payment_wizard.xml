@@ -22,17 +22,15 @@
                         </div>
                         <field name="payment_category_id" options="{'no_edit': True, 'no_create': True, 'no_open': True}"/>
                         <field name="payment_amount"/>
-                        <field name="partner_address"/>
-                        <label for="month_of_payment_period" class="o_form_label" string="Month/Year (If debt receipt)"/>
-                        <div class="o_row">
+                        <field name="partner_address" attrs="{'invisible': [('partner_id', '=', False)]}"/>
+                        <label for="month_of_payment_period" class="o_form_label" attrs="{'invisible': [('payment_type', '=', 'outbound')]}" string="Month/Year (If debt receipt)"/>
+                        <div class="o_row" attrs="{'invisible': [('payment_type', '=', 'outbound')]}">
                             <field name="month_of_payment_period"/>
                             <field name="year_of_payment_period"/>
                         </div>
-                        <label for="incurred_customer_debts" class="o_form_label" string="Debts"/>
-                        <div class="o_row">
-                            <field name="incurred_customer_debts" widget="char"/>
-                            <button string="Get debts" class="btn-primary o_get_debts"/>
-                        </div>
+                        <field name="arise" attrs="{'invisible': [('year_of_payment_period', '=', False)]}"/>
+                        <field name="paid" attrs="{'invisible': [('year_of_payment_period', '=', False)]}"/>
+                        <field name="debts" force_save="1" attrs="{'invisible': [('year_of_payment_period', '=', False)]}"/>
                         <field name="payment_method_line_id" invisible="1" />
                         <field name="available_payment_method_line_ids" invisible="1" />
                         <field name="hide_payment_method_line" invisible="1"/>
@@ -41,7 +39,7 @@
                 </group>
                 <footer>
                     <button name="register_payment" string="Create" type="object" class="btn-primary"/>
-                    <button name="register_payment" string="Create &amp; In A5" type="object" class="btn-primary"/>
+                    <button name="register_payment" context="{'is_print': True}" string="Create &amp; In A5" type="object" class="btn-primary"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>

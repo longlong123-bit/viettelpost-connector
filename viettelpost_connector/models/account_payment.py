@@ -28,15 +28,14 @@ class AccountPayment(models.Model):
     partner_id = fields.Many2one(
         comodel_name='res.partner',
         string="Customer/Vendor",
+        required=True,
         store=True, readonly=False, ondelete='restrict',
-        compute='_compute_partner_id',
         domain="['|', ('parent_id','=', False), ('is_company','=', True)]",
         tracking=True,
         check_company=True)
     partner_address = fields.Char(related='partner_id.vtp_address', string='Address')
     currency_id = fields.Many2one('res.currency', string='Currency', default=lambda self: self.env.company.currency_id)
     amount = fields.Monetary(currency_field='currency_id')
-    amount_to_words = fields.Char(string='To words', compute='_compute_amount_to_words')
 
     @api.model
     def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
@@ -76,8 +75,7 @@ class AccountPayment(models.Model):
         fractional_value = int(parts[2] or 0)
 
         lang = tools.get_lang(self.env)
-        if lang.iso_code == 'vi':
-            lang.iso_code = 'vi_VN'
+        lang.iso_code = 'vi_VN'
         amount_words = tools.ustr('{amt_value} {amt_word}').format(
             amt_value=_num2words(integer_value, lang=lang.iso_code),
             amt_word=self.currency_id.currency_unit_label,
@@ -93,4 +91,4 @@ class AccountPayment(models.Model):
     @api.depends('amount')
     def _compute_amount_to_words(self):
         for rec in self:
-            rec.amount_to_words = self._amount_to_words(rec.amount)
+            rec.amount_to_words = rec._amount_to_words(rec.amount)

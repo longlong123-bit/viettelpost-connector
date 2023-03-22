@@ -105,7 +105,7 @@
                     </div>
                     <div class="row">
                         <span>
-                            Số tiền: <t t-esc="'{:,}'.format(int(doc.amount))"/>đ <i>(Viết bằng chữ): <t t-esc="doc.amount_to_words"/></i>
+                            Số tiền: <t t-esc="'{:,}'.format(int(doc.amount))"/>đ <i>(Viết bằng chữ): <t t-esc="doc._amount_to_words(doc.amount)"/></i>
                         </span>
                     </div>
                     <div class="row">
@@ -162,7 +162,7 @@
                         </div>
                     </div>
                     <div class="row" style="margin-top: 25px;">
-                        <span>Đã nhận đủ số tiền (viết bằng chữ): <i>Viết bằng chữ: <t t-esc="doc.amount_to_words"/></i></span>
+                        <span>Đã nhận đủ số tiền (viết bằng chữ): <t t-esc="doc._amount_to_words(doc.amount)"/></span>
                     </div>
                     <div class="row">
                         <span>+ Tỷ giá ngoại tệ (vàng bạc, đá quý):........................................</span>
