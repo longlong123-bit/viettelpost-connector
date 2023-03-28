@@ -2,9 +2,9 @@ from typing import Dict, Any
 from odoo import fields, models
 
 
-class DebsReportWizard(models.TransientModel):
-    _name = 'debs.report.wizard'
-    _description = 'Used for debs customer report'
+class DebtsReportWizard(models.TransientModel):
+    _name = 'debts.report.wizard'
+    _description = 'Used for debts customer report'
 
     date_from = fields.Date(string='Date from', required=True)
     date_to = fields.Date(string='Date to', required=True)
@@ -14,10 +14,10 @@ class DebsReportWizard(models.TransientModel):
         name = f'DS tổng hợp công nợ {self.date_from.year}+{self.date_to.year}' if self.date_from.year != self.date_to.year else f'DS tổng hợp công nợ {self.date_from.year}'
         return name
 
-    def action_print_debs_report(self):
+    def action_print_debts_report(self):
         data: Dict[str, Any] = {
             'lst_partner_ids': [partner.id for partner in self.partner_ids],
             'date_start': self.date_from,
             'date_end': self.date_to,
         }
-        return self.env.ref('viettelpost_connector.action_debs_report').report_action(self, data=data)
+        return self.env.ref('viettelpost_connector.action_debts_report').report_action(self, data=data)

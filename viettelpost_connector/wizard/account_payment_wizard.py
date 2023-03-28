@@ -51,41 +51,76 @@ class AccountPaymentWizard(models.TransientModel):
         ('inbound', 'Receive'),
     ], string='Payment Type', default='inbound', required=True)
 
-    def _get_sequence_receipt(self) -> str:
+    def _get_sequence_receipt_bank(self):
         sequence = self.env['ir.sequence'].search([
-            ('code', '=', 'account.payment.wizard'),
-            ('prefix', '=', 'PT')
+            ('code', '=', 'account.payment'),
+            ('prefix', '=', 'PT'),
+            ('name', '=', 'Receipt Bank Sequence'),
+            ('active', '=', True)
         ])
+        return sequence
+
+    def _get_sequence_receipt_cash(self):
+        sequence = self.env['ir.sequence'].search([
+            ('code', '=', 'account.payment'),
+            ('prefix', '=', 'PT'),
+            ('name', '=', 'Receipt Cash Sequence'),
+            ('active', '=', True)
+        ])
+        return sequence
+
+    def _get_sequence_payment_bank(self):
+        sequence = self.env['ir.sequence'].search([
+            ('code', '=', 'account.payment'),
+            ('prefix', '=', 'PC'),
+            ('name', '=', 'Payment Bank Sequence'),
+            ('active', '=', True)
+        ])
+        return sequence
+
+    def _get_sequence_payment_cash(self):
+        sequence = self.env['ir.sequence'].search([
+            ('code', '=', 'account.payment'),
+            ('prefix', '=', 'PC'),
+            ('name', '=', 'Payment Cash Sequence'),
+            ('active', '=', True)
+        ])
+        return sequence
+
+    def _get_onchange_sequence(self):
+        if self.payment_type == 'inbound' and self.journal_id.type == 'bank':
+            sequence = self._get_sequence_receipt_bank()
+        elif self.payment_type == 'inbound' and self.journal_id.type == 'cash':
+            sequence = self._get_sequence_receipt_cash()
+        elif self.payment_type == 'outbound' and self.journal_id.type == 'bank':
+            sequence = self._get_sequence_payment_bank()
+        elif self.payment_type == 'outbound' and self.journal_id.type == 'cash':
+            sequence = self._get_sequence_payment_cash()
+        else:
+            raise UserError(_('Do not find sequence.'))
         next_document = sequence.get_next_char(sequence.number_next_actual)
         self._cr.execute('''SELECT voucher_sequence FROM account_payment''')
         query_res = self._cr.fetchall()
         while next_document in [res[0] for res in query_res]:
-            next_tmp = self.env['ir.sequence'].next_by_code('account.payment.wizard')
+            next_tmp = self.env['ir.sequence'].next_by_code('account.payment')
             next_document = next_tmp
         return next_document
 
-    def _get_sequence_payment(self) -> str:
-        sequence = self.env['ir.sequence'].search([
-            ('code', '=', 'account.payment.wizard'),
-            ('prefix', '=', 'PC')
-        ])
+    def _get_default_sequence_base(self):
+        sequence = self._get_sequence_receipt_bank()
         next_document = sequence.get_next_char(sequence.number_next_actual)
         self._cr.execute('''SELECT voucher_sequence FROM account_payment''')
         query_res = self._cr.fetchall()
         while next_document in [res[0] for res in query_res]:
-            next_tmp = self.env['ir.sequence'].next_by_code('account.payment.wizard')
+            next_tmp = self.env['ir.sequence'].next_by_code('account.payment')
             next_document = next_tmp
         return next_document
-
-    def _get_default_sequence(self) -> str:
-        next_sequence = self._get_sequence_receipt()
-        return next_sequence
 
     def _get_default_journal(self) -> int:
-        cash_id = self.env['account.journal'].search([('type', '=', 'cash')])
-        return cash_id.id
+        bank_id = self.env['account.journal'].search([('type', '=', 'bank')])
+        return bank_id.id
 
-    voucher_sequence = fields.Char(string='Voucher', required=True, default=_get_default_sequence)
+    voucher_sequence = fields.Char(string='Voucher', required=True, default=_get_default_sequence_base)
     journal_id = fields.Many2one('account.journal', string='Journal', required=True, default=_get_default_journal)
     currency_id = fields.Many2one('res.currency', string='Currency', default=lambda self: self.env.company.currency_id)
     debts = fields.Monetary(string='Debts', currency_field='currency_id', readonly=True)
@@ -100,17 +135,16 @@ class AccountPaymentWizard(models.TransientModel):
                                                          compute='_compute_payment_method_line_fields')
     hide_payment_method_line = fields.Boolean(compute='_compute_payment_method_line_fields')
 
-    @api.onchange('payment_type')
-    def _onchange_payment_type(self):
+    @api.onchange('payment_type', 'journal_id')
+    def _onchange_payment_type_and_journal_id(self):
         for rec in self:
             domain = dict()
-            if rec.payment_type:
+            if rec.payment_type or rec.journal_id:
+                rec.voucher_sequence = self._get_onchange_sequence()
                 if rec.payment_type == 'inbound':
                     domain = {'payment_category_id': [('category', '=', 'receipt')]}
-                    rec.voucher_sequence = self._get_sequence_receipt()
                 else:
                     domain = {'payment_category_id': [('category', '=', 'payment')]}
-                    rec.voucher_sequence = self._get_sequence_payment()
             return {'domain': domain}
 
     @api.depends('available_payment_method_line_ids')

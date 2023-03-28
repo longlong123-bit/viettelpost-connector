@@ -1,1 +1,1 @@
-from . import debs_report_xls
+from . import debts_report_xls

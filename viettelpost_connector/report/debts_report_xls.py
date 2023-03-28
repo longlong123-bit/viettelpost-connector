@@ -4,14 +4,15 @@ from odoo import models, _
 from odoo.exceptions import ValidationError, UserError
 
 
-class DebsReportTemplateXls(models.AbstractModel):
-    _name = 'report.viettelpost_connector.debs_report_xls'
+class DebtsReportTemplateXls(models.AbstractModel):
+    _name = 'report.viettelpost_connector.debts_report_xls'
     _inherit = 'report.report_xlsx.abstract'
 
-    def _get_debs_report(self, lst_ids: tuple, date_from: str, date_to: str) -> List[Tuple]:
+    def _get_debts_report(self, lst_ids: tuple, date_from: str, date_to: str) -> List[Tuple]:
         query = f"""
             WITH GetTotalAmountPayment AS (
                 SELECT RP.id,
+                       RP.name,
                        EXTRACT(MONTH FROM AM.date) month_ap,
                        EXTRACT(YEAR FROM AM.date) year_ap,
                        COALESCE(SUM(AP.amount), 0) paid
@@ -39,17 +40,24 @@ class DebsReportTemplateXls(models.AbstractModel):
                 GROUP BY RP.id, RP.name, month_so, year_so
                 ORDER BY RP.id
             )
-            SELECT SO.id, 
-                   SO.name,
-                   CONCAT(SO.month_so, '/', SO.year_so) date,
-                   COALESCE(SO.arise, 0) arise,
-                   COALESCE(AP.paid, 0) paid,
-                   COALESCE(arise - paid, 0) debs
-            FROM GetTotalAmountSaleOrder SO
-            LEFT JOIN GetTotalAmountPayment AP ON SO.id = AP.id
-            AND AP.month_ap = SO.month_so
-            AND AP.year_ap = SO.year_so
-            ORDER BY SO.name, date
+                SELECT CASE WHEN SO.name IS NULL THEN AP.name ELSE SO.name END AS name,
+                       CASE 
+                          WHEN SO.id IS NULL THEN CONCAT(AP.month_ap, '/', AP.year_ap)
+                          ELSE CONCAT(SO.month_so, '/', SO.year_so)
+                       END AS date,
+                       COALESCE(SO.arise, 0) arise,
+                   	   COALESCE(AP.paid, 0) paid,
+				    (CASE
+				        WHEN SO.arise IS NULL THEN 0 ELSE SO.arise END)
+				        -
+				    (CASE
+				        WHEN AP.paid IS NULL THEN 0 ELSE AP.paid END)
+				    AS debts
+                FROM GetTotalAmountSaleOrder SO
+                FULL JOIN GetTotalAmountPayment AP ON SO.id = AP.id
+                AND AP.month_ap = SO.month_so
+                AND AP.year_ap = SO.year_so
+                ORDER BY name, date
         """
         self._cr.execute(query)
         query_res = self._cr.fetchall()
@@ -62,7 +70,7 @@ class DebsReportTemplateXls(models.AbstractModel):
         name = f'DS tổng hợp công nợ {date_start.year}+{date_end.year}' if date_start.year != date_end.year else f'DS tổng hợp công nợ {date_start.year}'
         return name
 
-    def _get_data_debs_from_db(self, data: Dict[str, Any]) -> (List, str):
+    def _get_data_debts_from_db(self, data: Dict[str, Any]) -> (List, str):
         if not data.get('lst_partner_ids'):
             raise ValidationError(_('The value of customers is required.'))
         elif not data.get('date_start'):
@@ -72,20 +80,23 @@ class DebsReportTemplateXls(models.AbstractModel):
         lst_partner_ids: tuple = tuple(data.get('lst_partner_ids'))
         date_start: str = data.get('date_start')
         date_end: str = data.get('date_end')
-        dict_empty, lst_debs = {'id': '', 'name': '', 'date': '', 'arise': '', 'paid': '', 'debs': ''}, []
-        datas = self._get_debs_report(lst_partner_ids, date_start, date_end)
+        dict_empty, lst_debts = {'name': '', 'date': '', 'arise': '', 'paid': '', 'debts': ''}, []
+        datas = self._get_debts_report(lst_partner_ids, date_start, date_end)
+        if len(datas) == 0:
+            raise UserError(_(f'No reports for period from {date_start} to {date_end}'))
         for data in datas:
-            dict_debs: dict = {k: v for k, v in zip(dict_empty.keys(), data)}
-            lst_debs.append(dict_debs)
+            dict_debts: dict = {k: v for k, v in zip(dict_empty.keys(), data)}
+            lst_debts.append(dict_debts)
         name_xls = self._get_name_to_report_xlsx(date_start, date_end)
-        return lst_debs, name_xls
+        lst_debts = list(sorted(lst_debts, key=lambda x: (datetime.strptime(x['date'], '%m/%Y'), x['name'])))
+        return lst_debts, name_xls
 
     @staticmethod
     def _build_header_follow_result_month(sheet, header, lst_date, row, col):
         lst_cell: list = [chr(x) for x in range(ord('A'), ord('Z') + 1)]
         lst_cell_prefix: list = lst_cell[:]
-        if (len(lst_date) * 3) > len(lst_cell):
-            range_loop: int = len(lst_date) * 3 // len(lst_cell)
+        if ((len(lst_date) + 2) * 3) > len(lst_cell):
+            range_loop: int = (len(lst_date) + 2) * 3 // len(lst_cell)
             for i, prefix in enumerate(lst_cell_prefix):
                 if i == range_loop: break
                 lst_cell_extend: list = [f'{prefix}{suffix}' for suffix in lst_cell_prefix[:]]
@@ -114,6 +125,7 @@ class DebsReportTemplateXls(models.AbstractModel):
         sheet.write(row, col, 'Đã trả', header)
         col += 1
         sheet.write(row, col, 'Còn lại', header)
+        col += 1
         return sheet
 
     @staticmethod
@@ -148,32 +160,51 @@ class DebsReportTemplateXls(models.AbstractModel):
         currency = workbook.add_format({'num_format': '#,##0', 'bg_color': '#DDDBDB', 'border': 1, 'font_size': 8, 'font_name': 'Tahoma'})
         return currency
 
+    @staticmethod
+    def _handle_fill_empty_debts_missing(names: List[str], range_date_debts: List[str], lst_debts: List[Dict]) -> List[Dict]:
+        lst_news_debts = []
+        for name in names:
+            unique_debts = list(dict((debts['name'], debts) for debts in lst_debts if debts['name'] == name).values())
+            range_date_debts_current = [item['date'] for item in lst_debts if item['name'] == name]
+            for date in range_date_debts:
+                if date in range_date_debts_current:
+                    filtered_lst = [item for item in lst_debts if item['name'] == name and item['date'] == date]
+                    lst_news_debts.append(filtered_lst[0])
+                else:
+                    for debts in unique_debts:
+                        empty_debts = {'name': debts['name'], 'date': date, 'arise': 0.0, 'paid': 0.0, 'debts': 0.0}
+                        lst_news_debts.append(empty_debts)
+        return lst_news_debts
+
+    @staticmethod
+    def _compute_count_names(lst_debts: List[Dict[str, Any]]) -> Dict[str, int]:
+        names = {}
+        for debts in lst_debts:
+            name = debts['name']
+            if name in names:
+                names[name] += 1
+            else:
+                names[name] = 1
+        return names
+
     def generate_xlsx_report(self, workbook, data, docs):
-        lst_debs, name_xls = self._get_data_debs_from_db(data)
+        lst_debts, name_xls = self._get_data_debts_from_db(data)
         header = self._set_format_for_header(workbook)
         row_cell = self._set_format_for_row_cell(workbook)
         last_cell = self._set_format_for_cell_and_sheet(workbook)
         currency = self._set_format_for_currency(workbook)
         sheet = workbook.add_worksheet(name_xls)
         col, row = 0, 1
-        lst_date: list = []
-        for deb in lst_debs:
-            if deb['date'] not in lst_date:
-                lst_date.append(deb['date'])
+        range_date_debts = list(sorted(set([item['date'] for item in lst_debts]), key=lambda x: datetime.strptime(x, '%m/%Y')))
         sheet, col = self._build_header_customer(sheet, header, row, col)
-        sheet = self._build_header_follow_result_month(sheet, header, lst_date, row, col)
-        # names: list = list(sorted(set(deb['name'] for deb in lst_debs)))
-        names = {}
-        for deb in lst_debs:
-            name = deb['name']
-            if name in names:
-                names[name] += 1
-            else:
-                names[name] = 1
+        sheet = self._build_header_follow_result_month(sheet, header, range_date_debts, row, col)
+        names = list(set([item['name'] for item in lst_debts]))
         totals: dict = {}
-        last_totals: dict = {'arise': 0, 'paid': 0, 'debs': 0}
+        last_totals: dict = {'arise': 0, 'paid': 0, 'debts': 0}
+        lst_debts = self._handle_fill_empty_debts_missing(names, range_date_debts, lst_debts)
+        names = self._compute_count_names(lst_debts)
         for name, count in names.items():
-            last_name_cell = {'arise': 0, 'paid': 0, 'debs': 0}
+            last_name_cell = {'arise': 0, 'paid': 0, 'debts': 0}
             col: int = 0
             row += 1
             sheet.write(row, col, name, row_cell)
@@ -182,33 +213,33 @@ class DebsReportTemplateXls(models.AbstractModel):
             col += 1
             sheet.write(row, col, '', row_cell)
             col += 1
-            for i, deb in enumerate(lst_debs):
-                if deb['name'] == name:
-                    sheet.write(row, col, deb['arise'], currency)
+            for i, debts in enumerate(lst_debts):
+                if debts['name'] == name:
+                    sheet.write(row, col, debts['arise'], currency)
                     col += 1
-                    sheet.write(row, col, deb['paid'], currency)
+                    sheet.write(row, col, debts['paid'], currency)
                     col += 1
-                    sheet.write(row, col, deb['debs'], currency)
+                    sheet.write(row, col, debts['debts'], currency)
                     col += 1
-                    if deb['date'] not in totals:
-                        totals[deb['date']] = {'arise': 0, 'paid': 0, 'debs': 0}
-                    totals[deb['date']]['arise'] += deb['arise']
-                    totals[deb['date']]['paid'] += deb['paid']
-                    totals[deb['date']]['debs'] += deb['debs']
-                    last_name_cell['arise'] += deb['arise']
-                    last_name_cell['paid'] += deb['paid']
-                    last_name_cell['debs'] += deb['debs']
-                if deb['name'] == name and i + 1 == count:
+                    if debts['date'] not in totals:
+                        totals[debts['date']] = {'arise': 0, 'paid': 0, 'debts': 0}
+                    totals[debts['date']]['arise'] += debts['arise']
+                    totals[debts['date']]['paid'] += debts['paid']
+                    totals[debts['date']]['debts'] += debts['debts']
+                    last_name_cell['arise'] += debts['arise']
+                    last_name_cell['paid'] += debts['paid']
+                    last_name_cell['debts'] += debts['debts']
+                if debts['name'] == name and i + 1 == count:
                     sheet.write(row, col, last_name_cell['arise'], currency)
                     col += 1
                     sheet.write(row, col, last_name_cell['paid'], currency)
                     col += 1
-                    sheet.write(row, col, last_name_cell['debs'], currency)
+                    sheet.write(row, col, last_name_cell['debts'], currency)
                     col += 1
                     last_totals['arise'] += last_name_cell['arise']
                     last_totals['paid'] += last_name_cell['paid']
-                    last_totals['debs'] += last_name_cell['debs']
-                    lst_debs = [dct for dct in lst_debs if dct['name'] != name]
+                    last_totals['debts'] += last_name_cell['debts']
+                    lst_debts = [dct for dct in lst_debts if dct['name'] != name]
         row += 1
         col: int = 3
         sheet.merge_range(f'A{row+1}:C{row+1}', '', last_cell)
@@ -227,3 +258,4 @@ class DebsReportTemplateXls(models.AbstractModel):
             else:
                 sheet.write(row, col, '', last_cell)
                 col += 1
+                

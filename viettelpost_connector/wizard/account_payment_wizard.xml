@@ -23,7 +23,7 @@
                         <field name="payment_category_id" options="{'no_edit': True, 'no_create': True, 'no_open': True}"/>
                         <field name="payment_amount"/>
                         <field name="partner_address" attrs="{'invisible': [('partner_id', '=', False)]}"/>
-                        <label for="month_of_payment_period" class="o_form_label" attrs="{'invisible': [('payment_type', '=', 'outbound')]}" string="Month/Year (If debt receipt)"/>
+                        <label for="month_of_payment_period" class="o_form_label" attrs="{'invisible': [('payment_type', '=', 'outbound')]}" string="Month/Year (If debts receipt)"/>
                         <div class="o_row" attrs="{'invisible': [('payment_type', '=', 'outbound')]}">
                             <field name="month_of_payment_period"/>
                             <field name="year_of_payment_period"/>

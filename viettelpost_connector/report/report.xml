@@ -28,13 +28,13 @@
             <field name="attachment_use">False</field>
             <field name="paperformat_id" ref="paperformat_payment_receipt_report"/>
         </record>
-        <record id="action_debs_report" model="ir.actions.report">
-            <field name="name">Debs Report</field>
-            <field name="model">debs.report.wizard</field>
+        <record id="action_debts_report" model="ir.actions.report">
+            <field name="name">Debts Report</field>
+            <field name="model">debts.report.wizard</field>
             <field name="report_type">xlsx</field>
             <field name="print_report_name">(object._get_name_report_xls())</field>
-            <field name="report_name">viettelpost_connector.debs_report_xls</field>
-            <field name="report_file">viettelpost_connector.debs_report_xls</field>
+            <field name="report_name">viettelpost_connector.debts_report_xls</field>
+            <field name="report_file">viettelpost_connector.debts_report_xls</field>
             <field name="binding_type">report</field>
         </record>
     </data>

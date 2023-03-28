@@ -4,12 +4,12 @@ import ListController from 'web.ListController';
 import FormController from 'web.FormController';
 FormController.include({
     events: Object.assign({}, FormController.prototype.events, {
-        'click .o_get_debts': '_onClickGetDebs',
+        'click .o_get_debts': '_onClickGetDebts',
     }),
     init: function () {
         this._super.apply(this, arguments);
     },
-   _onClickGetDebs: function (e) {
+   _onClickGetDebts: function (e) {
         e.preventDefault();
         var self = this;
         var state = self.renderer.state;
@@ -45,8 +45,6 @@ ListController.include({
         'click .o_button_sync_extend_service': '_onClickSyncExtendService',
         'click .o_button_sync_store': '_onClickSyncStore',
         'click .o_button_create_store': '_onClickCreateStore',
-        'click .o_button_register_payment': '_onClickRegisterPayment',
-        'click .o_get_debts': '_onClickGetDebts',
     }),
     _onClickSyncProvince: function (e) {
         var self = this;
@@ -153,15 +151,6 @@ ListController.include({
                 'type': 'ir.actions.client',
                 'tag': 'reload'
             });
-        });
-    },
-    _onClickRegisterPayment: function (e) {
-        var self = this;
-        return this._rpc({
-            model: 'account.payment.wizard',
-            method: 'action_register_payment'
-        }).then(function(result) {
-            self.do_action(result);
         });
     },
 });
