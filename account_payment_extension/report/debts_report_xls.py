@@ -1,11 +1,11 @@
 from datetime import datetime
-from typing import Dict, Any, Sequence, List, Tuple
+from typing import Dict, Any, List, Tuple
 from odoo import models, _
 from odoo.exceptions import ValidationError, UserError
 
 
 class DebtsReportTemplateXls(models.AbstractModel):
-    _name = 'report.viettelpost_connector.debts_report_xls'
+    _name = 'report.account_payment_extension.debts_report_xls'
     _inherit = 'report.report_xlsx.abstract'
 
     def _get_debts_report(self, lst_ids: tuple, date_from: str, date_to: str) -> List[Tuple]:
@@ -19,7 +19,7 @@ class DebtsReportTemplateXls(models.AbstractModel):
                 FROM res_partner RP
                 LEFT JOIN account_payment AP ON RP.id = AP.partner_id
                 JOIN account_move AM ON AM.id = AP.move_id
-                WHERE RP.id IN {lst_ids}
+                WHERE RP.id IN ({",".join(str(item) for item in lst_ids)})
                 AND AM.date BETWEEN '{date_from}' AND '{date_to}'
                 AND AM.state = 'posted'
                 AND AP.payment_type = 'inbound'
@@ -34,7 +34,7 @@ class DebtsReportTemplateXls(models.AbstractModel):
                        SUM(SO.money_total) arise
                 FROM res_partner RP
                 LEFT JOIN sale_order SO ON RP.id = SO.partner_id
-                WHERE RP.id IN {lst_ids}
+                WHERE RP.id IN ({",".join(str(item) for item in lst_ids)})
                 AND SO.date_order BETWEEN '{date_from}' AND '{date_to}'
                 AND SO.state IN ('sale', 'done')
                 GROUP BY RP.id, RP.name, month_so, year_so
@@ -77,7 +77,7 @@ class DebtsReportTemplateXls(models.AbstractModel):
             raise ValidationError(_('The value of date start is required.'))
         elif not data.get('date_end'):
             raise ValidationError(_('The value of date end is required.'))
-        lst_partner_ids: tuple = tuple(data.get('lst_partner_ids'))
+        lst_partner_ids = data.get('lst_partner_ids')
         date_start: str = data.get('date_start')
         date_end: str = data.get('date_end')
         dict_empty, lst_debts = {'name': '', 'date': '', 'arise': '', 'paid': '', 'debts': ''}, []

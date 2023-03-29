@@ -1,5 +1,4 @@
 from . import api_connect_config
-from . import payment_category
 from . import viettelpost_common_information
 from . import delivery_carrier
 from . import viettelpost_address
@@ -10,5 +9,4 @@ from . import product_template
 from . import res_partner
 from . import sale_order
 from . import stock_picking
-from . import account_payment
 from . import base_import

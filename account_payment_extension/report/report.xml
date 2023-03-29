@@ -20,8 +20,8 @@
             <field name="name">Receipt/Payment Voucher</field>
             <field name="model">account.payment</field>
             <field name="report_type">qweb-pdf</field>
-            <field name="report_name">viettelpost_connector.receipt_payment_voucher_report</field>
-            <field name="report_file">viettelpost_connector.receipt_payment_voucher_report</field>
+            <field name="report_name">account_payment_extension.receipt_payment_voucher_report</field>
+            <field name="report_file">account_payment_extension.receipt_payment_voucher_report</field>
             <field name="print_report_name">(object._get_name_payment_voucher())</field>
             <field name="binding_model_id" ref="model_account_payment"/>
             <field name="binding_type">report</field>
@@ -33,8 +33,8 @@
             <field name="model">debts.report.wizard</field>
             <field name="report_type">xlsx</field>
             <field name="print_report_name">(object._get_name_report_xls())</field>
-            <field name="report_name">viettelpost_connector.debts_report_xls</field>
-            <field name="report_file">viettelpost_connector.debts_report_xls</field>
+            <field name="report_name">account_payment_extension.debts_report_xls</field>
+            <field name="report_file">account_payment_extension.debts_report_xls</field>
             <field name="binding_type">report</field>
         </record>
     </data>

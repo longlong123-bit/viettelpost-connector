@@ -127,28 +127,4 @@
               action="ir_cron_asset_management_inherit_action"
               sequence="1"
     />
-    <menuitem id="account_payment_menu"
-              name="Payments"
-              parent="sale.sale_menu_root"
-              groups="base.group_system"
-              sequence="2"
-              action="account.action_account_payments"
-    />
-    <menuitem id="menu_payment_category_main"
-              name="Payment"
-              parent="sale.menu_sale_config"
-              sequence="5"
-    />
-    <menuitem id="menu_payment_categories"
-              name="Categories"
-              parent="menu_payment_category_main"
-              action="payment_category_action"
-              sequence="1"
-    />
-    <menuitem id="menu_debts_report"
-              name="Debts report"
-              parent="sale.menu_sale_report"
-              action="debts_report_wizard_action"
-              sequence="1"
-    />
 </odoo>

@@ -34,7 +34,7 @@ class AccountPaymentWizard(models.TransientModel):
 
     @api.model
     def action_register_payment(self):
-        action = self.env.ref('viettelpost_connector.register_payment_wizard_action').read()[0]
+        action = self.env.ref('account_payment_extension.register_payment_wizard_action').read()[0]
         return action
 
     date_voucher = fields.Date(string='Date Voucher', default=lambda self: date.today(), required=True)
@@ -208,7 +208,7 @@ class AccountPaymentWizard(models.TransientModel):
             for so in lst_browse_so_ids:
                 so.action_done()
         if self.env.context.get('is_print'):
-            return self.env.ref('viettelpost_connector.action_report_payment_receipt').sudo().report_action(account_payment)
+            return self.env.ref('account_payment_extension.action_report_payment_receipt').sudo().report_action(account_payment)
         return {
             'type': 'ir.actions.act_window',
             'name': 'Account payment',

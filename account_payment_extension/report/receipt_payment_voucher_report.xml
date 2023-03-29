@@ -8,7 +8,7 @@
             </xpath>
         </template>
         <template id="receipt_payment_voucher_document" >
-            <t t-call="viettelpost_connector.header_footer_custom">
+            <t t-call="account_payment_extension.header_footer_custom">
                 <t t-set="doc" t-value="doc.with_context(lang=doc.env.lang)" />
                 <div class="page" style="font-family: TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif; font-style: normal; font-variant: normal;">
                     <div class="row">
@@ -177,7 +177,7 @@
         <template id="receipt_payment_voucher_report">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="doc">
-                    <t t-call="viettelpost_connector.receipt_payment_voucher_document"/>
+                    <t t-call="account_payment_extension.receipt_payment_voucher_document"/>
                 </t>
             </t>
         </template>

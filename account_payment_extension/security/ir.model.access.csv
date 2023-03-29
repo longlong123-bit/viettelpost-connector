@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_payment_category,access_payment_category,model_payment_category,base.group_system,1,1,1,1
+access_debts_report_wizard,access_debts_report_wizard,model_debts_report_wizard,base.group_system,1,1,1,1

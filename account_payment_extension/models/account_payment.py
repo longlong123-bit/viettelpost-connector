@@ -128,11 +128,11 @@ class AccountPayment(models.Model):
 
     def action_create_and_print(self):
         if self.env.context.get('is_print'):
-            return self.env.ref('viettelpost_connector.action_report_payment_receipt').sudo().report_action(self)
+            return self.env.ref('account_payment_extension.action_report_payment_receipt').sudo().report_action(self)
 
     @api.model
     def action_register_payment(self):
-        action = self.env.ref('viettelpost_connector.register_payment_wizard_action').read()[0]
+        action = self.env.ref('account_payment_extension.register_payment_wizard_action').read()[0]
         return action
 
     @api.model

@@ -20,4 +20,4 @@ class DebtsReportWizard(models.TransientModel):
             'date_start': self.date_from,
             'date_end': self.date_to,
         }
-        return self.env.ref('viettelpost_connector.action_debts_report').report_action(self, data=data)
+        return self.env.ref('account_payment_extension.action_debts_report').report_action(self, data=data)
