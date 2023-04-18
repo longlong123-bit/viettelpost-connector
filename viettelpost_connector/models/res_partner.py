@@ -23,13 +23,16 @@ class PartnerVTPost(models.Model):
                 rec.vtp_province_id = rec.vtp_ward_id.district_id.province_id
 
     @staticmethod
+    def format_address(text: str) -> str:
+        return re.sub(r'^.*?\.', '', text).strip()
+
+    @staticmethod
     def _handle_data_address(address: str) -> (dict, dict):
-        dict_address: dict = dict(street='', ward='', district='', province='')
+        dict_address: dict = dict(province='', district='', ward='', street='')
         address = re.sub(r"^\s+|\s+$|\n|\t", "", address)
         is_comma: bool = bool(re.search(r',', address, flags=re.I))
         new_address = address.split(',') if is_comma else address.split('-')
-        if len(new_address) != 4:
-            raise ValidationError(_(f'The format address invalid.'))
+        new_address.reverse()
         new_address = [re.sub(r"^\s+|\s+$|\n|\t", "", item) for item in new_address]
         new_address = dict(zip(dict_address.keys(), new_address))
         return address, new_address
@@ -37,35 +40,38 @@ class PartnerVTPost(models.Model):
     def _get_province(self, province: str):
         if not province:
             raise ValidationError(_('Province unknown.'))
-        province_id = self.env['vtp.country.province'].search([
+        province_format = self.format_address(province)
+        province_id = self.env['viettelpost.province'].search([
             '|',
-            ('province_name', 'ilike', f'%{province}%'),
-            ('vtp_aliases', 'ilike', f'%{province}%')
-        ])
+            ('province_name', 'ilike', f'%{province_format}%'),
+            ('vtp_aliases', 'ilike', f'%{province_format}%')
+        ], limit=1)
         return province_id.id
 
     def _get_district(self, district: str, province_id):
         if not district:
             raise ValidationError(_('District unknown.'))
-        district_id = self.env['vtp.country.district'].search([
+        district_format = self.format_address(district)
+        district_id = self.env['viettelpost.district'].search([
             '&',
             ('province_id', '=', province_id),
             '|',
-            ('district_name', 'ilike', f'%{district}%'),
-            ('vtp_aliases', 'ilike', f'%{district}%')
-        ])
+            ('district_name', 'ilike', f'%{district_format.strip()}%'),
+            ('vtp_aliases', 'ilike', f'%{district_format.strip()}%')
+        ], limit=1)
         return district_id.id
 
     def _get_ward(self, ward: str, district_id):
         if not ward:
             raise ValidationError(_('Ward unknown.'))
-        ward_id = self.env['vtp.country.ward'].search([
+        ward_format = self.format_address(ward)
+        ward_id = self.env['viettelpost.ward'].search([
             '&',
             ('district_id', '=', district_id),
             '|',
-            ('ward_name', 'ilike', f'%{ward}%'),
-            ('vtp_aliases', 'ilike', f'%{ward}%')
-        ])
+            ('ward_name', 'ilike', f'%{ward_format.strip()}%'),
+            ('vtp_aliases', 'ilike', f'%{ward_format.strip()}%')
+        ], limit=1)
         return ward_id.id
 
     @staticmethod
