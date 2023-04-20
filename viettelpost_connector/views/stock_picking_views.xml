@@ -6,10 +6,11 @@
         <field name="inherit_id" ref="stock.view_picking_form"/>
         <field name="arch" type="xml">
             <button name="button_validate" position="before">
-                <button name="action_confirm_waybill" type="object" attrs="{'invisible': [('state', '=', 'cancel')]}" class="btn btn-primary" string="Confirm waybill" />
-            </button>
-            <button name="do_print_picking" position="before">
-                <button name="%(print_waybill_wizard_wizard_action)d" type="action" string="Print waybill"/>
+                <button name="%(api_connect_instances.select_deli_carrier_wizard_acton)d"
+                        class="btn btn-primary"
+                        type="action"
+                        string="Assign to delivery"
+                />
             </button>
         </field>
     </record>

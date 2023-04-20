@@ -2,10 +2,9 @@ import base64
 from typing import Tuple
 
 from odoo import fields, models, api, _
-from datetime import datetime, timedelta
+from datetime import datetime
 from odoo.exceptions import UserError
 from odoo.addons.viettelpost_connector.common.constants import Const
-from odoo.addons.viettelpost_connector.common.constants import Message
 
 
 class SaleOrderVTPost(models.Model):
@@ -49,7 +48,7 @@ class SaleOrderVTPost(models.Model):
     vtp_note = fields.Text(string='Note')
     sender_fullname = fields.Char(related='vtp_store_id.name', string='Fullname')
     sender_phone = fields.Char(related='vtp_store_id.phone', string='Phone')
-    sender_email = fields.Char(related='vtp_store_id.email', string='Email')
+    # sender_email = fields.Char(related='vtp_store_id.email', string='Email')
     sender_address = fields.Char(related='vtp_store_id.address', string='Street')
     sender_province_id = fields.Many2one(related='vtp_store_id.province_id', string='Province')
     sender_district_id = fields.Many2one(related='vtp_store_id.district_id', string='District')
@@ -130,7 +129,7 @@ class SaleOrderVTPost(models.Model):
         return payload
 
     def action_create_waybill_code(self):
-        client = self.env['api.connect.config'].generate_client_api()
+        client = self.env['api.connect.instances'].generate_client_api()
         try:
             payload = self._prepare_data_create_waybill()
             res = client.create_waybill(payload)
@@ -142,7 +141,7 @@ class SaleOrderVTPost(models.Model):
             raise UserError(_(f'Create waybill failed. {e}'))
 
     def get_list_service(self):
-        client = self.env['api.connect.config'].generate_client_api()
+        client = self.env['api.connect.instances'].generate_client_api()
         try:
             payload = self._prepare_payload_for_get_list_service()
             res = client.compute_fee_ship_all(payload)
@@ -243,7 +242,7 @@ class SaleOrderVTPost(models.Model):
         fee: float = 0.0
         list_item, total_weight, total_qty, total_price = self._prepare_data_order_line()
         if self.vtp_waybill_type_id.code in [Const.WAYBILL_TYPE_CODE_2, Const.WAYBILL_TYPE_CODE_4]:
-            client = self.env['api.connect.config'].generate_client_api()
+            client = self.env['api.connect.instances'].generate_client_api()
             payload = self._prepare_payload_check_ship_code()
             res = client.check_ship_cost(payload)
             if self.vtp_waybill_type_id.code == Const.WAYBILL_TYPE_CODE_2:
@@ -284,7 +283,7 @@ class SaleOrderVTPost(models.Model):
             'SENDER_FULLNAME': self.vtp_store_id.name,
             'SENDER_ADDRESS': self.vtp_store_id.address,
             'SENDER_PHONE': self.vtp_store_id.phone or '',
-            'SENDER_EMAIL': self.vtp_store_id.email or '',
+            # 'SENDER_EMAIL': self.vtp_store_id.email or '',
             'SENDER_WARD': self.vtp_store_id.ward_id.ward_id,
             'SENDER_DISTRICT': self.vtp_store_id.district_id.district_id,
             'SENDER_PROVINCE': self.vtp_store_id.province_id.province_id,

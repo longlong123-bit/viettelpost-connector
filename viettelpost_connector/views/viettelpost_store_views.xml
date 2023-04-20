@@ -4,10 +4,9 @@
         <field name="name">viettelpost.store.form.view</field>
         <field name="model">viettelpost.store</field>
         <field name="arch" type="xml">
-            <form string="Warehouse" create="0" edit="0" import="0">
+            <form string="Store" create="0" edit="0" import="0">
                 <sheet>
                     <group>
-                        <field name="delivery_carrier_id"/>
                         <field name="name"/>
                         <field name="phone"/>
                         <field name="address"/>
@@ -26,7 +25,7 @@
         <field name="name">viettelpost.store.tree.view</field>
         <field name="model">viettelpost.store</field>
         <field name="arch" type="xml">
-            <tree string="Warehouse" create="0" export_xlsx="0">
+            <tree string="Stores" create="0" export_xlsx="0">
                 <field name="name"/>
                 <field name="phone"/>
                 <field name="address"/>
@@ -51,7 +50,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="vtp_store_action_view">
-        <field name="name">Warehouses</field>
+        <field name="name">Stores</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">viettelpost.store</field>
         <field name="view_ids" eval="[(5, 0, 0),
@@ -60,7 +59,7 @@
         <field name="search_view_id" ref="vtp_store_search_view"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-                Create a new warehouse.
+                Create a new stores.
             </p>
         </field>
     </record>

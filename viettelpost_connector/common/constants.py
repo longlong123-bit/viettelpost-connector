@@ -1,5 +1,5 @@
 class Const:
-    BASE_CODE = 'viettelpost_base_url'
+    INSTANCE_CODE = 'viettelpost'
     DELIVERY_CARRIER_CODE = 'viettelpost'
     SERVICE_PRODUCT_CODE = 'ViettelPost'
     TYPE_SERVICE = 1

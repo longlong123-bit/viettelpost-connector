@@ -55,7 +55,7 @@
                     <group string="Place of sender" attrs="{'invisible': [('delivery_carrier_vtp_id', '=', False)]}">
                         <field name="sender_fullname"/>
                         <field name="sender_phone" widget="phone"/>
-                        <field name="sender_email" widget="email"/>
+<!--                        <field name="sender_email" widget="email"/>-->
                         <field name="sender_address"/>
                         <field name="sender_ward_id"/>
                         <field name="sender_district_id"/>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="seq_request_api_viettelpost" model="ir.sequence">
+            <field name="name">Request API Viettelpost Sequence</field>
+            <field name="code">api.connect.history</field>
+            <field name="prefix">req-viettelpost-</field>
+            <field name="suffix">-%(year)s%(month)s%(day)s-%(h24)s%(min)s%(sec)s</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

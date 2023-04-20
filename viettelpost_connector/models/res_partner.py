@@ -5,9 +5,9 @@ class PartnerVTPost(models.Model):
     _inherit = 'res.partner'
     _description = 'Configuration Address'
 
-    vtp_province_id = fields.Many2one('vtp.country.province', string='Province')
-    vtp_district_id = fields.Many2one('vtp.country.district', string='District')
-    vtp_ward_id = fields.Many2one('vtp.country.ward', string='Ward')
+    vtp_province_id = fields.Many2one('viettelpost.province', string='Province')
+    vtp_district_id = fields.Many2one('viettelpost.district', string='District')
+    vtp_ward_id = fields.Many2one('viettelpost.ward', string='Ward')
     vtp_street = fields.Char(string='Street')
 
     @api.onchange('vtp_ward_id')

@@ -1,8 +1,10 @@
+from typing import Dict, List
 from odoo import fields, api, models, _
 from odoo.exceptions import UserError
 
-from odoo.addons.viettelpost_connector.common.constants import Const
-from odoo.addons.viettelpost_connector.common.constants import Message
+from odoo.addons.viettelpost_connector.common.constants import Const, Message
+from odoo.addons.viettelpost_connector.dataclass.viettelpost_service import Service, ServiceExtend
+from odoo.addons.viettelpost_connector.common.action import Action
 
 
 class ViettelPostService(models.Model):
@@ -12,44 +14,25 @@ class ViettelPostService(models.Model):
     name = fields.Char(string='Service name')
     code = fields.Char(string='Service code')
     extend_service_ids = fields.One2many('viettelpost.extend.service', 'service_id', string='Extend Service')
-    delivery_carrier_id = fields.Many2one('delivery.carrier', string='Delivery Carrier')
 
     @api.model
     def sync_service(self):
-        client = self.env['api.connect.config'].generate_client_api()
         try:
+            client = self.env['api.connect.instances'].generate_client_api()
             data_services: list = []
-            delivery_carrier_id = self.env['delivery.carrier'].search(
-                [('delivery_carrier_code', '=', Const.DELIVERY_CARRIER_CODE)])
-            if not delivery_carrier_id:
-                raise UserError(_(Message.MSG_NOT_CARRIER))
-            payload: dict = {'TYPE': Const.TYPE_SERVICE}
-            dataset = client.get_services(payload)
-            if len(dataset) > 0:
-                lst_service_ids: list = [rec.get('SERVICE_CODE') for rec in dataset]
-                results = self.search([('code', 'in', lst_service_ids)])
-                result_ids: list = [res.id for res in results]
-                dataset = list(filter(lambda x: x.get('SERVICE_CODE') not in result_ids, dataset))
-                if len(dataset) > 0:
-                    for data in dataset:
-                        dict_service: dict = {
-                            'name': data.get('SERVICE_NAME'),
-                            'code': data.get('SERVICE_CODE'),
-                            'delivery_carrier_id': delivery_carrier_id.id
-                        }
-                        data_services.append(dict_service)
-                    self.create(data_services)
-            return {
-                "type": "ir.actions.client",
-                "tag": "display_notification",
-                "params": {
-                    "title": _("Sync Service Successfully!"),
-                    "type": "success",
-                    "message": _(Message.MSG_ACTION_SUCCESS),
-                    "sticky": False,
-                    "next": {"type": "ir.actions.act_window_close"},
-                },
-            }
+            payload: Dict[str, int] = {'TYPE': Const.TYPE_SERVICE}
+            result = client.get_services(payload)
+            if result:
+                lst_dataclass_service: List[Service] = [Service(*Service.parser_dict(res)) for res in result]
+                lst_service_ids = self.search([('code', 'in', [rec.code for rec in lst_dataclass_service])])
+                service_codes: List[str] = [rec.code for rec in lst_service_ids]
+                for data in lst_dataclass_service:
+                    if data.code not in service_codes:
+                        data_services.append(Service.parser_class(data))
+                if data_services:
+                    service_ids = self.create(data_services)
+                    self.sync_extend_services(client, service_ids)
+            return Action.display_notification(_('Sync service successfully!'), _(Message.MSG_ACTION_SUCCESS))
         except Exception as e:
             raise UserError(_(f'Sync service failed. Error: {str(e)}'))
 
@@ -63,41 +46,23 @@ class ViettelPostService(models.Model):
             res.append((record.id, name))
         return res
 
-    @api.model
-    def sync_extend_services(self):
-        client = self.env['api.connect.config'].generate_client_api()
+    def sync_extend_services(self, client, service_ids):
         try:
             data_service_extend_ids: list = []
-            lst_service_id = self.search([])
-            if len(lst_service_id) > 0:
-                for service in lst_service_id:
-                    dataset = client.get_extend_services(service.code)
-                    for data in dataset:
-                        extend_service_id = self.env['viettelpost.extend.service'].search([
-                            ('extend_code', '=', data.get('SERVICE_CODE')),
-                            ('service_id', '=', service.id)
-                        ])
-                        if not extend_service_id:
-                            data: dict = {
-                                'extend_code': data.get('SERVICE_CODE'),
-                                'extend_name': data.get('SERVICE_NAME'),
-                                'service_id': service.id
-                            }
-                            data_service_extend_ids.append(data)
-                    self.env['viettelpost.extend.service'].create(data_service_extend_ids)
-                return {
-                    "type": "ir.actions.client",
-                    "tag": "display_notification",
-                    "params": {
-                        "title": _("Sync Extend Service Successfully!"),
-                        "type": "success",
-                        "message": _(Message.MSG_ACTION_SUCCESS),
-                        "sticky": False,
-                        "next": {"type": "ir.actions.act_window_close"},
-                    },
-                }
-            else:
-                raise UserError(_('Please sync service before sync extend service.'))
+            for service in service_ids:
+                result = client.get_extend_services(service.code)
+                if result:
+                    lst_dataclass_service_extend: List[ServiceExtend] = [ServiceExtend(*ServiceExtend.parser_dict(res)) for res in result]
+                    extend_service_id = self.env['viettelpost.extend.service'].search([
+                        ('extend_code', 'in', [service.code for service in lst_dataclass_service_extend]),
+                        ('service_id', '=', service.id)
+                    ])
+                    service_extend_codes: List[str] = [service.code for service in extend_service_id]
+                    for data in lst_dataclass_service_extend:
+                        if data.code not in service_extend_codes:
+                            data_service_extend_ids.append(ServiceExtend.parser_class(data, service_id=service.id))
+            if data_service_extend_ids:
+                self.env['viettelpost.extend.service'].create(data_service_extend_ids)
         except Exception as e:
             raise UserError(_(f'Sync extend service failed. {e}'))
 
@@ -106,8 +71,9 @@ class ExtendService(models.Model):
     _name = 'viettelpost.extend.service'
     _description = 'List extend service ViettelPost'
 
-    extend_code = fields.Char(string='Service Code')
-    extend_name = fields.Char(string='Service Name')
+    extend_code = fields.Char(string='Code')
+    extend_name = fields.Char(string='Name')
+    description = fields.Text(string='Description')
     service_id = fields.Many2one('viettelpost.service', string='Service')
 
     @api.depends('extend_name', 'extend_code')

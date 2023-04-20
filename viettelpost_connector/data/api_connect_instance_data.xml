@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <data noupdate="1">
-        <record model="api.connect.config" id="api_connect_config_1">
-            <field name="name">ViettelPost Base Url</field>
-            <field name="code">viettelpost_base_url</field>
+        <record model="api.connect.instances" id="api_instance_viettelpost">
+            <field name="name">[Instance] - Viettelpost</field>
+            <field name="code">viettelpost</field>
             <field name="host">https://partner.viettelpost.vn</field>
             <field name="active">True</field>
         </record>

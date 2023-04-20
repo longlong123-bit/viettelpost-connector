@@ -2,7 +2,7 @@
 <odoo>
     <template id="assets_backend_button" inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
-            <script type="text/javascript" src="/viettelpost_connector/static/src/js/handle_button.js"></script>
+            <script type="text/javascript" src="/viettelpost_connector/static/src/js/handle_button.js"/>
         </xpath>
     </template>
 </odoo>

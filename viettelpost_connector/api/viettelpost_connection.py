@@ -52,12 +52,28 @@ class ViettelPostConnection:
         sale_id = self.external_model.env['sale.order'].search([('waybill_code', '=', waybill_code)])
         sale_id.write({'waybill_status': status})
 
+    def _get_sequence_request_id(self):
+        sequence = self.external_model.env['ir.sequence'].search([
+            ('code', '=', 'api.connect.history'),
+            ('prefix', '=', 'req-viettelpost-'),
+            ('name', '=', 'Request API Viettelpost Sequence'),
+            ('active', '=', True)
+        ])
+        next_document = sequence.get_next_char(sequence.number_next_actual)
+        self.external_model.env.cr.execute('''SELECT request_id FROM api_connect_history''')
+        query_res = self.external_model.env.cr.fetchall()
+        while next_document in [res[0] for res in query_res]:
+            next_tmp = self.external_model.env['ir.sequence'].next_by_code('api.connect.history')
+            next_document = next_tmp
+        return next_document
+
     def create_connect_history(self, *args):
         create_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         uid = self.external_model.env.uid
+        sequence = self._get_sequence_request_id()
         query = f"""
-                    INSERT INTO api_connect_history (name, method, url, body, message, status, create_date, create_uid) 
-                    VALUES ('{args[0]}', '{args[1]}', '{args[2]}', '{args[3]}', '{args[4]}', '{args[5]}', '{create_date}', '{uid}')
+                    INSERT INTO api_connect_history (name, method, url, body, message, status, request_id, create_date, create_uid) 
+                    VALUES ('{args[0]}', '{args[1]}', '{args[2]}', '{args[3]}', '{args[4]}', '{args[5]}', '{sequence}','{create_date}', '{uid}')
                 """
         query = query.replace('\n', '')
         self.external_model.env.cr.execute(query)

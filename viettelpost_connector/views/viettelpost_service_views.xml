@@ -9,7 +9,6 @@
                     <group>
                         <field name="name"/>
                         <field name="code"/>
-                        <field name="delivery_carrier_id" invisible="1"/>
                     </group>
                     <notebook>
                         <page string="Extend Service" name="extend_service">
@@ -34,7 +33,6 @@
             <tree string="Service" export_xlsx="0" create="0">
                 <field name="name"/>
                 <field name="code"/>
-                <field name="delivery_carrier_id"/>
             </tree>
         </field>
     </record>

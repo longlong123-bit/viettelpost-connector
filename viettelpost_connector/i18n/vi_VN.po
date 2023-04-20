@@ -160,7 +160,7 @@ msgid "Create Store Successfully!"
 msgstr "Tạo cửa hàng thành công!"
 
 #. module: viettelpost_connector
-#: model_terms:ir.actions.act_window,help:viettelpost_connector.vtp_country_district_action_view
+#: model_terms:ir.actions.act_window,help:viettelpost_connector.viettelpost_district_action
 msgid "Create a new District."
 msgstr "Tạo mới một Quận/Huyện"
 
@@ -170,12 +170,12 @@ msgid "Create a new Post office."
 msgstr "Tạo mới một bưu cục"
 
 #. module: viettelpost_connector
-#: model_terms:ir.actions.act_window,help:viettelpost_connector.vtp_country_province_action_view
+#: model_terms:ir.actions.act_window,help:viettelpost_connector.viettelpost_province_action
 msgid "Create a new Province."
 msgstr "Tạo tới một Tỉnh/Thành"
 
 #. module: viettelpost_connector
-#: model_terms:ir.actions.act_window,help:viettelpost_connector.vtp_country_ward_action_view
+#: model_terms:ir.actions.act_window,help:viettelpost_connector.viettelpost_ward_action
 msgid "Create a new Ward."
 msgstr "Tạo mới một Phường/Xã"
 
@@ -359,7 +359,7 @@ msgid "Display Name"
 msgstr ""
 
 #. module: viettelpost_connector
-#: model:ir.actions.act_window,name:viettelpost_connector.vtp_country_district_action_view
+#: model:ir.actions.act_window,name:viettelpost_connector.viettelpost_district_action
 #: model:ir.model.fields,field_description:viettelpost_connector.field_res_partner__vtp_district_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_res_users__vtp_district_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__receiver_district_id
@@ -978,7 +978,7 @@ msgid "Product type"
 msgstr "Loại hàng hóa"
 
 #. module: viettelpost_connector
-#: model:ir.actions.act_window,name:viettelpost_connector.vtp_country_province_action_view
+#: model:ir.actions.act_window,name:viettelpost_connector.viettelpost_province_action
 #: model:ir.model.fields,field_description:viettelpost_connector.field_res_partner__vtp_province_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_res_users__vtp_province_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_sale_order__receiver_province_id
@@ -1341,7 +1341,7 @@ msgid "ViettelPost office"
 msgstr "Bưu cục"
 
 #. module: viettelpost_connector
-#: model:ir.actions.act_window,name:viettelpost_connector.vtp_country_ward_action_view
+#: model:ir.actions.act_window,name:viettelpost_connector.viettelpost_ward_action
 #: model:ir.model.fields,field_description:viettelpost_connector.field_create_store_wizard__ward_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_res_partner__vtp_ward_id
 #: model:ir.model.fields,field_description:viettelpost_connector.field_res_users__vtp_ward_id

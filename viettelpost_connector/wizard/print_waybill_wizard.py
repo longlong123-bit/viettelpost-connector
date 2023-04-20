@@ -26,7 +26,7 @@ class PrintWaybillWizard(models.Model):
     waybill_code = fields.Char(related='picking_id.sale_id.waybill_code', string='Waybill code')
 
     def action_print_waybill(self):
-        client = self.env['api.connect.config'].generate_client_api()
+        client = self.env['api.connect.instances'].generate_client_api()
         try:
             payload = self._prepare_data_print_waybill()
             token = client.print_waybill(payload)

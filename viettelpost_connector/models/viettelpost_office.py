@@ -1,8 +1,10 @@
+from typing import List
 from odoo import fields, api, models, _
 from odoo.exceptions import UserError
-
-from odoo.addons.viettelpost_connector.common.constants import Const
+from odoo.tools import ustr
 from odoo.addons.viettelpost_connector.common.constants import Message
+from odoo.addons.viettelpost_connector.dataclass.viettelpost_office import PostOffice
+from odoo.addons.viettelpost_connector.common.action import Action
 
 
 class ViettelPostOffice(models.Model):
@@ -14,57 +16,28 @@ class ViettelPostOffice(models.Model):
     province_name = fields.Char(string='Province name')
     district_name = fields.Char(string='District name')
     ward_name = fields.Char(string='Ward name')
-    street = fields.Char(string='Street')
+    address = fields.Char(string='Address')
     latitude = fields.Char(string='Latitude')
     longitude = fields.Char(string='Longitude')
-    number_phone = fields.Char(string='Phone')
+    phone = fields.Char(string='Phone')
     person_in_charge = fields.Char(string='Person in charge')
     person_in_charge_phone = fields.Char(string='Person in charge phone')
-    delivery_carrier_id = fields.Many2one('delivery.carrier', string='Delivery Carrier')
 
     @api.model
     def sync_office(self):
-        client = self.env['api.connect.config'].generate_client_api()
         try:
+            client = self.env['api.connect.instances'].generate_client_api()
             data_offices: list = []
-            delivery_carrier_id = self.env['delivery.carrier'].search(
-                [('delivery_carrier_code', '=', Const.DELIVERY_CARRIER_CODE)])
-            if not delivery_carrier_id:
-                raise UserError(_(Message.MSG_NOT_CARRIER))
-            dataset = client.get_offices()
-            if len(dataset) > 0:
-                lst_office_ids: list = [rec.get('MA_BUUCUC') for rec in dataset]
-                results = self.search([('code', 'in', lst_office_ids)])
-                result_ids: list = [res.id for res in results]
-                dataset = list(filter(lambda x: x.get('MA_BUUCUC') not in result_ids, dataset))
-                if len(dataset) > 0:
-                    for data in dataset:
-                        dict_office: dict = {
-                            'name': data.get('TEN_BUUCUC'),
-                            'code': data.get('MA_BUUCUC'),
-                            'province_name': data.get('TEN_TINH'),
-                            'district_name': data.get('TEN_QUANHUYEN'),
-                            'ward_name': data.get('TEN_PHUONGXA'),
-                            'street': data.get('DIA_CHI'),
-                            'latitude': data.get('LATITUDE'),
-                            'longitude': data.get('LONGITUDE'),
-                            'number_phone': data.get('DIEN_THOAI'),
-                            'person_in_charge': data.get('PHUTRACH'),
-                            'person_in_charge_phone': data.get('PHUTRACHPHONE'),
-                            'delivery_carrier_id': delivery_carrier_id.id
-                        }
-                        data_offices.append(dict_office)
+            result = client.get_offices()
+            if result:
+                lst_dataclass_office: List[PostOffice] = [PostOffice(*PostOffice.parser_dict(res)) for res in result]
+                office_ids = self.search([('code', 'in', [rec.code for rec in lst_dataclass_office])])
+                office_codes: List[str] = [res.code for res in office_ids]
+                for data in lst_dataclass_office:
+                    if data.code not in office_codes:
+                        data_offices.append(PostOffice.parser_class(data))
+                if data_offices:
                     self.create(data_offices)
-            return {
-                "type": "ir.actions.client",
-                "tag": "display_notification",
-                "params": {
-                    "title": _("Sync Post Office Successfully!"),
-                    "type": "success",
-                    "message": _(Message.MSG_ACTION_SUCCESS),
-                    "sticky": False,
-                    "next": {"type": "ir.actions.act_window_close"},
-                },
-            }
+            return Action.display_notification(_('Sync post office successfully!'), _(Message.MSG_ACTION_SUCCESS))
         except Exception as e:
-            raise UserError(_(f'Sync office failed. Error: {str(e)}'))
+            raise UserError(_(f'Sync office failed. Error: {ustr(e)}'))

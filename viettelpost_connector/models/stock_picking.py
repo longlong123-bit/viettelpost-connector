@@ -9,7 +9,7 @@ class StockPickingVTP(models.Model):
     _description = 'For ViettelPost'
 
     def action_confirm_waybill(self):
-        client = self.env['api.connect.config'].generate_client_api()
+        client = self.env['api.connect.instances'].generate_client_api()
         try:
             payload = self._prepare_payload_update_waybill(Const.VTP_STATUS_TYPE_1, Message.NOTE_CONFIRM_ORDER)
             client.update_waybill(payload)
@@ -28,7 +28,7 @@ class StockPickingVTP(models.Model):
 
     def action_cancel(self):
         res = super(StockPickingVTP, self).action_cancel()
-        client = self.env['api.connect.config'].generate_client_api()
+        client = self.env['api.connect.instances'].generate_client_api()
         try:
             payload = self._prepare_payload_update_waybill(Const.VTP_STATUS_TYPE_4, Message.NOTE_CANCEL_ORDER)
             client.update_waybill(payload)
