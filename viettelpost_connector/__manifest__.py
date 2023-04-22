@@ -1,5 +1,5 @@
 {
-    'name': 'ViettelPost Connector',
+    'name': 'Viettelpost Connector',
     'version': '13.0.1.0',
     'summary': 'Connect Odoo Application with Viettel Post',
     'description': """

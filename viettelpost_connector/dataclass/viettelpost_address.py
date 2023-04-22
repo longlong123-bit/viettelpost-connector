@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from enum import Enum
 from typing import Dict, Any, Sequence, Tuple
-from .dictionary_io import InputDict, OutputDict
+from odoo.addons.api_connect_instances.dataclass.dictionary_io import InputDict, OutputDict
 
 
 class KEY_INPUT_DICT_PROVINCE(Enum):

@@ -1,7 +1,6 @@
-from odoo import models, fields,_
+from odoo import models, fields, _
 from odoo.exceptions import UserError
-from odoo.addons.viettelpost_connector.common.constants import Const
-from odoo.addons.viettelpost_connector.common.constants import Message
+from odoo.addons.viettelpost_connector.common.constants import Const, Message
 
 
 class StockPickingVTP(models.Model):

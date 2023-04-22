@@ -17,9 +17,8 @@
             <field name="free_over" eval="True"/>
             <field name="amount">0</field>
             <field name="sequence">2</field>
-            <field name="delivery_type">fixed</field>
+            <field name="delivery_type">viettelpost</field>
             <field name="product_id" ref="viettelpost_connector.product_product_delivery_vtp"/>
-            <field name="delivery_carrier_code">viettelpost</field>
         </record>
     </data>
 </odoo>

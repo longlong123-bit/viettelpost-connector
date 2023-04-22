@@ -4,7 +4,7 @@ from enum import Enum
 from typing import Dict, Any, Sequence, Tuple, List
 from odoo import _
 from odoo.exceptions import UserError
-from .dictionary_io import InputDict, OutputDict
+from odoo.addons.api_connect_instances.dataclass.dictionary_io import InputDict, OutputDict
 from odoo.addons.viettelpost_connector.common.constants import Const
 
 

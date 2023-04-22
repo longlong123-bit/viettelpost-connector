@@ -13,7 +13,6 @@ access_viettelpost_waybill_type,viettelpost_waybill_type,model_viettelpost_waybi
 access_viettelpost_status,viettelpost_status,model_viettelpost_status,base.group_system,1,1,1,1
 access_res_partner_vtp,res_partner_vtp,model_res_partner,base.group_system,1,1,1,1
 access_stock_picking_vtp,stock_picking_vtp,model_stock_picking,base.group_system,1,1,1,1
-access_stock_picking_vtp,stock_picking_vtp,model_stock_picking,base.group_system,1,1,1,1
 access_select_delivery_carrier_wizard,select_delivery_carrier_wizard,model_select_delivery_carrier_wizard,base.group_system,1,1,1,1
 access_booking_viettelpost_wizard,booking_viettelpost_wizard,model_booking_viettelpost_wizard,base.group_system,1,1,1,1
 access_print_waybill_wizard,print_waybill_wizard,model_print_waybill_wizard,base.group_system,1,1,1,1
