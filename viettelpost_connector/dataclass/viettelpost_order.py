@@ -18,21 +18,20 @@ class KEY_INPUT_DICT_ORDER(Enum):
     MONEY_COLLECTION_FEE: str = 'MONEY_COLLECTION_FEE'
     MONEY_OTHER_FEE: str = 'MONEY_OTHER_FEE'
     MONEY_VAT: str = 'MONEY_VAT'
-    KPI_HT: str = 'KPI_HT'
 
 
-class KEY_OUTPUT_DICT_OFFICE(Enum):
-    OFFICE_NAME: str = 'name'
-    OFFICE_CODE: str = 'code'
-    PROVINCE_NAME: str = 'province_name'
-    DISTRICT_NAME: str = 'district_name'
-    WARD_NAME: str = 'ward_name'
-    ADDRESS: str = 'address'
-    LATITUDE: str = 'latitude'
-    LONGITUDE: str = 'longitude'
-    OFFICE_PHONE: str = 'phone'
-    PERSON_IN_CHARGE: str = 'person_in_charge'
-    PERSON_IN_CHARGE_PHONE: str = 'person_in_charge_phone'
+class KEY_OUTPUT_DICT_ORDER(Enum):
+    ORDER_NUMBER: str = 'carrier_tracking_ref'
+    MONEY_COLLECTION: str = 'money_collection'
+    EXCHANGE_WEIGHT: str = 'shipping_weight'
+    MONEY_TOTAL: str = 'money_total'
+    MONEY_TOTAL_FEE: str = 'money_total_fee'
+    MONEY_FEE: str = 'money_fee'
+    MONEY_COLLECTION_FEE: str = 'money_collection_fee'
+    MONEY_OTHER_FEE: str = 'money_other_fee'
+    MONEY_VAT: str = 'money_vat'
+    BL_STATUS: str = 'bl_status'
+    DELI_CARRIER_ID: str = 'carrier_id'
 
 
 class KEY_OUTPUT_DICT_SENDER(Enum):
@@ -90,7 +89,6 @@ class Order(InputDict, OutputDict):
     money_collection_fee: int
     money_other_fee: int
     money_vat: int
-    kpi_ht: int
 
     @staticmethod
     def parser_dict(data: Dict[str, Any]) -> Sequence[Tuple]:
@@ -103,25 +101,24 @@ class Order(InputDict, OutputDict):
             data.get(KEY_INPUT_DICT_ORDER.MONEY_FEE.value),
             data.get(KEY_INPUT_DICT_ORDER.MONEY_COLLECTION_FEE.value),
             data.get(KEY_INPUT_DICT_ORDER.MONEY_OTHER_FEE.value),
-            data.get(KEY_INPUT_DICT_ORDER.MONEY_VAT.value),
-            data.get(KEY_INPUT_DICT_ORDER.KPI_HT.value)
+            data.get(KEY_INPUT_DICT_ORDER.MONEY_VAT.value)
         )
         return result
 
     @staticmethod
     def parser_class(cls, **kwargs) -> Dict[str, Any]:
         payload: dict = {
-            KEY_OUTPUT_DICT_OFFICE.OFFICE_NAME.value: cls.name,
-            KEY_OUTPUT_DICT_OFFICE.OFFICE_CODE.value: cls.code,
-            KEY_OUTPUT_DICT_OFFICE.OFFICE_PHONE.value: cls.phone,
-            KEY_OUTPUT_DICT_OFFICE.PROVINCE_NAME.value: cls.province_name,
-            KEY_OUTPUT_DICT_OFFICE.DISTRICT_NAME.value: cls.district_name,
-            KEY_OUTPUT_DICT_OFFICE.WARD_NAME.value: cls.ward_name,
-            KEY_OUTPUT_DICT_OFFICE.LATITUDE.value: cls.latitude,
-            KEY_OUTPUT_DICT_OFFICE.LONGITUDE.value: cls.longitude,
-            KEY_OUTPUT_DICT_OFFICE.ADDRESS.value: cls.address,
-            KEY_OUTPUT_DICT_OFFICE.PERSON_IN_CHARGE.value: cls.person_in_charge,
-            KEY_OUTPUT_DICT_OFFICE.PERSON_IN_CHARGE_PHONE.value: cls.person_in_charge_phone
+            KEY_OUTPUT_DICT_ORDER.ORDER_NUMBER.value: cls.order_number,
+            KEY_OUTPUT_DICT_ORDER.MONEY_COLLECTION.value: cls.money_collection,
+            KEY_OUTPUT_DICT_ORDER.EXCHANGE_WEIGHT.value: cls.exchange_weight,
+            KEY_OUTPUT_DICT_ORDER.MONEY_TOTAL.value: cls.money_total,
+            KEY_OUTPUT_DICT_ORDER.MONEY_TOTAL_FEE.value: cls.money_total_fee,
+            KEY_OUTPUT_DICT_ORDER.MONEY_FEE.value: cls.money_fee,
+            KEY_OUTPUT_DICT_ORDER.MONEY_COLLECTION_FEE.value: cls.money_collection_fee,
+            KEY_OUTPUT_DICT_ORDER.MONEY_OTHER_FEE.value: cls.money_other_fee,
+            KEY_OUTPUT_DICT_ORDER.MONEY_VAT.value: cls.money_vat,
+            KEY_OUTPUT_DICT_ORDER.DELI_CARRIER_ID.value: kwargs.get(KEY_OUTPUT_DICT_ORDER.DELI_CARRIER_ID.value),
+            KEY_OUTPUT_DICT_ORDER.BL_STATUS.value: 'Giao cho Bưu tá đi nhận'
         }
         return payload
 
@@ -164,6 +161,8 @@ class Order(InputDict, OutputDict):
         total_price: float = 0.0
         if cls.deli_order_id.sale_id.order_line:
             for line in cls.deli_order_id.sale_id.order_line:
+                if line.is_delivery:
+                    continue
                 gross_width: float = line.product_id.product_tmpl_id.gross_width
                 gross_height: float = line.product_id.product_tmpl_id.gross_height
                 gross_depth: float = line.product_id.product_tmpl_id.gross_depth
@@ -237,6 +236,6 @@ class Order(InputDict, OutputDict):
             KEY_OUTPUT_DICT_ORDER_INFORMATION.PRODUCT_PRICE.value: total_price,
             KEY_OUTPUT_DICT_ORDER_INFORMATION.PRODUCT_WEIGHT.value: total_weight,
             KEY_OUTPUT_DICT_ORDER_INFORMATION.ORDER_NOTE.value: cls.note or '',
-            KEY_OUTPUT_DICT_ORDER_INFORMATION.LIST_ITEM.value: 0
+            KEY_OUTPUT_DICT_ORDER_INFORMATION.LIST_ITEM.value: list_item
         }
         return payload

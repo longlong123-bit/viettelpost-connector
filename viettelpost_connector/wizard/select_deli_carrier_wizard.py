@@ -6,7 +6,7 @@ class SelectDeliCarrierWizard(models.TransientModel):
     _description = 'This module is used open a popup to select delivery carrier'
 
     def action_assign_delivery(self):
-        if self.deli_carrier_id.delivery_type == 'viettelpost':
+        if self.carrier_id.delivery_type == 'viettelpost':
             return {
                 'name': _('Viettelpost Shipment Information'),
                 'view_mode': 'form',
@@ -15,7 +15,7 @@ class SelectDeliCarrierWizard(models.TransientModel):
                 'res_model': 'booking.viettelpost.wizard',
                 'context': {
                     'default_deli_order_id': self.deli_order_id.id,
-                    'default_deli_carrier_id': self.deli_carrier_id.id,
+                    'default_carrier_id': self.carrier_id.id,
                     'default_receiver_id': self.deli_order_id.partner_id.id
                 },
                 'type': 'ir.actions.act_window',

@@ -13,7 +13,6 @@ odoo.define('viettelpost_connector.handle_button', function (require) {
                 this.$buttons.on('click', '.o_button_sync_service', this._onClickSyncService.bind(this));
                 this.$buttons.on('click', '.o_button_sync_extend_service', this._onClickSyncExtendService.bind(this));
                 this.$buttons.on('click', '.o_button_sync_store', this._onClickSyncStore.bind(this));
-                this.$buttons.on('click', '.o_button_create_store', this._onClickCreateStore.bind(this));
             }
         },
         _onClickSyncProvince: function (e) {
@@ -98,15 +97,6 @@ odoo.define('viettelpost_connector.handle_button', function (require) {
                     'type': 'ir.actions.client',
                     'tag': 'reload'
                 });
-            });
-        },
-        _onClickCreateStore: function (e) {
-            var self = this;
-            return this._rpc({
-                model: 'create.store.wizard',
-                method: 'create_store'
-            }).then(function(result) {
-                self.do_action(result);
             });
         },
         _onClickSyncExtendService: function (e) {

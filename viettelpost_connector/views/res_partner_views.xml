@@ -16,6 +16,12 @@
                         </group>
                     </group>
                 </page>
+                <page string="Webhook Configuration" attrs="{'invisible': [('type', '!=', 'webhook_service')]}">
+                    <button name="get_access_token" type="object" class="oe_highlight" string="Get Access Token"/>
+                    <group>
+                        <field name="token"/>
+                    </group>
+                </page>
             </xpath>
         </field>
     </record>

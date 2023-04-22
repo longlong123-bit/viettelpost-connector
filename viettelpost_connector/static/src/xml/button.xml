@@ -35,11 +35,6 @@
                 </button>
                 <button t-if="widget.modelName=='viettelpost.store'"
                         type="button"
-                        class="btn btn-primary o_button_create_store">
-                    Create
-                </button>
-                <button t-if="widget.modelName=='viettelpost.store'"
-                        type="button"
                         class="btn btn-primary o_button_sync_store"
                         style="margin-left: 2px !important;">
                     Sync Store

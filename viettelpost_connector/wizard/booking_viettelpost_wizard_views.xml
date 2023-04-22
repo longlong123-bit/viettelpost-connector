@@ -8,12 +8,12 @@
             <form>
                 <div class="oe_title">
                     <h1><field name="deli_order_id" force_save="1"/></h1>
-                    <h3><field name="deli_carrier_id"/></h3>
+                    <h3><field name="carrier_id"/></h3>
                 </div>
                 <group>
                     <group>
                         <field name="sender_id" options="{'no_create_edit': True, 'no_open': True}"/>
-                        <field name="sender_phone" widget="phone"/>
+                        <field name="sender_phone"/>
                         <label for="sender_address" string="Address"/>
                         <div class="o_address_format">
                             <field name="sender_address" class="o_address_street" placeholder="Street"/>
@@ -21,11 +21,11 @@
                             <field name="sender_district_id" class="o_address_state" placeholder="District" options="{'no_create': True, 'no_open': True}"/>
                             <field name="sender_province_id" class="o_address_zip" placeholder="City" options="{'no_create': True, 'no_open': True}"/>
                         </div>
-                        <field name="service_id"/>
-                        <field name="service_extend_id"/>
-                        <field name="waybill_type_id"/>
-                        <field name="product_type_id"/>
-                        <field name="national_type_id"/>
+                        <field name="service_id" options="{'no_create_edit': True, 'no_open': True}"/>
+                        <field name="service_extend_id" options="{'no_create_edit': True, 'no_open': True}"/>
+                        <field name="waybill_type_id" options="{'no_create_edit': True, 'no_open': True}"/>
+                        <field name="product_type_id" options="{'no_create_edit': True, 'no_open': True}"/>
+                        <field name="national_type_id" options="{'no_create_edit': True, 'no_open': True}"/>
                     </group>
                     <group>
                         <field name="receiver_id" options="{'no_create_edit': True, 'no_open': True}"/>

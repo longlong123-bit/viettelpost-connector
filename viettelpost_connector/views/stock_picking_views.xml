@@ -9,9 +9,33 @@
                 <button name="%(api_connect_instances.select_deli_carrier_wizard_acton)d"
                         class="btn btn-primary"
                         type="action"
+                        attrs="{'invisible': [('state', '!=', 'assigned')]}"
                         string="Assign to delivery"
                 />
+                <button name="%(print_waybill_wizard_wizard_action)d"
+                        class="btn btn-primary"
+                        type="action"
+                        attrs="{'invisible': [
+                        '|',
+                            ('carrier_tracking_ref', '=', False),
+                            ('delivery_type', '!=', 'viettelpost')
+                        ]}"
+                        string="Print Tracking Ref"
+                />
             </button>
+            <xpath expr="//group[@name='carrier_data']" position="attributes">
+                <attribute name="attrs">{'invisible': [('carrier_id', '=', False)]}</attribute>
+            </xpath>
+            <field name="carrier_id" position="after">
+                <field name="money_total_fee"/>
+                <field name="money_fee"/>
+                <field name="money_other_fee"/>
+                <field name="money_collection_fee"/>
+                <field name="money_vat"/>
+                <field name="money_total"/>
+                <field name="money_collection"/>
+                <field name="bl_status"/>
+            </field>
         </field>
     </record>
 </odoo>

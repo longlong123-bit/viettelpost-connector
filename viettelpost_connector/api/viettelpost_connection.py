@@ -49,8 +49,8 @@ class ViettelPostConnection:
             raise e
 
     def update_sale_order(self, waybill_code, status):
-        sale_id = self.external_model.env['sale.order'].search([('waybill_code', '=', waybill_code)])
-        sale_id.write({'waybill_status': status})
+        do_id = self.external_model.env['stock.picking'].search([('carrier_tracking_ref', '=', waybill_code)])
+        do_id.write({'bl_status': status})
 
     def _get_sequence_request_id(self):
         sequence = self.external_model.env['ir.sequence'].search([

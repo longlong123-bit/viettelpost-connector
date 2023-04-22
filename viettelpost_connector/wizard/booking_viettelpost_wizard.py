@@ -1,4 +1,4 @@
-from odoo import models, fields, _
+from odoo import models, fields, _, api
 from odoo.tools import ustr
 from odoo.exceptions import ValidationError, UserError
 from odoo.addons.viettelpost_connector.common.constants import Const
@@ -10,26 +10,26 @@ class BookingViettelpostWizard(models.TransientModel):
     _description = 'This module fills and confirms info about shipment before creating a bill of lading Viettelpost.'
 
     def _default_product_type(self) -> models:
-        product_type_id = self.env['viettelpost.product.type'].search([('code', '=', Const.PRODUCT_TYPE_CODE_HH)])
+        product_type_id = self.env.ref('viettelpost_connector.viettelpost_product_type_2')
         if product_type_id:
-            return product_type_id
+            return product_type_id.id
 
     def _default_national_type(self) -> models:
-        national_type_id = self.env['viettelpost.national.type'].search([('code', '=', Const.NATIONAL_TYPE_CODE)])
+        national_type_id = self.env.ref('viettelpost_connector.viettelpost_national_type_1')
         if national_type_id:
-            return national_type_id
+            return national_type_id.id
 
     def _default_waybill_type(self) -> models:
-        waybill_type_id = self.env['viettelpost.waybill.type'].search([('code', '=', Const.WAYBILL_TYPE_CODE_1)])
+        waybill_type_id = self.env.ref('viettelpost_connector.viettelpost_waybill_type_1')
         if waybill_type_id:
-            return waybill_type_id
+            return waybill_type_id.id
 
     def _default_service_type(self) -> models:
-        service_id = self.env['viettelpost.service'].search([('code', '=', 'LCOD')])
+        service_id = self.env['viettelpost.service'].search([('code', '=', Const.SERVICE_TYPE)])
         if service_id:
             return service_id
 
-    deli_carrier_id = fields.Many2one('delivery.carrier', string='Delivery Carrier', required=True, readonly=True)
+    carrier_id = fields.Many2one('delivery.carrier', string='Delivery Carrier', required=True, readonly=True)
     deli_order_id = fields.Many2one('stock.picking', string='Delivery order', required=True, readonly=True)
     service_id = fields.Many2one('viettelpost.service', string='Service', default=_default_service_type, required=True)
     service_extend_id = fields.Many2one('viettelpost.extend.service', string='Service Extend')
@@ -58,49 +58,31 @@ class BookingViettelpostWizard(models.TransientModel):
     note = fields.Text(string='Note')
     currency_id = fields.Many2one('res.currency', string='Currency', default=lambda self: self.env.company.currency_id)
 
-    # def _validate_payload(self):
-    #     fields = {
-    #         'Delivery carrier': self.deli_carrier_id,
-    #         'Delivery order': self.deli_order_id,
-    #         'Sender': self.sender_id,
-    #         'Sender Phone': self.sender_phone,
-    #         'Sender Street': self.sender_street,
-    #         'Sender Ward': self.sender_ward_id,
-    #         'Sender District': self.sender_district_id,
-    #         'Sender Province': self.sender_province_id,
-    #         'Store': self.store_id,
-    #         'Service Type': self.service_type,
-    #         'Order Payment': self.order_payment,
-    #         'Product Type': self.product_type,
-    #         'National Type': self.national_type,
-    #         'Product Name': self.product_name,
-    #         'Number of Package': self.no_of_package,
-    #         'Receiver': self.receiver_id,
-    #         'Receiver Phone': self.receiver_phone,
-    #         'Receiver Street': self.receiver_street,
-    #         'Receiver Ward': self.receiver_ward_id,
-    #         'Receiver District': self.receiver_district_id,
-    #         'Receiver Province': self.receiver_province_id,
-    #         'List Item': len(self.deli_order_id.sale_id.order_line)
-    #     }
-    #     for field, value in fields.items():
-    #         if not value:
-    #             raise ValidationError(_(f'The field {field} is required.'))
+    @api.onchange('service_id')
+    def _onchange_service_id(self):
+        for rec in self:
+            if rec.service_id:
+                return {
+                    'domain':
+                        {
+                            'service_extend_id': [('service_id', '=', rec.service_id.id)]
+                        }
+                }
 
-    # def _prepare_data_create_line_amount_ship_fee(self, dataclass: ViettelpostDataclass):
-    #     service_name = [item[1] for item in BookingViettelpostWizard.get_viettelpost_service_types() if item[0] == self.service_type]
-    #     payload: dict = {
-    #         'product_id': self.deli_carrier_id.product_id.id,
-    #         'name': f'[{self.service_type}] - {service_name[0]}',
-    #         'product_uom_qty': 1.0,
-    #         'price_unit': dataclass.money_total,
-    #         'price_subtotal': dataclass.money_total,
-    #         'price_total': dataclass.money_total,
-    #         'sequence': self.deli_order_id.sale_id.order_line[-1].sequence + 1,
-    #         'order_id': self.deli_order_id.sale_id.order_line[-1].order_id.id,
-    #         'is_delivery': True
-    #     }
-    #     return payload
+    def _prepare_data_create_line_amount_ship_fee(self, dataclass: Order):
+        payload: dict = {
+            'product_id': self.carrier_id.product_id.id,
+            'name': f'{self.service_id.display_name}\n{self.service_extend_id.display_name}'
+            if self.service_extend_id else f'{self.service_id.display_name}',
+            'product_uom_qty': 1.0,
+            'price_unit': dataclass.money_total,
+            'price_subtotal': dataclass.money_total,
+            'price_total': dataclass.money_total,
+            'sequence': self.deli_order_id.sale_id.order_line[-1].sequence + 1,
+            'order_id': self.deli_order_id.sale_id.order_line[-1].order_id.id,
+            'is_delivery': True
+        }
+        return payload
 
     def action_booking_viettelpost(self):
         try:
@@ -113,9 +95,11 @@ class BookingViettelpostWizard(models.TransientModel):
             }
             if self.check_unique:
                 payload = {**payload, **{'CHECK_UNIQUE': True}}
-            result = client.create_order(payload)
-            dataclass_vtp = Order(*Order.parser_dict(result))
-            # line_data_ship_fee = self._prepare_data_create_line_amount_ship_fee(dataclass_vtp)
-            # self.env['sale.order.line'].create(line_data_ship_fee)
+            result = client.create_waybill(payload)
+            dataclass_order = Order(*Order.parser_dict(result))
+            payload_do = Order.parser_class(dataclass_order, carrier_id=self.carrier_id.id)
+            self.deli_order_id.write(payload_do)
+            line_data_ship_fee = self._prepare_data_create_line_amount_ship_fee(dataclass_order)
+            self.env['sale.order.line'].create(line_data_ship_fee)
         except Exception as e:
             raise UserError(_(ustr(e)))

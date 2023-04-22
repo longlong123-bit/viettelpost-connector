@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="paperformat_print_carrier_tracking_ref" model="report.paperformat">
+            <field name="name">Carrier Tracking Ref</field>
+            <field name="default" eval="False"/>
+            <field name="format">A5</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">0</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_spacing">30</field>
+            <field name="dpi">96</field>
+        </record>
+
+        <record id="action_print_carrier_tracking_ref" model="ir.actions.report">
+            <field name="name">Carrier Tracking Ref</field>
+            <field name="model">print.waybill.wizard</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">viettelpost_connector.print_carrier_tracking_ref_report</field>
+            <field name="report_file">viettelpost_connector.print_carrier_tracking_ref_report</field>
+            <field name="print_report_name">(object._get_print_name())</field>
+            <field name="binding_model_id" ref="model_print_waybill_wizard"/>
+            <field name="binding_type">report</field>
+            <field name="attachment_use">False</field>
+            <field name="paperformat_id" ref="paperformat_print_carrier_tracking_ref"/>
+        </record>
+    </data>
+</odoo>

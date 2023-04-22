@@ -3,13 +3,14 @@ class Const:
     DELIVERY_CARRIER_CODE = 'viettelpost'
     SERVICE_PRODUCT_CODE = 'ViettelPost'
     TYPE_SERVICE = 1
-    TRACKING_LINK = 'https://viettelpost.com.vn/tra-cuu-hanh-trinh-don/'
+    TRACKING_LINK = 'https://viettelpost.vn/thong-tin-don-hang?peopleTracking=sender&orderNumber={bl_code}'
     PRODUCT_TYPE_CODE_HH = 'HH' # Hàng hóa
     NATIONAL_TYPE_CODE = '1'    # Bảng giá trong nước
     WAYBILL_TYPE_CODE_1 = '1'   # Không thu hộ
     WAYBILL_TYPE_CODE_2 = '2'   # Thu hộ tiền hàng và tiền cước
     WAYBILL_TYPE_CODE_3 = '3'   # Thu hộ tiền hàng
     WAYBILL_TYPE_CODE_4 = '4'   # Thu hộ tiền cước
+    SERVICE_TYPE = 'LCOD'
     PRINT_WAYBILL_TYPE_1 = 1
     VTP_STATUS_TYPE_1 = 1   # Confirm order
     VTP_STATUS_TYPE_2 = 2   # Confirm return shipping

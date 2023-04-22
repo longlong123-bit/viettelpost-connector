@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="viettelpost_webhook" model="res.partner">
+        <field name="name">Viettelpost Webhook Service</field>
+        <field name="company_type">person</field>
+        <field name="type">webhook_service</field>
+        <field name="website">https://partner.viettelpost.vn/</field>
+        <field name="mobile">1900 8095</field>
+        <field name="phone">0246 2661 507</field>
+    </record>
+</odoo>
