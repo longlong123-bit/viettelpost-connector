@@ -1,14 +1,7 @@
 import functools
-import odoo
-import json
-import datetime
-import re
-from werkzeug.wrappers import Response
-
 from typing import Dict, Any
+import odoo
 from odoo import http
-
-from odoo.addons.web.controllers.main import ensure_db
 from odoo.http import Controller, request, route
 
 
@@ -33,16 +26,16 @@ def invalid_response(message: str, status: int):
     return {'status': 'error', 'message': message}
 
 
-# db_monodb = http.db_monodb
+db_monodb = http.db_monodb
 
 
-# def ensure_db(redirect='/web/database/selector'):
-#     db = request.params.get('db') and request.params.get('db').strip()
-#     if db and db not in http.db_filter([db]):
-#         db = None
-#     if not db:
-#         db = db_monodb(request.httprequest)
-#     return db
+def ensure_db(redirect='/web/database/selector'):
+    db = request.params.get('db') and request.params.get('db').strip()
+    if db and db not in http.db_filter([db]):
+        db = None
+    if not db:
+        db = db_monodb(request.httprequest)
+    return db
 
 
 def validate_token(func):
@@ -92,9 +85,6 @@ class WebhookViettelpostController(Controller):
                 if not do_id:
                     return invalid_response(f'The order number {payload.get("ORDER_NUMBER")} not found.')
                 do_id.write({'bl_status': payload.get('STATUS_NAME')})
-                do_id.sale_id.write({
-                    'order_line': [(1, )]
-                })
             return valid_response('The odoo received data successfully.')
         except Exception as error:
             return invalid_response(f'Exception: {error}', STATUS_NOT_FOUND)

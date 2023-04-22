@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="api_connect_instances_form_view_inherit">
+        <field name="name">api.connect.instances.form.view.inherit</field>
+        <field name="model">api.connect.instances</field>
+        <field name="priority">100</field>
+        <field name="inherit_id" ref="api_connect_instances.api_connect_instance_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header[hasclass('o_header_extend')]">
+                <button type="object"
+                        name="get_owner_token"
+                        string="Get token"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('code', '!=', 'viettelpost')]}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

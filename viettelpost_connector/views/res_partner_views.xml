@@ -19,7 +19,7 @@
                 <page string="Webhook Configuration" attrs="{'invisible': [('type', '!=', 'webhook_service')]}">
                     <button name="get_access_token" type="object" class="oe_highlight" string="Get Access Token"/>
                     <group>
-                        <field name="token"/>
+                        <field name="token" readonly="1" widget="CopyClipboardChar"/>
                     </group>
                 </page>
             </xpath>

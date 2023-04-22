@@ -36,6 +36,7 @@
         'wizard/print_waybill_wizard.xml',
         'wizard/booking_viettelpost_wizard_views.xml',
         'views/assets.xml',
+        'views/api_connect_instances_views.xml',
         'views/viettelpost_province_views.xml',
         'views/viettelpost_district_views.xml',
         'views/viettelpost_ward_views.xml',
